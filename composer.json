@@ -5,7 +5,7 @@
   "require": {
     "guzzlehttp/guzzle": "^6.2",
     "psr/cache": "^1.0",
-    "cache/array-adapter": "^0.4.0",
+    "cache/array-adapter": "^0.4.0"
   },
   "suggest": {
     "symfony/dependency-injection": "Allows the use of a dependency injection container with TheSportsDb.",
