@@ -1,0 +1,24 @@
+{
+  "name": "jelle-s/thesportsdb",
+  "description": "PSR-4 API library for thesportsdb.com",
+  "type": "library",
+  "require": {
+    "guzzlehttp/guzzle": "^6.2",
+    "psr/cache": "^1.0",
+    "cache/array-adapter": "^0.4.0",
+    "symfony/dependency-injection": "^3.0",
+    "hendricha/tagpass": "dev-master",
+    "symfony/config": "^3.0"
+  },
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "Jelle Sebreghts",
+      "email": "sebreghts.jelle@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"TheSportsDb\\": "src/"}
+  },
+  "minimum-stability": "dev"
+}
