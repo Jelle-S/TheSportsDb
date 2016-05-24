@@ -11,7 +11,7 @@
     "symfony/dependency-injection": "Allows the use of a dependency injection container with TheSportsDb.",
     "hendricha/tagpass": "Required in combination with symfony/dependency-injection when using the default_bootstrap.php",
     "symfony/config": "Required in combination with symfony/dependency-injection when using the default_bootstrap.php"
-  }
+  },
   "license": "GPL-3.0+",
   "authors": [
     {
