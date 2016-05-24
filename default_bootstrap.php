@@ -1,131 +1,87 @@
 <?php
-
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-use HendrichA\TagPassLibrary\TagPass;
-
-// Todo: switch to setter injection.
-
-$container = new ContainerBuilder();
-// API key.
-$container->setParameter('thesportsdb.api_key', '1');
-
-// Entity classes.
-$container->setParameter('thesportsdb.entity.class.league', 'TheSportsDb\Entity\League');
-$container->setParameter('thesportsdb.entity.proxy.league', 'TheSportsDb\Entity\Proxy\LeagueProxy');
-$container->setParameter('thesportsdb.entity.class.sport', 'TheSportsDb\Entity\Sport');
-$container->setParameter('thesportsdb.entity.proxy.sport', 'TheSportsDb\Entity\Proxy\SportProxy');
-$container->setParameter('thesportsdb.entity.class.team', 'TheSportsDb\Entity\Team');
-$container->setParameter('thesportsdb.entity.proxy.team', 'TheSportsDb\Entity\Proxy\TeamProxy');
-$container->setParameter('thesportsdb.entity.class.event', 'TheSportsDb\Entity\Event');
-$container->setParameter('thesportsdb.entity.proxy.event', 'TheSportsDb\Entity\Proxy\EventProxy');
-$container->setParameter('thesportsdb.entity.class.player', 'TheSportsDb\Entity\Player');
-$container->setParameter('thesportsdb.entity.proxy.player', 'TheSportsDb\Entity\Proxy\PlayerProxy');
-$container->setParameter('thesportsdb.entity.class.season', 'TheSportsDb\Entity\Season');
-$container->setParameter('thesportsdb.entity.proxy.season', 'TheSportsDb\Entity\Proxy\SeasonProxy');
+if (!defined('THESPORTSDB_API_KEY')) {
+  define('THESPORTSDB_API_KEY', '1');
+}
+if (class_exists('\Symfony\Component\DependencyInjection\ContainerBuilder') && class_exists('\Symfony\Component\Config\Resource\FileResource')) {
+  // Use the dependency injection container if available.
+  include_once __DIR__ . '/default_bootstrap_dic.php';
+  return;
+}
 
 // Http client.
-$container->register('thesportsdb.client.http', 'GuzzleHttp\Client');
+$httpClient = new GuzzleHttp\Client();
 
 // Property mapper container.
-$container->register('thesportsdb.propertymapper.container', 'TheSportsDb\PropertyMapper\PropertyMapperContainer');
+$propertyMapperContainer = new TheSportsDb\PropertyMapper\PropertyMapperContainer();
 
-// Sports db client.
-$container->register('thesportsdb.client.thesportsdb', 'TheSportsDb\Http\TheSportsDbClient')
-    ->addArgument('%thesportsdb.api_key%')
-    ->addArgument(new Reference('thesportsdb.client.http'));
+// The sports db client.
+$sportsDbClient = new TheSportsDb\Http\TheSportsDbClient(THESPORTSDB_API_KEY, $httpClient);
 
 // Cache pool.
-$container->register('thesportsdb.cache', 'Cache\Adapter\PHPArray\ArrayCachePool');
+$cachePool = new Cache\Adapter\PHPArray\ArrayCachePool();
 
 // League property mapper.
-$container->register('thesportsdb.propertymapper.league', 'TheSportsDb\PropertyMapper\LeaguePropertyMapper')
-    ->addMethodCall('setSeasonFactory', array(new Reference('thesportsdb.factory.season')))
-    ->addTag('property_mapper');
+$leaguePropertyMapper = new TheSportsDb\PropertyMapper\LeaguePropertyMapper();
 
 // League factory.
-$container->register('thesportsdb.factory.league', 'TheSportsDb\Factory\Factory')
-    ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
-    ->addArgument('%thesportsdb.entity.class.league%')
-    ->addArgument('%thesportsdb.entity.proxy.league%')
-    ->addMethodCall('setPropertyMapperContainer', array(new Reference('thesportsdb.propertymapper.container')));
+$leagueFactory = new \TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\League', 'TheSportsDb\Entity\Proxy\LeagueProxy');
+$leagueFactory->setPropertyMapperContainer($propertyMapperContainer);
 
 // Sport property mapper.
-$container->register('thesportsdb.propertymapper.sport', 'TheSportsDb\PropertyMapper\SportPropertyMapper')
-    ->addMethodCall('setLeagueFactory', array(new Reference('thesportsdb.factory.league')))
-    ->addTag('property_mapper');
+$sportPropertyMapper = new TheSportsDb\PropertyMapper\SportPropertyMapper();
+$sportPropertyMapper->setLeagueFactory($leagueFactory);
 
 // Sport factory.
-$container->register('thesportsdb.factory.sport', 'TheSportsDb\Factory\Factory')
-    ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
-    ->addArgument('%thesportsdb.entity.class.sport%')
-    ->addArgument('%thesportsdb.entity.proxy.sport%')
-    ->addMethodCall('setPropertyMapperContainer', array(new Reference('thesportsdb.propertymapper.container')));
+$sportFactory = new TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\Sport', 'TheSportsDb\Entity\Proxy\SportProxy');
+$sportFactory->setPropertyMapperContainer($propertyMapperContainer);
 
 // Team property mapper.
-$container->register('thesportsdb.propertymapper.team', 'TheSportsDb\PropertyMapper\TeamPropertyMapper')
-    ->addMethodCall('setLeagueFactory', array(new Reference('thesportsdb.factory.league')))
-    ->addMethodCall('setSportFactory', array(new Reference('thesportsdb.factory.sport')))
-    ->addTag('property_mapper');
+$teamPropertyMapper = new TheSportsDb\PropertyMapper\TeamPropertyMapper();
+$teamPropertyMapper->setLeagueFactory($leagueFactory);
+$teamPropertyMapper->setSportFactory($sportFactory);
 
 // Team factory.
-$container->register('thesportsdb.factory.team', 'TheSportsDb\Factory\Factory')
-    ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
-    ->addArgument('%thesportsdb.entity.class.team%')
-    ->addArgument('%thesportsdb.entity.proxy.team%')
-    ->addMethodCall('setPropertyMapperContainer', array(new Reference('thesportsdb.propertymapper.container')));
+$teamFactory = new TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\Team', 'TheSportsDb\Entity\Proxy\TeamProxy');
+$teamFactory->setPropertyMapperContainer($propertyMapperContainer);
 
 // Event property mapper.
-$container->register('thesportsdb.propertymapper.event', 'TheSportsDb\PropertyMapper\EventPropertyMapper')
-    ->addMethodCall('setLeagueFactory', array(new Reference('thesportsdb.factory.league')))
-    ->addMethodCall('setTeamFactory', array(new Reference('thesportsdb.factory.team')))
-    ->addTag('property_mapper');
+$eventPropertyMapper = new TheSportsDb\PropertyMapper\EventPropertyMapper();
+$eventPropertyMapper->setLeagueFactory($leagueFactory);
+$eventPropertyMapper->setTeamFactory($teamFactory);
 
 // Event factory.
-$container->register('thesportsdb.factory.event', 'TheSportsDb\Factory\Factory')
-    ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
-    ->addArgument('%thesportsdb.entity.class.event%')
-    ->addArgument('%thesportsdb.entity.proxy.event%')
-    ->addMethodCall('setPropertyMapperContainer', array(new Reference('thesportsdb.propertymapper.container')));
+$eventFactory = new TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\Event', 'TheSportsDb\Entity\Proxy\EventProxy');
+$eventFactory->setPropertyMapperContainer($propertyMapperContainer);
 
 // Player property mapper.
-$container->register('thesportsdb.propertymapper.player', 'TheSportsDb\PropertyMapper\PlayerPropertyMapper')
-    ->addMethodCall('setTeamFactory', array(new Reference('thesportsdb.factory.team')))
-    ->addMethodCall('setSportFactory', array(new Reference('thesportsdb.factory.sport')))
-    ->addTag('property_mapper');
+$playerPropertyMapper = new TheSportsDb\PropertyMapper\PlayerPropertyMapper();
+$playerPropertyMapper->setSportFactory($sportFactory);
+$playerPropertyMapper->setTeamFactory($teamFactory);
 
 // Player factory.
-$container->register('thesportsdb.factory.player', 'TheSportsDb\Factory\Factory')
-    ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
-    ->addArgument('%thesportsdb.entity.class.player%')
-    ->addArgument('%thesportsdb.entity.proxy.player%')
-    ->addMethodCall('setPropertyMapperContainer', array(new Reference('thesportsdb.propertymapper.container')));
+$playerFactory = new TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\Player', 'TheSportsDb\Entity\Proxy\PlayerProxy');
+$playerFactory->setPropertyMapperContainer($propertyMapperContainer);
 
 // Season property mapper.
-$container->register('thesportsdb.propertymapper.season', 'TheSportsDb\PropertyMapper\SeasonPropertyMapper')
-    ->addMethodCall('setLeagueFactory', array(new Reference('thesportsdb.factory.league')))
-    ->addMethodCall('setEventFactory', array(new Reference('thesportsdb.factory.event')))
-    ->addTag('property_mapper');
+$seasonPropertyMapper = new TheSportsDb\PropertyMapper\SeasonPropertyMapper();
+$seasonPropertyMapper->setLeagueFactory($leagueFactory);
+$seasonPropertyMapper->setEventFactory($eventFactory);
 
 // Season factory.
-$container->register('thesportsdb.factory.season', 'TheSportsDb\Factory\Factory')
-    ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
-    ->addArgument('%thesportsdb.entity.class.season%')
-    ->addArgument('%thesportsdb.entity.proxy.season%')
-    ->addMethodCall('setPropertyMapperContainer', array(new Reference('thesportsdb.propertymapper.container')));
+$seasonFactory = new TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\Season', 'TheSportsDb\Entity\Proxy\SeasonProxy');
+$seasonFactory->setPropertyMapperContainer($propertyMapperContainer);
 
-// Create the main sportsdb object.
-$container->register('thesportsdb', 'TheSportsDb\TheSportsDb')
-    ->addArgument('%thesportsdb.api_key%')
-    ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
-    ->addArgument(new Reference('thesportsdb.cache'))
-    ->addArgument(new Reference('thesportsdb.factory.league'))
-    ->addArgument(new Reference('thesportsdb.factory.sport'));
+// Set the season facotry for the league and event property mappers.
+$leaguePropertyMapper->setSeasonFactory($seasonFactory);
+$eventPropertyMapper->setSeasonFactory($seasonFactory);
 
-// Compiler pass.
-$tagpass = new TagPass('property_mapper');
-$tagpass->addServiceIdsTo('thesportsdb.propertymapper.container', 'addPropertyMapper');
-$container->addCompilerPass($tagpass);
-$container->compile();
+// Add property mappers to the container.
+$propertyMapperContainer->addPropertyMapper($leaguePropertyMapper);
+$propertyMapperContainer->addPropertyMapper($sportPropertyMapper);
+$propertyMapperContainer->addPropertyMapper($teamPropertyMapper);
+$propertyMapperContainer->addPropertyMapper($eventPropertyMapper);
+$propertyMapperContainer->addPropertyMapper($playerPropertyMapper);
+$propertyMapperContainer->addPropertyMapper($seasonPropertyMapper);
 
-$db = $container->get('thesportsdb');
+
+$db = new TheSportsDb\TheSportsDb(THESPORTSDB_API_KEY, $sportsDbClient, $cachePool, $leagueFactory, $sportFactory);
