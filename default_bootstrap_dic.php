@@ -112,13 +112,18 @@ $container->register('thesportsdb.factory.season', 'TheSportsDb\Factory\Factory'
     ->addArgument('%thesportsdb.entity.proxy.season%')
     ->addMethodCall('setPropertyMapperContainer', array(new Reference('thesportsdb.propertymapper.container')));
 
+// Create the Query objects.
+$container->register('thesportsdb.query.sport', 'TheSportsDb\Query\SportQuery')
+    ->addArgument(new Reference('thesportsdb.factory.sport'))
+    ->addArgument(new Reference('thesportsdb.client.thesportsdb'));
+$container->register('thesportsdb.query.league', 'TheSportsDb\Query\LeagueQuery')
+    ->addArgument(new Reference('thesportsdb.factory.league'))
+    ->addArgument(new Reference('thesportsdb.client.thesportsdb'));
+
 // Create the main sportsdb object.
 $container->register('thesportsdb', 'TheSportsDb\TheSportsDb')
-    ->addArgument('%thesportsdb.api_key%')
-    ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
-    ->addArgument(new Reference('thesportsdb.cache'))
-    ->addArgument(new Reference('thesportsdb.factory.league'))
-    ->addArgument(new Reference('thesportsdb.factory.sport'));
+    ->addArgument(new Reference('thesportsdb.query.sport'))
+    ->addArgument(new Reference('thesportsdb.query.league'));
 
 // Compiler pass.
 $tagpass = new TagPass('property_mapper');

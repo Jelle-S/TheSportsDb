@@ -2,7 +2,11 @@
 if (!defined('THESPORTSDB_API_KEY')) {
   define('THESPORTSDB_API_KEY', '1');
 }
-if (class_exists('\Symfony\Component\DependencyInjection\ContainerBuilder') && class_exists('\Symfony\Component\Config\Resource\FileResource')) {
+if (
+  class_exists('\Symfony\Component\DependencyInjection\ContainerBuilder')
+  && class_exists('\Symfony\Component\Config\Resource\FileResource')
+  && class_exists('\HendrichA\TagPassLibrary\TagPass')
+) {
   // Use the dependency injection container if available.
   include_once __DIR__ . '/default_bootstrap_dic.php';
   return;
@@ -83,5 +87,8 @@ $propertyMapperContainer->addPropertyMapper($eventPropertyMapper);
 $propertyMapperContainer->addPropertyMapper($playerPropertyMapper);
 $propertyMapperContainer->addPropertyMapper($seasonPropertyMapper);
 
+// Create the Query objects.
+$sportQuery = new TheSportsDb\Query\SportQuery($sportFactory, $sportsDbClient);
+$leagueQuery = new TheSportsDb\Query\LeagueQuery($leagueFactory, $sportsDbClient);
 
-$db = new TheSportsDb\TheSportsDb(THESPORTSDB_API_KEY, $sportsDbClient, $cachePool, $leagueFactory, $sportFactory);
+$db = new TheSportsDb\TheSportsDb($sportQuery, $leagueQuery);
