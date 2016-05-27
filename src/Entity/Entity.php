@@ -14,6 +14,9 @@ namespace TheSportsDb\Entity;
  * @author drupalpro
  */
 abstract class Entity implements EntityInterface {
+
+  protected static $propertyMapDefinition = array();
+
   /**
    * Creates a new Entity object.
    *
@@ -38,10 +41,28 @@ abstract class Entity implements EntityInterface {
         $prop = lcfirst(substr($methodName, 3));
         if ($reflection->hasProperty($prop)) {
           $val = $this->{$methodName}();
-          $raw->{$prop} = $val instanceof EntityInterface? $val->raw() : $val;
+          $raw->{$prop} = $val;
+          if (method_exists($val, 'raw')) {
+            $raw->{$prop} = $val->raw();
+          }
+          elseif (is_array($val)) {
+            $raw->{$prop} = array();
+            foreach ($val as $v) {
+              $raw->{$prop}[] = method_exists($v, 'raw') ? $v->raw() : $v;
+            }
+          }
         }
       }
     }
     return $raw;
+  }
+
+  public static function getEntityType() {
+    $reflection = new \ReflectionClass(static::class);
+    return strtolower($reflection->getShortName());
+  }
+
+  public static function getPropertyMapDefinition() {
+    return static::$propertyMapDefinition;
   }
 }

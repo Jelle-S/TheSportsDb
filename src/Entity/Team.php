@@ -13,6 +13,65 @@ namespace TheSportsDb\Entity;
  */
 class Team extends Entity implements TeamInterface {
 
+  protected static $propertyMapDefinition = array(
+    array('idTeam', 'id'),
+    array('strTeam', 'name'),
+    array('strTeamShort', 'teamShort'),
+    array('strAlternateName', 'alternateName'),
+    array('strFormedYear', 'formedYear'),
+    array('strSport', 'sport', array(
+      array(self::class, 'transformSport'),
+      array(self::class, 'reverseSport'),
+    ), 'sport'),
+    array('idLeague', 'league', array(
+      array(self::class, 'transformLeague'),
+      array(self::class, 'reverseLeague'),
+    ), 'league'),
+    array('strDivision', 'division'),
+    array('strManager', 'manager'),
+	array('strStadium', 'stadium'),
+    array('strKeywords', 'keywords'),
+	array('strRSS', 'rss'),
+    array('strStadiumThumb', 'stadiumThumb'),
+    array('strStadiumDescription', 'stadiumDescription'),
+	array('strStadiumLocation', 'stadiumLocation'),
+	array('intStadiumCapacity', 'stadiumCapacity'),
+	array('strWebsite', 'website'),
+    array('strFacebook', 'facebook'),
+	array('strTwitter', 'twitter'),
+	array('strInstagram', 'instagram'),
+	array('strDescriptionEN', 'description'),
+	array('strGender', 'gender'),
+    array('strCountry', 'country'),
+	array('strTeamBadge', 'badge'),
+    array('strTeamJersey', 'jersey'),
+	array('strTeamLogo', 'logo'),
+	array('strTeamBanner', 'banner'),
+	array('strYoutube', 'youtube'),
+    array('strLocked', 'locked'),
+    // idSoccerXML
+    // intLoved
+    // strLeague
+    // strDescriptionDE
+	// strDescriptionFR
+	// strDescriptionCN
+	// strDescriptionIT
+	// strDescriptionJP
+	// strDescriptionRU
+	// strDescriptionES
+	// strDescriptionPT
+	// strDescriptionSE
+	// strDescriptionNL
+	// strDescriptionHU
+	// strDescriptionNO
+	// strDescriptionIL
+	// strDescriptionPL
+    // strTeamFanart1
+	// strTeamFanart2
+	// strTeamFanart3
+	// strTeamFanart4
+  );
+
   protected $id;
   protected $name;
   protected $teamShort;
@@ -157,5 +216,36 @@ class Team extends Entity implements TeamInterface {
 
   public function getLocked() {
     return $this->locked;
+  }
+
+  public static function transformSport($value, $context, FactoryInterface $factory) {
+    if (is_object($value)) {
+      $sport = $value;
+    }
+    else {
+      $sport = (object) array('strSport' => $value);
+    }
+    return $factory->create($sport);
+  }
+
+  public static function reverseSport(SportInterface $sport, $context, FactoryInterface $factory) {
+    return $factory->reverseMapProperties($sport->raw());
+  }
+
+  public static function transformLeague($value, $context, FactoryInterface $factory) {
+    if (is_object($value)) {
+      $league = $value;
+    }
+    else {
+      $league = (object) array('idLeague' => $value);
+      if (isset($context->strLeague)) {
+        $league->strLeague = $context->strLeague;
+      }
+    }
+    return $factory->create($league);
+  }
+
+  public static function reverseLeague(LeagueInterface $league, $context, FactoryInterface $factory) {
+    return $factory->reverseMapProperties($league->raw());
   }
 }

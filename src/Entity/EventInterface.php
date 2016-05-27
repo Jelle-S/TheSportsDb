@@ -6,6 +6,7 @@
 
 namespace TheSportsDb\Entity;
 
+use TheSportsDb\Entity\LeagueInterface;
 
 /**
  * Interface for events.
@@ -75,8 +76,6 @@ interface EventInterface extends EntityInterface {
   public function getAwayShots();
 
   public function getDate();
-
-  public function getTime();
 
   public function getTvStation();
 

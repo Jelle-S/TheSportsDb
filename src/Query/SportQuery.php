@@ -16,6 +16,13 @@ class SportQuery extends Query implements SportQueryInterface {
   /**
    * {@inheritdoc}
    */
+  public function byId($id) {
+    return $this->factory->create($this->factory->reverseMapProperties((object) array('id' => $id, 'name' => $id)));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function all() {
     $data = $this->sportsDbClient->doRequest('all_leagues.php');
     $sports = array();

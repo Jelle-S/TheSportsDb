@@ -108,10 +108,6 @@ class LeagueProxy extends Proxy implements LeagueInterface {
     return $this->get('rss');
   }
 
-  public function getSportName() {
-    return $this->get('sportName');
-  }
-
   public function getTrophy() {
     return $this->get('trophy');
   }
@@ -131,4 +127,9 @@ class LeagueProxy extends Proxy implements LeagueInterface {
   public function getSeasons() {
     return $this->get('seasons');
   }
+
+  public function getSport() {
+    return $this->get('sport');
+  }
+
 }

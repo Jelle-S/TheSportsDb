@@ -44,4 +44,14 @@ interface FactoryInterface {
    *   The reverse mapped properties.
    */
   public function reverseMapProperties(\stdClass $values);
+
+  /**
+   * Get the entity type name this factory is for.
+   *
+   * @return string
+   *   The entity type name of the entity this factory is for.
+   */
+  public function getEntityTypeName();
+
+  public function isEmptyValue($value);
 }

@@ -12,6 +12,63 @@ namespace TheSportsDb\Entity;
  * @author Jelle Sebreghts
  */
 class Player extends Entity implements PlayerInterface {
+
+  protected static $propertyMapDefinition = array(
+    array('idPlayer', 'id'),
+    array('idTeam', 'team', array(
+      array(self::class, 'transformTeam'),
+      array(self::class, 'reverseTeam'),
+    ), 'team'),
+    array('strNationality', 'nationality'),
+    array('strPlayer', 'name'),
+    array('strSport', 'sport', array(
+      array(self::class, 'transformSport'),
+      array(self::class, 'reverseSport'),
+    ), 'sport'),
+    array('dateBorn', 'birthDay'), // transform to date
+    array('dateSigned', 'dateSigned'), // transform to date
+    array('strSigning', 'signing'),
+    array('strWage', 'wage'),
+    array('strBirthLocation', 'birthLocation'),
+    array('strDescriptionEN', 'description'),
+    array('strGender', 'gender'),
+    array('strPosition', 'position'),
+    array('strFacebook', 'facebook'),
+    array('strWebsite', 'website'),
+    array('strTwitter', 'strTwitter'),
+    array('strInstagram', 'instagram'),
+    array('strYoutube', 'youtube'),
+    array('strHeight', 'height'),
+    array('strWeight', 'weight'),
+    array('strThumb', 'thumb'),
+    array('strCutout', 'strCutout'),
+    array('strLocked', 'locked'),
+    // strTeam
+    // idSoccerXML
+    // idPlayerManager
+    // intSoccerXMLTeamID
+    // strDescriptionDE
+    // strDescriptionFR
+    // strDescriptionCN
+    // strDescriptionIT
+    // strDescriptionJP
+    // strDescriptionRU
+    // strDescriptionES
+    // strDescriptionPT
+    // strDescriptionSE
+    // strDescriptionNL
+    // strDescriptionHU
+    // strDescriptionNO
+    // strDescriptionIL
+    // strDescriptionPL
+    // strCollege
+    // intLoved
+    // strFanart1
+    // strFanart2
+    // strFanart3
+    // strFanart4
+  );
+
   protected $id;
   protected $team;
   protected $nationality;
@@ -126,5 +183,36 @@ class Player extends Entity implements PlayerInterface {
 
   public function getLocked() {
     return $this->locked;
+  }
+
+  public static function transformTeam($value, $context, FactoryInterface $factory) {
+    if (is_object($value)) {
+      $team = $value;
+    }
+    else {
+      $team = (object) array('idTeam' => $value);
+      if (isset($context->strTeam)) {
+        $team->strTeam = $context->strTeam;
+      }
+    }
+    return $factory->create($team);
+  }
+
+  public static function reverseTeam(TeamInterface $team, $context, FactoryInterface $factory) {
+    return $factory->reverseMapProperties($team->raw());
+  }
+
+  public static function transformSport($value, $context, FactoryInterface $factory) {
+    if (is_object($value)) {
+      $sport = $value;
+    }
+    else {
+      $sport = (object) array('strSport' => $value);
+    }
+    return $factory->create($sport);
+  }
+
+  public static function reverseSport(SportInterface $sport, $context, FactoryInterface $factory) {
+    return $factory->reverseMapProperties($sport->raw());
   }
 }

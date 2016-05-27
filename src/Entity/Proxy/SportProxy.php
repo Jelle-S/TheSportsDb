@@ -27,7 +27,7 @@ class SportProxy extends Proxy implements SportInterface {
   protected function loadLeagues() {
     $league_data = $this->sportsDbClient->doRequest('search_all_leagues.php', array('s' => urlencode(strtolower($this->properties->id))));
     if (isset($league_data->countrys)) {
-      $sport = (object) array_merge(array('leagues' => $league_data->countrys), (array) $this->factory->reverseMapProperties($this->properties));
+      $sport = (object) array_merge(array('leagues' => $league_data->countrys), (array) $this->factory->reverseMapProperties($this->raw()));
       $this->entity = $this->factory->create($sport);
       if ($this->entity instanceof SportInterface) {
         return;

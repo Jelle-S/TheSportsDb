@@ -17,7 +17,7 @@ interface LeagueInterface extends EntityInterface {
 
   public function getName();
 
-  public function getSportName();
+  public function getSport();
 
   public function getAlternateName();
 

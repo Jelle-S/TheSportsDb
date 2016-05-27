@@ -15,4 +15,8 @@ interface EntityInterface {
   public function __construct(\stdClass $values);
 
   public function raw();
+
+  public static function getEntityType();
+
+  public static function getPropertyMapDefinition();
 }
