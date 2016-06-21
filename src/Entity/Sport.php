@@ -6,7 +6,7 @@
 
 namespace TheSportsDb\Entity;
 
-use TheSportsDb\Factory\FactoryInterface;
+use TheSportsDb\Entity\EntityManagerInterface;
 
 /**
  * A fully loaded sport object.
@@ -20,8 +20,8 @@ class Sport extends Entity implements SportInterface {
     array('strSport', 'name'),
     array('leagues', 'leagues', array(
       array(self::class, 'transformLeagues'),
-      array(self::class, 'reverseLeagues'),
-    ), 'league'),
+      array(League::class, 'reverseArray'),
+    )),
   );
 
   protected $id;
@@ -49,19 +49,11 @@ class Sport extends Entity implements SportInterface {
     }
   }
 
-  public static function transformLeagues($values, $context, FactoryInterface $factory) {
+  public static function transformLeagues($values, $context, EntityManagerInterface $entityManager) {
     $mapped_leagues = array();
     foreach ($values as $league_data) {
-      $mapped_leagues[] = $factory->create($league_data);
+      $mapped_leagues[] = $entityManager->repository('league')->byId($league_data->idLeague);
     }
     return $mapped_leagues;
-  }
-
-  public static function reverseLeagues($leagues, $context, FactoryInterface $factory) {
-    $reversed_leagues = array();
-    foreach ($leagues as $league) {
-      $reversed_leagues[] = $factory->reverseMapProperties($league->raw());
-    }
-    return $reversed_leagues;
   }
 }

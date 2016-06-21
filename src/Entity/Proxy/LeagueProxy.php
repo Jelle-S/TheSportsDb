@@ -23,11 +23,8 @@ class LeagueProxy extends Proxy implements LeagueInterface {
   protected function load() {
     $league_data = $this->sportsDbClient->doRequest('lookupleague.php', array('id' => $this->properties->id));
     if (isset($league_data->leagues)) {
-      $league = (object) array_merge((array) reset($league_data->leagues), (array) $this->factory->reverseMapProperties($this->properties));
-      $this->entity = $this->factory->create($league);
-      if ($this->entity instanceof LeagueInterface) {
-        return;
-      }
+      $this->update($this->entityManager->mapProperties(reset($league_data->leagues), 'league'));
+      return;
     }
     throw new TheSportsDbException('Could not fully load league with id ' . $this->properties->id . '.');
   }
@@ -35,11 +32,8 @@ class LeagueProxy extends Proxy implements LeagueInterface {
   protected function loadSeasons() {
     $league_data = $this->sportsDbClient->doRequest('lookupleague.php', array('id' => $this->properties->id, 's' => 'all'));
     if (isset($league_data->leagues)) {
-      $league = (object) array_merge((array) $this->factory->reverseMapProperties($this->properties), array('seasons' => $league_data->leagues));
-      $this->entity = $this->factory->create($league);
-      if ($this->entity instanceof LeagueInterface) {
-        return;
-      }
+      $this->update($this->factory->mapProperties((object) array('seasons' => $league_data->leagues)));
+      return;
     }
     throw new TheSportsDbException('Could not fully load league with id ' . $this->properties->id . '.');
   }

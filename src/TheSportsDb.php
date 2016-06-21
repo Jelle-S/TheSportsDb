@@ -6,8 +6,7 @@
 
 namespace TheSportsDb;
 
-use TheSportsDb\Query\SportQueryInterface;
-use TheSportsDb\Query\LeagueQueryInterface;
+use TheSportsDb\Entity\EntityManagerInterface;
 /**
  * Main API class for TheSportsDb.
  *
@@ -16,29 +15,21 @@ use TheSportsDb\Query\LeagueQueryInterface;
 class TheSportsDb {
 
   /**
-   * The sport query.
+   * The entity manager.
    *
-   * @var TheSportsDb\Query\SportQueryInterface
+   * @var TheSportsDb\Entity\EntityManagerInterface
    */
-  protected $sportQuery;
-
-  /**
-   * The league query.
-   *
-   * @var TheSportsDb\Query\LeagueQueryInterface
-   */
-  protected $leagueQuery;
+  protected $entityManager;
 
   /**
    * Creates a new TheSportsDb instance
    */
-  public function __construct(SportQueryInterface $sportQuery, LeagueQueryInterface $leagueQuery) {
-    $this->sportQuery = $sportQuery;
-    $this->leagueQuery = $leagueQuery;
+  public function __construct(EntityManagerInterface $entityManager) {
+    $this->entityManager = $entityManager;
   }
 
   public function getSports() {
-    return $this->sportQuery->all();
+    return $this->entityManager->repository('sport')->all();
   }
 
   /**
@@ -50,11 +41,11 @@ class TheSportsDb {
    * @return \TheSportsDb\Entity\SportInterface
    */
   public function getSport($name) {
-    return $this->sportQuery->byId($name);
+    return $this->entityManager->repository('sport')->byId($name);
   }
 
   public function getLeagues() {
-    return $this->leagueQuery->all();
+    return $this->entityManager->repository('league')->all();
   }
 
   /**
@@ -66,6 +57,6 @@ class TheSportsDb {
    * @return \TheSportsDb\Entity\LeagueInterface
    */
   public function getLeague($league_id) {
-    return $this->leagueQuery->byId($league_id);
+    return $this->entityManager->repository('league')->byId($league_id);
   }
 }

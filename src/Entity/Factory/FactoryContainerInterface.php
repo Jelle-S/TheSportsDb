@@ -1,10 +1,10 @@
 <?php
 /**
  * @file
- * Contains \TheSportsDb\Factory\FactoryContainerInterface.
+ * Contains \TheSportsDb\Entity\Factory\FactoryContainerInterface.
  */
 
-namespace TheSportsDb\Factory;
+namespace TheSportsDb\Entity\Factory;
 
 /**
  * An interface for factory containers.
@@ -16,10 +16,10 @@ interface FactoryContainerInterface {
   /**
    * Add a factory for a class.
    *
-   * @param \TheSportsDb\Factory\FactoryInterface $factory
+   * @param \TheSportsDb\Entity\Factory\FactoryInterface $factory
    *   The factory to add.
    */
-  public function addFactory(FactoryInterface $factory);
+  public function addFactory(FactoryInterface $factory, $entityType);
 
   /**
    * Get the factory for a class.
@@ -30,8 +30,10 @@ interface FactoryContainerInterface {
    * @throws \Exception
    *   When the factory for this class is not registered.
    *
-   * @return \TheSportsDb\Factory\FactoryInterface
+   * @return \TheSportsDb\Entity\Factory\FactoryInterface
    *   The factory for this class.
    */
   public function getFactory($class);
+
+  public function setDefaultFactory(FactoryInterface $factory);
 }

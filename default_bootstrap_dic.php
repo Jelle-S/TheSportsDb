@@ -41,7 +41,7 @@ $container->register('thesportsdb.propertymapper.league', 'TheSportsDb\PropertyM
     ->addTag('property_mapper');
 
 // League factory.
-$container->register('thesportsdb.factory.league', 'TheSportsDb\Factory\Factory')
+$container->register('thesportsdb.factory.league', 'TheSportsDb\Entity\Factory\Factory')
     ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
     ->addArgument('%thesportsdb.entity.class.league%')
     ->addArgument('%thesportsdb.entity.proxy.league%')
@@ -53,7 +53,7 @@ $container->register('thesportsdb.propertymapper.sport', 'TheSportsDb\PropertyMa
     ->addTag('property_mapper');
 
 // Sport factory.
-$container->register('thesportsdb.factory.sport', 'TheSportsDb\Factory\Factory')
+$container->register('thesportsdb.factory.sport', 'TheSportsDb\Entity\Factory\Factory')
     ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
     ->addArgument('%thesportsdb.entity.class.sport%')
     ->addArgument('%thesportsdb.entity.proxy.sport%')
@@ -66,7 +66,7 @@ $container->register('thesportsdb.propertymapper.team', 'TheSportsDb\PropertyMap
     ->addTag('property_mapper');
 
 // Team factory.
-$container->register('thesportsdb.factory.team', 'TheSportsDb\Factory\Factory')
+$container->register('thesportsdb.factory.team', 'TheSportsDb\Entity\Factory\Factory')
     ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
     ->addArgument('%thesportsdb.entity.class.team%')
     ->addArgument('%thesportsdb.entity.proxy.team%')
@@ -80,7 +80,7 @@ $container->register('thesportsdb.propertymapper.event', 'TheSportsDb\PropertyMa
     ->addTag('property_mapper');
 
 // Event factory.
-$container->register('thesportsdb.factory.event', 'TheSportsDb\Factory\Factory')
+$container->register('thesportsdb.factory.event', 'TheSportsDb\Entity\Factory\Factory')
     ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
     ->addArgument('%thesportsdb.entity.class.event%')
     ->addArgument('%thesportsdb.entity.proxy.event%')
@@ -93,7 +93,7 @@ $container->register('thesportsdb.propertymapper.player', 'TheSportsDb\PropertyM
     ->addTag('property_mapper');
 
 // Player factory.
-$container->register('thesportsdb.factory.player', 'TheSportsDb\Factory\Factory')
+$container->register('thesportsdb.factory.player', 'TheSportsDb\Entity\Factory\Factory')
     ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
     ->addArgument('%thesportsdb.entity.class.player%')
     ->addArgument('%thesportsdb.entity.proxy.player%')
@@ -106,7 +106,7 @@ $container->register('thesportsdb.propertymapper.season', 'TheSportsDb\PropertyM
     ->addTag('property_mapper');
 
 // Season factory.
-$container->register('thesportsdb.factory.season', 'TheSportsDb\Factory\Factory')
+$container->register('thesportsdb.factory.season', 'TheSportsDb\Entity\Factory\Factory')
     ->addArgument(new Reference('thesportsdb.client.thesportsdb'))
     ->addArgument('%thesportsdb.entity.class.season%')
     ->addArgument('%thesportsdb.entity.proxy.season%')

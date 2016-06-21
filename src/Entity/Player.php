@@ -6,6 +6,8 @@
 
 namespace TheSportsDb\Entity;
 
+use TheSportsDb\Entity\EntityManagerInterface;
+
 /**
  * A fully loaded player object.
  *
@@ -17,14 +19,14 @@ class Player extends Entity implements PlayerInterface {
     array('idPlayer', 'id'),
     array('idTeam', 'team', array(
       array(self::class, 'transformTeam'),
-      array(self::class, 'reverseTeam'),
-    ), 'team'),
+      array(Team::class, 'reverse'),
+    )),
     array('strNationality', 'nationality'),
     array('strPlayer', 'name'),
     array('strSport', 'sport', array(
       array(self::class, 'transformSport'),
-      array(self::class, 'reverseSport'),
-    ), 'sport'),
+      array(Sport::class, 'reverse'),
+    )),
     array('dateBorn', 'birthDay'), // transform to date
     array('dateSigned', 'dateSigned'), // transform to date
     array('strSigning', 'signing'),
@@ -185,34 +187,36 @@ class Player extends Entity implements PlayerInterface {
     return $this->locked;
   }
 
-  public static function transformTeam($value, $context, FactoryInterface $factory) {
+  public static function transformTeam($value, $context, EntityManagerInterface $entityManager) {
+    $id = $value;
     if (is_object($value)) {
+      $id = $value->idTeam;
       $team = $value;
     }
     else {
-      $team = (object) array('idTeam' => $value);
+      $team = (object) array('idTeam' => $id);
       if (isset($context->strTeam)) {
         $team->strTeam = $context->strTeam;
       }
     }
-    return $factory->create($team);
+    $teamEntity = $entityManager->repository('team')->byId($id);
+    // Update with given values.
+    $teamEntity->update($team);
+    return $teamEntity;
   }
 
-  public static function reverseTeam(TeamInterface $team, $context, FactoryInterface $factory) {
-    return $factory->reverseMapProperties($team->raw());
-  }
-
-  public static function transformSport($value, $context, FactoryInterface $factory) {
+  public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
+    $id = $value;
     if (is_object($value)) {
+      $id = $value->strSport;
       $sport = $value;
     }
     else {
-      $sport = (object) array('strSport' => $value);
+      $sport = (object) array('strSport' => $id);
     }
-    return $factory->create($sport);
-  }
-
-  public static function reverseSport(SportInterface $sport, $context, FactoryInterface $factory) {
-    return $factory->reverseMapProperties($sport->raw());
+    $sportEntity = $entityManager->repository('sport')->byId($id);
+    // Update with given values.
+    $sportEntity->update($sport);
+    return $sportEntity;
   }
 }

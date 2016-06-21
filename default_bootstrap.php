@@ -16,37 +16,38 @@ if (
 $httpClient = new GuzzleHttp\Client();
 
 // Factory container.
-$factoryContainer = new TheSportsDb\Factory\FactoryContainer();
+$factoryContainer = new TheSportsDb\Entity\Factory\FactoryContainer();
+
+// Repository container.
+$repositoryContainer = new TheSportsDb\Entity\Repository\RepositoryContainer();
 
 // Property mapper.
 $propertyMapper = new FastNorth\PropertyMapper\Mapper();
 
-// The sports db client.
-$sportsDbClient = new TheSportsDb\Http\TheSportsDbClient(THESPORTSDB_API_KEY, $httpClient);
+// Entity manager.
+$entityManager = new TheSportsDb\Entity\EntityManager($factoryContainer, $repositoryContainer, $propertyMapper);
+$entityManager->registerClass('league');
+$entityManager->registerClass('sport');
+$entityManager->registerClass('team');
+$entityManager->registerClass('event');
+$entityManager->registerClass('player');
+$entityManager->registerClass('season');
+
+// Repositories.
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\SportRepository($entityManager));
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\LeagueRepository($entityManager));
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\SeasonRepository($entityManager));
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\EventRepository($entityManager));
 
 // Cache pool.
 $cachePool = new Cache\Adapter\PHPArray\ArrayCachePool();
 
-// League factory.
-$leagueFactory = new \TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\League', 'TheSportsDb\Entity\Proxy\LeagueProxy', $factoryContainer, $propertyMapper);
+// The sports db client.
+$sportsDbClient = new TheSportsDb\Http\TheSportsDbClient(THESPORTSDB_API_KEY, $httpClient);
 
-// Sport factory.
-$sportFactory = new TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\Sport', 'TheSportsDb\Entity\Proxy\SportProxy', $factoryContainer, $propertyMapper);
+// Factory.
+$factory = new \TheSportsDb\Entity\Factory\Factory($sportsDbClient, $entityManager);
 
-// Team factory.
-$teamFactory = new TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\Team', 'TheSportsDb\Entity\Proxy\TeamProxy', $factoryContainer, $propertyMapper);
+$factoryContainer->setDefaultFactory($factory);
 
-// Event factory.
-$eventFactory = new TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\Event', 'TheSportsDb\Entity\Proxy\EventProxy', $factoryContainer, $propertyMapper);
-
-// Player factory.
-$playerFactory = new TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\Player', 'TheSportsDb\Entity\Proxy\PlayerProxy', $factoryContainer, $propertyMapper);
-
-// Season factory.
-$seasonFactory = new TheSportsDb\Factory\Factory($sportsDbClient, 'TheSportsDb\Entity\Season', 'TheSportsDb\Entity\Proxy\SeasonProxy', $factoryContainer, $propertyMapper);
-
-// Create the Query objects.
-$sportQuery = new TheSportsDb\Query\SportQuery($sportFactory, $sportsDbClient);
-$leagueQuery = new TheSportsDb\Query\LeagueQuery($leagueFactory, $sportsDbClient);
-
-$db = new TheSportsDb\TheSportsDb($sportQuery, $leagueQuery);
+$db = new TheSportsDb\TheSportsDb($entityManager);

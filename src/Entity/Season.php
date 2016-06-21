@@ -6,6 +6,8 @@
 
 namespace TheSportsDb\Entity;
 
+use TheSportsDb\Entity\EntityManagerInterface;
+
 /**
  * A fully loaded season object.
  *
@@ -17,12 +19,12 @@ class Season extends Entity implements SeasonInterface {
     array('strSeason', 'name'),
     array('idLeague', 'league', array(
       array(self::class, 'transformLeague'),
-      array(self::class, 'reverseLeague'),
-    ), 'league'),
+      array(League::class, 'reverse'),
+    )),
     array('events', 'events', array(
       array(self::class, 'transformEvents'),
-      array(self::class, 'reverseEvents'),
-    ), 'event'),
+      array(Event::class, 'reverseArray'),
+    )),
   );
 
   protected $id;
@@ -53,36 +55,29 @@ class Season extends Entity implements SeasonInterface {
     return $this->events;
   }
 
-  public static function transformLeague($value, $context, FactoryInterface $factory) {
+  public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
+    $id = $value;
     if (is_object($value)) {
+      $id = $value->idLeague;
       $league = $value;
     }
     else {
-      $league = (object) array('idLeague' => $value);
+      $league = (object) array('idLeague' => $id);
       if (isset($context->strLeague)) {
         $league->strLeague = $context->strLeague;
       }
     }
-    return $factory->create($league);
+    $leagueEntity = $entityManager->repository('league')->byId($id);
+    // Update with given values.
+    $leagueEntity->update($league);
+    return $leagueEntity;
   }
 
-  public static function reverseLeague(LeagueInterface $league, $context, FactoryInterface $factory) {
-    return $factory->reverseMapProperties($league->raw());
-  }
-
-  public static function transformEvents(array $values, $context, FactoryInterface $factory) {
+  public static function transformEvents(array $values, $context, EntityManagerInterface $entityManager) {
     $mapped_events = array();
     foreach ($values as $event_data) {
-      $mapped_events[] = $factory->create($event_data);
+      $mapped_events[] = $entityManager->repository('event')->byId($event_data->idEvent);
     }
     return $mapped_events;
-  }
-
-  public static function reverseEvents(array $events, $context, FactoryInterface $factory) {
-    $reversed_events = array();
-    foreach ($events as $event) {
-      $reversed_events[] = $factory->reverseMapProperties($event->raw());
-    }
-    return $reversed_events;
   }
 }

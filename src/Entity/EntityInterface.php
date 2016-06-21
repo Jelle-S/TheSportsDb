@@ -14,6 +14,8 @@ namespace TheSportsDb\Entity;
 interface EntityInterface {
   public function __construct(\stdClass $values);
 
+  public function update(\stdClass $values);
+
   public function raw();
 
   public static function getEntityType();

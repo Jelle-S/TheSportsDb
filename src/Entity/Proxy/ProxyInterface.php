@@ -8,7 +8,7 @@ namespace TheSportsDb\Entity\Proxy;
 
 use TheSportsDb\Entity\EntityInterface;
 use TheSportsDb\Http\TheSportsDbClientInterface;
-use TheSportsDb\Factory\FactoryInterface;
+use TheSportsDb\Entity\EntityManagerInterface;
 
 /**
  * Interface for proxy objects.
@@ -19,5 +19,5 @@ interface ProxyInterface extends EntityInterface {
 
   public function setSportsDbClient(TheSportsDbClientInterface $sportsDbClient);
 
-  public function setFactory(FactoryInterface $factory);
+  public function setEntityManager(EntityManagerInterface $entityManager);
 }

@@ -7,7 +7,7 @@
 namespace TheSportsDb\Entity\Proxy;
 
 use TheSportsDb\Http\TheSportsDbClientInterface;
-use TheSportsDb\Factory\FactoryInterface;
+use TheSportsDb\Entity\EntityManagerInterface;
 use TheSportsDb\Entity\EntityInterface;
 
 /**
@@ -40,9 +40,9 @@ abstract class Proxy implements ProxyInterface {
   /**
    * The factory.
    *
-   * @var \TheSportsDb\Factory\FactoryInterface
+   * @var TheSportsDb\Entity\EntityManagerInterface
    */
-  protected $factory;
+  protected $entityManager;
 
   /**
    * Creates a new Proxy object.
@@ -51,15 +51,30 @@ abstract class Proxy implements ProxyInterface {
    *   The sport data.
    * @param \TheSportsDb\Http\TheSportsDbClientInterface $sportsDbClient
    *   A sports db client
-   * @param \TheSportsDb\Factory\FactoryInterface $factory
+   * @param \TheSportsDb\Entity\Factory\FactoryInterface $factory
    *   The sport factory.
    */
   public function __construct(\stdClass $values) {
-    $this->properties = $values;
+    $this->properties = new \stdClass();
+    $this->update($values);
   }
 
-  public function setFactory(FactoryInterface $factory) {
-    $this->factory = $factory;
+  public function update(\stdClass $values) {
+    foreach ((array) $values as $prop => $val) {
+      if (method_exists($this, 'get' . ucfirst($prop))) {
+        $this->properties->{$prop} = $val;
+      }
+    }
+    if ($this->entityManager && $this->entityManager->factory($this->getEntityType())->isFullObject($this->properties, $this->getEntityType())) {
+      $this->entity = $this->entityManager->factory($this->getEntityType())->create($this->properties, $this->getEntityType(), FALSE);
+    }
+  }
+
+  public function setEntityManager(EntityManagerInterface $entityManager) {
+    $this->entityManager = $entityManager;
+    // Check if we can create a full object once the entity manager is set.
+    $stub = new \stdClass();
+    $this->update($stub);
   }
 
   public function setSportsDbClient(TheSportsDbClientInterface $sportsDbClient) {
@@ -76,19 +91,26 @@ abstract class Proxy implements ProxyInterface {
    *   The property value.
    */
   protected function get($name) {
+    // If the full entity is loaded, use it.
+    if ($this->entity instanceof EntityInterface) {
+      return $this->entity->{'get' . ucfirst($name)}();
+    }
+
+        // If the property exists on the proxy, use it.
     if (isset($this->properties->{$name})) {
       return $this->properties->{$name};
     }
-    if (!$this->entity) {
-      // Do request & create league.
-      if (method_exists($this, 'load' . ucfirst($name))) {
-        $this->{'load' . ucfirst($name)}();
-      }
-      else {
-        $this->load();
-      }
+
+    // The property does not exist on the proxy, and the entity is not loaded in
+    // full yet, so load it first and repeat the operation.
+    if (method_exists($this, 'load' . ucfirst($name))) {
+      $this->{'load' . ucfirst($name)}();
     }
-    return $this->entity->{'get' . ucfirst($name)}();
+    else {
+      $this->load();
+    }
+    return $this->get($name);
+    
   }
 
   /**
@@ -101,36 +123,40 @@ abstract class Proxy implements ProxyInterface {
 
   public function raw() {
     if ($this->entity) {
-      return $this->entity->raw();
+      $this->_raw = $this->entity->raw();
+      return $this->_raw;
     }
-    $raw = new \stdClass();
+    if (!isset($this->_raw)) {
+      $this->_raw = new \stdClass();
+    }
     $reflection = new \ReflectionClass($this);
     $methods = $reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
     foreach ($methods as $method) {
       $methodName = $method->getName();
       if (strpos($methodName, 'get') === 0) {
         $prop = lcfirst(substr($methodName, 3));
-        if (isset($this->properties->{$prop})) {
+        if (isset($this->properties->{$prop}) && !property_exists($this->_raw, $prop)) {
+          $this->_raw->{$prop} = NULL;
           $val = $this->{$methodName}();
-          $raw->{$prop} = $val;
+          $this->_raw->{$prop} = $val;
           if (method_exists($val, 'raw')) {
-            $raw->{$prop} = $val->raw();
+            $this->_raw->{$prop} = $val->raw();
           }
           elseif (is_array($val)) {
-            $raw->{$prop} = array();
+            $this->_raw->{$prop} = array();
             foreach ($val as $v) {
-              $raw->{$prop}[] = method_exists($v, 'raw') ? $v->raw() : $v;
+              $this->_raw->{$prop}[] = method_exists($v, 'raw') ? $v->raw() : $v;
             }
           }
         }
       }
     }
-    return $raw;
+    return $this->_raw;
   }
 
   public static function getEntityType() {
-    $reflection = new \ReflectionClass(substr(static::class, 0, -5));
-    return strtolower($reflection->getShortName());
+    $reflection = new \ReflectionClass(static::class);
+    return strtolower(substr($reflection->getShortName(), 0, -5));
   }
 
   public static function getPropertyMapDefinition() {

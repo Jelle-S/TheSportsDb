@@ -21,13 +21,10 @@ class EventProxy extends Proxy implements EventInterface {
   protected function load() {
     $event_data = $this->sportsDbClient->doRequest('lookupevent.php', array('id' => $this->getId()));
     if (isset($event_data->events)) {
-      $event = (object) array_merge((array) reset($event_data->events), (array) $this->factory->reverseMapProperties($this->properties));
-      $this->entity = $this->factory->create($event);
-      if ($this->entity instanceof EventInterface) {
-        return;
-      }
+      $this->update($this->factory->mapProperties(reset($event_data->event)));
+      return;
     }
-    throw new TheSportsDbException('Could not fully load event with id ' . $this->properties->id . '.');
+    throw new \Exception('Could not fully load event with id ' . $this->properties->id . '.');
   }
 
   public function getAwayFormation() {

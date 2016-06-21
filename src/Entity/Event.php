@@ -6,7 +6,7 @@
 
 namespace TheSportsDb\Entity;
 
-use TheSportsDb\Factory\FactoryInterface;
+use TheSportsDb\Entity\EntityManagerInterface;
 
 /**
  * A fully loaded event object.
@@ -21,12 +21,12 @@ class Event extends Entity implements EventInterface {
     array('strFilename', 'filename'),
     array('idLeague', 'league', array(
       array(self::class, 'transformLeague'),
-      array(self::class, 'reverseLeague'),
-    ), 'league'),
+      array(League::class, 'reverse'),
+    )),
     array('strSeason', 'season', array(
       array(self::class, 'transformSeason'),
-      array(self::class, 'reverseSeason'),
-    ), 'season'),
+      array(Season::class, 'reverse'),
+    )),
     array('strDescriptionEN', 'description'),
     array('intHomeScore', 'homeScore'),
     array('intRound' , 'round'),
@@ -56,12 +56,12 @@ class Event extends Entity implements EventInterface {
     array('strTVStation', 'tvStation'),
     array('idHomeTeam', 'homeTeam', array(
       array(self::class, 'transformHomeTeam'),
-      array(self::class, 'reverseTeam'),
-    ), 'team'),
+      array(Team::class, 'reverse'),
+    )),
     array('idAwayTeam', 'awayTeam', array(
       array(self::class, 'transformAwayTeam'),
-      array(self::class, 'reverseTeam'),
-    ), 'team'),
+      array(Team::class, 'reverse'),
+    )),
     array('strResult', 'result'),
     array('strCircuit', 'circuit'),
     array('strCountry', 'country'),
@@ -300,64 +300,70 @@ class Event extends Entity implements EventInterface {
     return $this->locked;
   }
 
-  public static function transformLeague($value, $context, FactoryInterface $factory) {
+  public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
+    $id = $value;
     if (is_object($value)) {
+      $id = $value->idLeague;
       $league = $value;
     }
     else {
-      $league = (object) array('idLeague' => $value);
+      $league = (object) array('idLeague' => $id);
       if (isset($context->strLeague)) {
         $league->strLeague = $context->strLeague;
       }
     }
-    return $factory->create($league);
+    $leagueEntity = $entityManager->repository('league')->byId($id);
+    // Update with given values.
+    $leagueEntity->update($league);
+    return $leagueEntity;
   }
 
-  public static function reverseLeague(LeagueInterface $league, $context, FactoryInterface $factory) {
-    return $factory->reverseMapProperties($league->raw());
-  }
-
-  public static function transformSeason($value, $context, FactoryInterface $factory) {
+  public static function transformSeason($value, $context, EntityManagerInterface $entityManager) {
     if (is_object($value)) {
       $season = $value;
     }
     else {
       $season = (object) array('idLeague' => $context->idLeague, 'strSeason' => $value);
     }
-    return $factory->create($season);
+    $id = array($season->strSeason, $season->idLeague);
+    $seasonEntity = $entityManager->repository('season')->byId($id);
+    $seasonEntity->update($season);
+    return $seasonEntity;
   }
 
-  public static function reverseSeason(SeasonInterface $season, $context, FactoryInterface $factory) {
-    return $factory->reverseMapProperties($season->raw());
-  }
-
-  public static function transformHomeTeam($value, $context, FactoryInterface $factory) {
+  public static function transformHomeTeam($value, $context, EntityManagerInterface $entityManager) {
+    $id = $value;
     if (is_object($value)) {
+      $id = $value->idTeam;
       $team = $value;
     }
     else {
-      $team = (object) array('idTeam' => $value);
+      $team = (object) array('idTeam' => $id);
       if (isset($context->strHomeTeam)) {
         $team->strTeam = $context->strHomeTeam;
       }
     }
-    return $factory->create($team);
+    $teamEntity = $entityManager->repository('team')->byId($id);
+    // Update with given values.
+    $teamEntity->update($team);
+    return $teamEntity;
   }
 
-  public static function reverseTeam(TeamInterface $team, $context, FactoryInterface $factory) {
-    return $factory->reverseMapProperties($team->raw());
-  }
-
-  public static function transformAwayTeam($value, $context, FactoryInterface $factory) {
+  public static function transformAwayTeam($value, $context, EntityManagerInterface $entityManager) {
+    $id = $value;
     if (is_object($value)) {
+      $id = $value->idTeam;
       $team = $value;
     }
     else {
-      $team = (object) array('idTeam' => $value);
+      $team = (object) array('idTeam' => $id);
       if (isset($context->strAwayTeam)) {
         $team->strTeam = $context->strAwayTeam;
       }
     }
-    return $factory->create($team);
+    $teamEntity = $entityManager->repository('team')->byId($id);
+    // Update with given values.
+    $teamEntity->update($team);
+    return $teamEntity;
   }
 }

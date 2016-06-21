@@ -6,7 +6,7 @@
 
 namespace TheSportsDb\Entity;
 
-use TheSportsDb\Factory\FactoryInterface;
+use TheSportsDb\Entity\EntityManagerInterface;
 
 /**
  * A fully loaded league object.
@@ -20,8 +20,8 @@ class League extends Entity implements LeagueInterface {
     array('strLeague', 'name'),
     array('strSport', 'sport', array(
       array(self::class, 'transformSport'),
-      array(self::class, 'reverseSport'),
-    ), 'sport'),
+      array(Sport::class, 'reverse'),
+    )),
     array('strLeagueAlternate', 'alternateName'),
     array('intFormedYear', 'formedYear'),
     array('dateFirstEvent', 'dateFirstEvent'), //"2013-03-02",
@@ -42,8 +42,8 @@ class League extends Entity implements LeagueInterface {
     array('strLocked', 'locked'),
     array('seasons', 'seasons', array(
       array(self::class, 'transformSeasons'),
-      array(self::class, 'reverseSeasons'),
-    ), 'season'),
+      array(Season::class, 'reverseArray'),
+    )),
     // idSoccerXML
     // strDescriptionDE
     // strDescriptionFR
@@ -175,33 +175,27 @@ class League extends Entity implements LeagueInterface {
     return $this->seasons;
   }
 
-  public static function transformSport($value, $context, FactoryInterface $factory) {
+  public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
+    $id = $value;
     if (is_object($value)) {
+      $id = $value->strSport;
       $sport = $value;
     }
     else {
-      $sport = (object) array('strSport' => $value);
+      $sport = (object) array('strSport' => $id);
     }
-    return $factory->create($sport);
+    $sportEntity = $entityManager->repository('sport')->byId($id);
+    // Update with given values.
+    $sportEntity->update($sport);
+    return $sportEntity;
   }
 
-  public static function reverseSport($sport, $context, FactoryInterface $factory) {
-    return $factory->reverseMapProperties($sport->raw());
-  }
-
-  public static function transformSeasons($value, $context, FactoryInterface $factory) {
+  public static function transformSeasons($value, $context, EntityManagerInterface $entityManager) {
     $mapped_seasons = array();
     foreach ($value as $season) {
-      $mapped_seasons[] = $factory->create((object) array('idLeague' => $context->idLeague, 'strSeason' => $season->strSeason));
+      $id = array($season->strSeason, $season->idLeague);
+      $mapped_seasons[] = $entityManager->repository('season')->byId($id);
     }
     return $mapped_seasons;
-  }
-
-  public static function reverseSeasons($seasons, $context, FactoryInterface $factory) {
-    $reversed_seasons = array();
-    foreach ($seasons as $season) {
-      $reversed_seasons[] = $factory->reverseMapProperties($season->raw());
-    }
-    return $reversed_seasons;
   }
 }

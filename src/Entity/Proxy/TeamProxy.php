@@ -22,11 +22,8 @@ class TeamProxy extends Proxy implements TeamInterface {
   protected function load() {
     $team_data = $this->sportsDbClient->doRequest('lookupteam.php', array('id' => $this->properties->id));
     if (isset($team_data->teams)) {
-      $team = (object) array_merge((array) reset($team_data->teams), (array) $this->factory->reverseMapProperties($this->properties));
-      $this->entity = $this->factory->create($team);
-      if ($this->entity instanceof TeamInterface) {
-        return;
-      }
+      $this->update($this->entityManager->mapProperties(reset($team_data->teams), $this->getEntityType()));
+      return;
     }
     throw new TheSportsDbException('Could not fully load team with id ' . $this->properties->id . '.');
   }
