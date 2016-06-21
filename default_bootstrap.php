@@ -2,11 +2,7 @@
 if (!defined('THESPORTSDB_API_KEY')) {
   define('THESPORTSDB_API_KEY', '1');
 }
-if (
-  class_exists('\Symfony\Component\DependencyInjection\ContainerBuilder')
-  && class_exists('\Symfony\Component\Config\Resource\FileResource')
-  && class_exists('\HendrichA\TagPassLibrary\TagPass')
-) {
+if (class_exists('\Symfony\Component\DependencyInjection\ContainerBuilder')) {
   // Use the dependency injection container if available.
   include_once __DIR__ . '/default_bootstrap_dic.php';
   return;
@@ -38,9 +34,8 @@ $repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\SportRepos
 $repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\LeagueRepository($entityManager));
 $repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\SeasonRepository($entityManager));
 $repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\EventRepository($entityManager));
-
-// Cache pool.
-$cachePool = new Cache\Adapter\PHPArray\ArrayCachePool();
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\PlayerRepository($entityManager));
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\TeamRepository($entityManager));
 
 // The sports db client.
 $sportsDbClient = new TheSportsDb\Http\TheSportsDbClient(THESPORTSDB_API_KEY, $httpClient);

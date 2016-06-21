@@ -4,14 +4,10 @@
   "type": "library",
   "require": {
     "guzzlehttp/guzzle": "^6.2",
-    "psr/cache": "^1.0",
-    "cache/array-adapter": "^0.4.0",
     "fastnorth/property-mapper": "^0.0.4"
   },
   "suggest": {
-    "symfony/dependency-injection": "Allows the use of a dependency injection container with TheSportsDb.",
-    "hendricha/tagpass": "Required in combination with symfony/dependency-injection when using the default_bootstrap.php",
-    "symfony/config": "Required in combination with symfony/dependency-injection when using the default_bootstrap.php"
+    "symfony/dependency-injection": "Allows the use of a dependency injection container with TheSportsDb."
   },
   "license": "GPL-3.0+",
   "authors": [

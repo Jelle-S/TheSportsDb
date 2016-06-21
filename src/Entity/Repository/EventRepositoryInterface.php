@@ -7,7 +7,7 @@
 namespace TheSportsDb\Entity\Repository;
 
 /**
- * The main interface for LeagueRepository objects.
+ * The main interface for EventRepository objects.
  *
  * @author Jelle Sebreghts
  */
