@@ -17,7 +17,7 @@ class FactoryContainer implements FactoryContainerInterface {
   protected $defaultFactory;
 
   public function addFactory(FactoryInterface $factory, $entityType) {
-    $this->factories[$factory->getEntityTypeName()] = $factory;
+    $this->factories[$entityType] = $factory;
   }
 
   public function getFactory($entityType) {

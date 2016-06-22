@@ -1,0 +1,83 @@
+parameters:
+    thesportsdb.api_key: '1'
+
+services:
+    thesportsdb.client.http:
+        class: GuzzleHttp\Client
+    thesportsdb.factory.container:
+        class: TheSportsDb\Entity\Factory\FactoryContainer
+        calls:
+            - [setDefaultFactory, ['@thesportsdb.default.factory']]
+
+    thesportsdb.repository.container:
+        class: TheSportsDb\Entity\Repository\RepositoryContainer
+        tags:
+            - { name: repository_container }
+
+    thesportsdb.property.mapper:
+        class: FastNorth\PropertyMapper\Mapper
+    thesportsdb.entity.manager:
+        class: TheSportsDb\Entity\EntityManager
+        tags:
+            - { name: entity_manager, tag: entity_manager_consumer }
+        arguments: ['@thesportsdb.property.mapper']
+        calls:
+            - [setFactoryContainer, ['@thesportsdb.factory.container']]
+            - [setRepositoryContainer, ['@thesportsdb.repository.container']]
+            - [registerClass, [league]]
+            - [registerClass, [sport]]
+            - [registerClass, [team]]
+            - [registerClass, [event]]
+            - [registerClass, [player]]
+            - [registerClass, [season]]
+
+    thesportsdb.repository.sport:
+        class: TheSportsDb\Entity\Repository\SportRepository
+        tags:
+            - { name: entity_repository, tag: repository_container }
+            - { name: entity_manager_consumer }
+
+    thesportsdb.repository.league:
+        class: TheSportsDb\Entity\Repository\LeagueRepository
+        tags:
+            - { name: entity_repository, tag: repository_container }
+            - { name: entity_manager_consumer }
+
+    thesportsdb.repository.season:
+        class: TheSportsDb\Entity\Repository\SeasonRepository
+        tags:
+            - { name: entity_repository, tag: repository_container }
+            - { name: entity_manager_consumer }
+
+    thesportsdb.repository.event:
+        class: TheSportsDb\Entity\Repository\EventRepository
+        tags:
+            - { name: entity_repository, tag: repository_container }
+            - { name: entity_manager_consumer }
+
+    thesportsdb.repository.player:
+        class: TheSportsDb\Entity\Repository\PlayerRepository
+        tags:
+            - { name: entity_repository, tag: repository_container }
+            - { name: entity_manager_consumer }
+
+    thesportsdb.repository.team:
+        class: TheSportsDb\Entity\Repository\TeamRepository
+        tags:
+            - { name: entity_repository, tag: repository_container }
+            - { name: entity_manager_consumer }
+
+    thesportsdb.client.thesportsdb:
+        class: TheSportsDb\Http\TheSportsDbClient
+        arguments: ['%thesportsdb.api_key%', '@thesportsdb.client.http']
+    thesportsdb.default.factory:
+        class: TheSportsDb\Entity\Factory\Factory
+        tags:
+            - { name: entity_manager_consumer }
+        arguments: ['@thesportsdb.client.thesportsdb']
+
+    thesportsdb:
+        class: TheSportsDb\TheSportsDb
+        tags:
+            - { name: entity_manager_consumer }
+

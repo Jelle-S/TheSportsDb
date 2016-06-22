@@ -9,10 +9,9 @@ namespace TheSportsDb\Entity\Factory;
 use TheSportsDb\Http\TheSportsDbClientInterface;
 use TheSportsDb\Entity\EntityInterface;
 use TheSportsDb\Entity\Proxy\ProxyInterface;
-use TheSportsDb\PropertyMapper\Transformer\Callback;
 use FastNorth\PropertyMapper\MapperInterface;
-use FastNorth\PropertyMapper\Map;
 use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\Entity\EntityManagerConsumerTrait;
 
 /**
  * Default implementation of factories.
@@ -21,20 +20,14 @@ use TheSportsDb\Entity\EntityManagerInterface;
  */
 class Factory implements FactoryInterface {
 
+  use EntityManagerConsumerTrait;
+
   /**
    * The sports db client.
    *
    * @var TheSportsDb\Http\TheSportsDbClientInterface
    */
   protected $sportsDbClient;
-
-  /**
-   * The entity manager.
-   *
-   * @var TheSportsDb\Entity\EntityManagerInterface
-   */
-  protected $entityManager;
-
 
   /**
    * Creates a \TheSportsDb\Facotory\Factory object.
@@ -50,9 +43,11 @@ class Factory implements FactoryInterface {
    * @param MapperInterface $propertyMapper
    *   The property mapper.
    */
-  public function __construct(TheSportsDbClientInterface $sportsDbClient, EntityManagerInterface $entityManager) {
+  public function __construct(TheSportsDbClientInterface $sportsDbClient, EntityManagerInterface $entityManager = NULL) {
     $this->sportsDbClient = $sportsDbClient;
-    $this->entityManager = $entityManager;
+    if ($entityManager instanceof EntityManagerInterface) {
+      $this->entityManager = $entityManager;
+    }
   }
 
   /**

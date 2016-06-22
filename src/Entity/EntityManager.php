@@ -60,24 +60,49 @@ class EntityManager implements EntityManagerInterface {
   const EMPTYPROPERTYPLACEHOLDER = '__EMPTY_PROPERTY_PLACEHOLDER__';
 
 
-  public function __construct(FactoryContainerInterface $factoryContainer, RepositoryContainerInterface $repositoryContainer, MapperInterface $propertyMapper) {
-    $this->factoryContainer = $factoryContainer;
-    $this->repositoryContainer = $repositoryContainer;
+  public function __construct(MapperInterface $propertyMapper, FactoryContainerInterface $factoryContainer = NULL, RepositoryContainerInterface $repositoryContainer = NULL) {
+    if ($factoryContainer instanceof FactoryContainerInterface) {
+      $this->factoryContainer = $factoryContainer;
+    }
+    if ($repositoryContainer instanceof RepositoryContainerInterface) {
+      $this->repositoryContainer = $repositoryContainer;
+    }
     $this->propertyMapper = $propertyMapper;
   }
+
+  public function setFactoryContainer(FactoryContainerInterface $factoryContainer) {
+    if ($this->factoryContainer instanceof FactoryContainerInterface) {
+      throw new \Exception('Factory container already set.');
+    }
+    $this->factoryContainer = $factoryContainer;
+  }
+
+  public function setRepositoryContainer(RepositoryContainerInterface $repositoryContainer) {
+    if ($this->repositoryContainer instanceof RepositoryContainerInterface) {
+      throw new \Exception('Repository container already set.');
+    }
+    $this->repositoryContainer = $repositoryContainer;
+  }
+
 
   /**
    * {@inheritdoc}
    */
   public function repository($entityType) {
-    return $this->repositoryContainer->getRepository($entityType);
+    if ($this->repositoryContainer instanceof RepositoryContainerInterface) {
+      return $this->repositoryContainer->getRepository($entityType);
+    }
+    throw new \Exception('No repository container set.');
   }
 
   /**
    * {@inheritdoc}
    */
   public function factory($entityType) {
-    return $this->factoryContainer->getFactory($entityType);
+    if ($this->factoryContainer instanceof FactoryContainerInterface) {
+      return $this->factoryContainer->getFactory($entityType);
+    }
+    throw new \Exception('No factory container set.');
   }
 
   /**

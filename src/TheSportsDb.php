@@ -6,26 +6,25 @@
 
 namespace TheSportsDb;
 
-use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\Entity\EntityManagerConsumerInterface;
+use TheSportsDb\Entity\EntityManagerConsumerTrait;
+
 /**
  * Main API class for TheSportsDb.
  *
  * @author Jelle Sebreghts
  */
-class TheSportsDb {
+class TheSportsDb implements EntityManagerConsumerInterface {
 
-  /**
-   * The entity manager.
-   *
-   * @var TheSportsDb\Entity\EntityManagerInterface
-   */
-  protected $entityManager;
+  use EntityManagerConsumerTrait;
 
   /**
    * Creates a new TheSportsDb instance
    */
-  public function __construct(EntityManagerInterface $entityManager) {
-    $this->entityManager = $entityManager;
+  public function __construct(EntityManagerInterface $entityManager = NULL) {
+    if ($entityManager instanceof EntityManagerInterface) {
+      $this->entityManager = $entityManager;
+    }
   }
 
   public function getSports() {

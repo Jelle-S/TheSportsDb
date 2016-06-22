@@ -7,6 +7,7 @@
 namespace TheSportsDb\Entity\Repository;
 
 use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\Entity\EntityManagerConsumerTrait;
 
 /**
  * Abstract Repository implementation to inherit from.
@@ -15,12 +16,7 @@ use TheSportsDb\Entity\EntityManagerInterface;
  */
 abstract class Repository implements RepositoryInterface {
   
-  /**
-   * The entity manager.
-   * 
-   * @var TheSportsDb\Entity\EntityManagerInterface
-   */
-  protected $entityManager;
+  use EntityManagerConsumerTrait;
 
   /**
    * The repository of entities.
@@ -31,8 +27,10 @@ abstract class Repository implements RepositoryInterface {
 
   protected $entityType;
 
-  public function __construct(EntityManagerInterface $entityManager) {
-    $this->entityManager = $entityManager;
+  public function __construct(EntityManagerInterface $entityManager = NULL) {
+    if ($this->entityManager instanceof EntityManagerInterface) {
+      $this->entityManager = $entityManager;
+    }
     $this->repository = array();
   }
 

@@ -6,12 +6,13 @@
 
 namespace TheSportsDb\Entity\Repository;
 
+use TheSportsDb\Entity\EntityManagerConsumerInterface;
 /**
  * The main interface for Repository objects.
  *
  * @author Jelle Sebreghts
  */
-interface RepositoryInterface {
+interface RepositoryInterface extends EntityManagerConsumerInterface {
 
   /**
    * Loads an entity by id.

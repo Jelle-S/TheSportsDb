@@ -9,6 +9,7 @@ namespace TheSportsDb\Entity\Proxy;
 use TheSportsDb\Http\TheSportsDbClientInterface;
 use TheSportsDb\Entity\EntityManagerInterface;
 use TheSportsDb\Entity\EntityInterface;
+use TheSportsDb\Entity\EntityManagerConsumerTrait;
 
 /**
  * Default implementation of proxy objects.
@@ -16,6 +17,7 @@ use TheSportsDb\Entity\EntityInterface;
  * @author Jelle Sebreghts
  */
 abstract class Proxy implements ProxyInterface {
+  use EntityManagerConsumerTrait;
   /**
    * The sports db client.
    *
@@ -36,13 +38,6 @@ abstract class Proxy implements ProxyInterface {
    * @var mixed
    */
   protected $entity;
-
-  /**
-   * The factory.
-   *
-   * @var TheSportsDb\Entity\EntityManagerInterface
-   */
-  protected $entityManager;
 
   /**
    * Creates a new Proxy object.

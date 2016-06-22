@@ -6,12 +6,14 @@
 
 namespace TheSportsDb\Entity\Factory;
 
+use TheSportsDb\Entity\EntityManagerConsumerInterface;
+
 /**
  * Interface for factories.
  *
  * @author Jelle Sebreghts
  */
-interface FactoryInterface {
+interface FactoryInterface extends EntityManagerConsumerInterface {
   /**
    * Creates a sportsdb entity object based on given values.
    *
