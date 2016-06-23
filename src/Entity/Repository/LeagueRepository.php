@@ -19,13 +19,14 @@ class LeagueRepository extends Repository implements LeagueRepositoryInterface {
    * {@inheritdoc}
    */
   public function all() {
-    $leagues_data = $this->sportsDbClient->doRequest('all_leagues.php');
-    $factory = $this->entityManager->factory($this->getEntityTypeName());
-    foreach ($leagues_data->leagues as $league) {
-      if (!isset($this->repository[$league->idLeague])) {
-        $this->repository[$league->idLeague] = $factory->create($league, $this->getEntityTypeName());
-      }
-    }
-    return $this->repository;
+    return $this->normalizeArray($this->sportsDbClient->doRequest('all_leagues.php')->leagues);
+  }
+
+  public function byCountry($country) {
+    return $this->normalizeArray($this->sportsDbClient->doRequest('search_all_leagues.php', array('c' => $country))->countrys);
+  }
+
+  public function byCountryAndSport($country, $sport) {
+    return $this->normalizeArray($this->sportsDbClient->doRequest('search_all_leagues.php', array('c' => $country, 's' => $sport))->countrys);
   }
 }

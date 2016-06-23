@@ -325,7 +325,7 @@ class Event extends Entity implements EventInterface {
     else {
       $season = (object) array('idLeague' => $context->idLeague, 'strSeason' => $value);
     }
-    $id = array($season->strSeason, $season->idLeague);
+    $id = $season->strSeason . '|' . $season->idLeague;
     $seasonEntity = $entityManager->repository('season')->byId($id);
     $seasonEntity->update($season);
     return $seasonEntity;

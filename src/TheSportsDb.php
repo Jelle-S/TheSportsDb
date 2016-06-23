@@ -8,6 +8,7 @@ namespace TheSportsDb;
 
 use TheSportsDb\Entity\EntityManagerConsumerInterface;
 use TheSportsDb\Entity\EntityManagerConsumerTrait;
+use TheSportsDb\Entity\EntityManagerInterface;
 
 /**
  * Main API class for TheSportsDb.
@@ -57,5 +58,41 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    */
   public function getLeague($league_id) {
     return $this->entityManager->repository('league')->byId($league_id);
+  }
+
+  public function getLeaguesByCountry($country) {
+    return $this->entityManager->repository('league')->byCountry($country);
+  }
+
+  public function getLeaguesByCountryAndSport($country, $sport) {
+    return $this->entityManager->repository('league')->byCountryAndSport($country, $sport);
+  }
+
+  public function getTeamByName($teamName) {
+    return $this->entityManager->repository('team')->byName($teamName);
+  }
+
+  public function getPlayersByTeamName($teamName) {
+    return $this->entityManager->repository('player')->byTeamName($teamName);
+  }
+
+  public function getPlayersByName($teamName) {
+    return $this->entityManager->repository('player')->byName($teamName);
+  }
+
+  public function getPlayersByTeamNameAndName($teamName, $name) {
+    return $this->entityManager->repository('player')->byTeamNameAndName($teamName, $name);
+  }
+
+  public function getEventsByName($name) {
+    return $this->entityManager->repository('event')->byName($name);
+  }
+
+  public function getEventsByFileName($name) {
+    return $this->entityManager->repository('event')->byFileName($name);
+  }
+
+  public function getEventsByNameAndSeason($name, $season) {
+    return $this->entityManager->repository('event')->byNameAndSeason($name, $season);
   }
 }

@@ -12,5 +12,5 @@ namespace TheSportsDb\Entity\Repository;
  * @author Jelle Sebreghts
  */
 interface TeamRepositoryInterface extends RepositoryInterface {
-
+  public function byName($name);
 }

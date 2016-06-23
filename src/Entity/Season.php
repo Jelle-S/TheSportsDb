@@ -15,7 +15,10 @@ use TheSportsDb\Entity\EntityManagerInterface;
  */
 class Season extends Entity implements SeasonInterface {
   protected static $propertyMapDefinition = array(
-    array('strSeason', 'id'),
+    array('strSeason', 'id', array(
+      array(self::class, 'transformId'),
+      array(self::class, 'reverseId'),
+    )),
     array('strSeason', 'name'),
     array('idLeague', 'league', array(
       array(self::class, 'transformLeague'),
@@ -79,5 +82,14 @@ class Season extends Entity implements SeasonInterface {
       $mapped_events[] = $entityManager->repository('event')->byId($event_data->idEvent);
     }
     return $mapped_events;
+  }
+
+  public static function transformId($value, $context) {
+    return $value . '|' . $context->idLeague;
+  }
+
+  public static function reverseId($value, $context) {
+    $id = explode('|', $value);
+    return reset($id);
   }
 }

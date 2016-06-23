@@ -8,6 +8,7 @@ namespace TheSportsDb\Entity\Repository;
 
 use TheSportsDb\Entity\EntityManagerInterface;
 use TheSportsDb\Entity\EntityManagerConsumerTrait;
+use TheSportsDb\Http\TheSportsDbClientInterface;
 
 /**
  * Abstract Repository implementation to inherit from.
@@ -27,8 +28,16 @@ abstract class Repository implements RepositoryInterface {
 
   protected $entityType;
 
-  public function __construct(EntityManagerInterface $entityManager = NULL) {
-    if ($this->entityManager instanceof EntityManagerInterface) {
+  /**
+   * The sports db client.
+   *
+   * @var TheSportsDb\Http\TheSportsDbClientInterface
+   */
+  protected $sportsDbClient;
+
+  public function __construct(TheSportsDbClientInterface $sportsDbClient, EntityManagerInterface $entityManager = NULL) {
+    $this->sportsDbClient = $sportsDbClient;
+    if ($entityManager instanceof EntityManagerInterface) {
       $this->entityManager = $entityManager;
     }
     $this->repository = array();
@@ -41,11 +50,9 @@ abstract class Repository implements RepositoryInterface {
     if (!isset($this->repository[$id])) {
       $factory =  $this->entityManager->factory($this->getEntityTypeName());
       $this->repository[$id] = $factory->create(
-        $this->entityManager->reverseMapProperties(
-          (object) array('id' => $id),
-          $this->getEntityTypeName()
-        ),
-        $this->getEntityTypeName()
+        (object) array('id' => $id),
+        $this->getEntityTypeName(),
+        FALSE
       );
     }
     return $this->repository[$id];
@@ -63,5 +70,27 @@ abstract class Repository implements RepositoryInterface {
    */
   public function getEntityTypeName() {
     return $this->entityType;
+  }
+
+  protected function normalizeEntity($data) {
+    $mapped = $this->entityManager->mapProperties($data, $this->getEntityTypeName());
+    if (isset($this->repository[$mapped->id])) {
+      $entity = $this->repository[$mapped->id];
+      $entity->update($mapped);
+    }
+    else {
+      $factory =  $this->entityManager->factory($this->getEntityTypeName());
+      $this->repository[$mapped->id] = $factory->create($mapped, $this->getEntityTypeName(), FALSE);
+    }
+    return $this->repository[$mapped->id];
+  }
+
+  public function normalizeArray($data) {
+    $normalized = array();
+    foreach ($data as $raw) {
+      $entity = $this->normalizeEntity($raw);
+      $normalized[$entity->getId()] = $entity;
+    }
+    return $normalized;
   }
 }

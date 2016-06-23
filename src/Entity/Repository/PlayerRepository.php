@@ -15,4 +15,16 @@ class PlayerRepository extends Repository implements PlayerRepositoryInterface {
 
   protected $entityType = 'player';
 
+  public function byTeamName($name) {
+    return $this->normalizeArray($this->sportsDbClient->doRequest('searchplayers.php', array('t' => $name))->player);
+  }
+
+  public function byName($name) {
+    return $this->normalizeArray($this->sportsDbClient->doRequest('searchplayers.php', array('p' => $name))->player);
+  }
+
+  public function byTeamNameAndName($teamName, $name) {
+    return $this->normalizeArray($this->sportsDbClient->doRequest('searchplayers.php', array('p' => $name, 't' => $teamName))->player);
+  }
+
 }

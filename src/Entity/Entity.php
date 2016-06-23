@@ -79,7 +79,7 @@ abstract class Entity implements EntityInterface {
 
   public static function reverse($entity, $context, EntityManagerInterface $entityManager) {
     $data = ($entity instanceof EntityInterface) ? $entity->raw() : $entity;
-    return $entityManager->reverseMapProperties($data, static::getEntityType());
+    return $data->id;
   }
 
   public static function reverseArray(array $entities, $context, EntityManagerInterface $entityManager) {

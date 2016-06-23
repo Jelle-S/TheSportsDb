@@ -108,7 +108,7 @@ class Team extends Entity implements TeamInterface {
     return $this->id;
   }
 
-  public function getTeamName() {
+  public function getName() {
     return $this->name;
   }
 

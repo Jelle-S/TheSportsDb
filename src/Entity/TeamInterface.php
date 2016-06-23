@@ -15,7 +15,7 @@ interface TeamInterface extends EntityInterface {
 
   public function getId();
 
-  public function getTeamName();
+  public function getName();
 
   public function getTeamShort();
 

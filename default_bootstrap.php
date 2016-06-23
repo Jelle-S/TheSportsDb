@@ -26,7 +26,7 @@ $repositoryContainer = new TheSportsDb\Entity\Repository\RepositoryContainer();
 $propertyMapper = new FastNorth\PropertyMapper\Mapper();
 
 // Entity manager.
-$entityManager = new TheSportsDb\Entity\EntityManager($factoryContainer, $repositoryContainer, $propertyMapper);
+$entityManager = new TheSportsDb\Entity\EntityManager($propertyMapper, $factoryContainer, $repositoryContainer);
 $entityManager->registerClass('league');
 $entityManager->registerClass('sport');
 $entityManager->registerClass('team');
@@ -34,16 +34,16 @@ $entityManager->registerClass('event');
 $entityManager->registerClass('player');
 $entityManager->registerClass('season');
 
-// Repositories.
-$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\SportRepository($entityManager));
-$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\LeagueRepository($entityManager));
-$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\SeasonRepository($entityManager));
-$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\EventRepository($entityManager));
-$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\PlayerRepository($entityManager));
-$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\TeamRepository($entityManager));
-
 // The sports db client.
 $sportsDbClient = new TheSportsDb\Http\TheSportsDbClient(THESPORTSDB_API_KEY, $httpClient);
+
+// Repositories.
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\SportRepository($sportsDbClient, $entityManager));
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\LeagueRepository($sportsDbClient, $entityManager));
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\SeasonRepository($sportsDbClient, $entityManager));
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\EventRepository($sportsDbClient, $entityManager));
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\PlayerRepository($sportsDbClient, $entityManager));
+$repositoryContainer->addRepository(new TheSportsDb\Entity\Repository\TeamRepository($sportsDbClient, $entityManager));
 
 // Factory.
 $factory = new \TheSportsDb\Entity\Factory\Factory($sportsDbClient, $entityManager);

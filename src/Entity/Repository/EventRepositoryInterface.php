@@ -12,5 +12,7 @@ namespace TheSportsDb\Entity\Repository;
  * @author Jelle Sebreghts
  */
 interface EventRepositoryInterface extends RepositoryInterface {
-
+  public function byName($name);
+  public function byFileName($fileName);
+  public function byNameAndSeason($name, $season);
 }

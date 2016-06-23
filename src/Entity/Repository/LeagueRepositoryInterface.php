@@ -19,4 +19,8 @@ interface LeagueRepositoryInterface extends RepositoryInterface {
    *   An array of leagues.
    */
   public function all();
+
+  public function byCountry($country);
+
+  public function byCountryAndSport($country, $sport);
 }

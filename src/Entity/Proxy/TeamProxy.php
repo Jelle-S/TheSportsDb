@@ -124,7 +124,7 @@ class TeamProxy extends Proxy implements TeamInterface {
     return $this->get('stadiumThumb');
   }
 
-  public function getTeamName() {
+  public function getName() {
     return $this->get('name');
   }
 
