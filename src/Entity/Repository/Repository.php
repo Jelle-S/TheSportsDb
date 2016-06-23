@@ -87,9 +87,11 @@ abstract class Repository implements RepositoryInterface {
 
   public function normalizeArray($data) {
     $normalized = array();
-    foreach ($data as $raw) {
-      $entity = $this->normalizeEntity($raw);
-      $normalized[$entity->getId()] = $entity;
+    if ($data) {
+      foreach ($data as $raw) {
+        $entity = $this->normalizeEntity($raw);
+        $normalized[$entity->getId()] = $entity;
+      }
     }
     return $normalized;
   }

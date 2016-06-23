@@ -23,4 +23,6 @@ interface LeagueRepositoryInterface extends RepositoryInterface {
   public function byCountry($country);
 
   public function byCountryAndSport($country, $sport);
+
+  public function bySport($sport);
 }

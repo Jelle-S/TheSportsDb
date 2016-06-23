@@ -64,12 +64,20 @@ class TheSportsDb implements EntityManagerConsumerInterface {
     return $this->entityManager->repository('league')->byCountry($country);
   }
 
+  public function getLeaguesBySport($sport) {
+    return $this->entityManager->repository('league')->bySport($sport);
+  }
+
   public function getLeaguesByCountryAndSport($country, $sport) {
     return $this->entityManager->repository('league')->byCountryAndSport($country, $sport);
   }
 
   public function getTeamByName($teamName) {
     return $this->entityManager->repository('team')->byName($teamName);
+  }
+
+  public function getTeamsByLeagueName($leagueName) {
+    return $this->entityManager->repository('team')->byLeagueName($leagueName);
   }
 
   public function getPlayersByTeamName($teamName) {

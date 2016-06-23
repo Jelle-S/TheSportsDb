@@ -13,4 +13,5 @@ namespace TheSportsDb\Entity\Repository;
  */
 interface TeamRepositoryInterface extends RepositoryInterface {
   public function byName($name);
+  public function byLeagueName($leagueName);
 }

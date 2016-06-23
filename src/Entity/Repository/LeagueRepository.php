@@ -29,4 +29,9 @@ class LeagueRepository extends Repository implements LeagueRepositoryInterface {
   public function byCountryAndSport($country, $sport) {
     return $this->normalizeArray($this->sportsDbClient->doRequest('search_all_leagues.php', array('c' => $country, 's' => $sport))->countrys);
   }
+
+  public function bySport($sport) {
+    return $this->normalizeArray($this->sportsDbClient->doRequest('search_all_leagues.php', array('s' => $sport))->countrys);
+  }
+
 }
