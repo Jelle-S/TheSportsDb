@@ -6,7 +6,6 @@
 
 namespace TheSportsDb\Entity\Proxy;
 
-use TheSportsDb\Exception\TheSportsDbException;
 use TheSportsDb\Entity\TeamInterface;
 
 /**
@@ -25,7 +24,7 @@ class TeamProxy extends Proxy implements TeamInterface {
       $this->update($this->entityManager->mapProperties(reset($teamData->teams), $this->getEntityType()));
       return;
     }
-    throw new TheSportsDbException('Could not fully load team with id ' . $this->properties->id . '.');
+    throw new \Exception('Could not fully load team with id ' . $this->properties->id . '.');
   }
 
   public function getAlternateName() {

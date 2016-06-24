@@ -6,9 +6,7 @@
 
 namespace TheSportsDb\Entity\Proxy;
 
-use TheSportsDb\Exception\TheSportsDbException;
 use TheSportsDb\Entity\LeagueInterface;
-use TheSportsDb\Entity\League;
 
 /**
  * A league object that is not yet fully loaded.
@@ -26,7 +24,7 @@ class LeagueProxy extends Proxy implements LeagueInterface {
       $this->update($this->entityManager->mapProperties(reset($leagueData->leagues), 'league'));
       return;
     }
-    throw new TheSportsDbException('Could not fully load league with id ' . $this->properties->id . '.');
+    throw new \Exception('Could not fully load league with id ' . $this->properties->id . '.');
   }
 
   protected function loadSeasons() {
@@ -35,7 +33,7 @@ class LeagueProxy extends Proxy implements LeagueInterface {
       $this->update($this->factory->mapProperties((object) array('seasons' => $leagueData->leagues)));
       return;
     }
-    throw new TheSportsDbException('Could not fully load league with id ' . $this->properties->id . '.');
+    throw new \Exception('Could not fully load league with id ' . $this->properties->id . '.');
   }
 
   public function getAlternateName() {

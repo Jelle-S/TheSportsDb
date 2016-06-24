@@ -111,7 +111,7 @@ abstract class Proxy implements ProxyInterface {
   /**
    * Lazy loads an entity.
    *
-   * @throws \TheSportsDb\Exception\TheSportsDbException
+   * @throws \Exception
    *   When the entity is not found.
    */
   abstract protected function load();

@@ -6,7 +6,6 @@
 namespace TheSportsDb\Http;
 
 use GuzzleHttp\ClientInterface;
-use TheSportsDb\Exception\TheSportsDbException;
 
 /**
  * Http client for thesportsdb.
@@ -61,7 +60,7 @@ class TheSportsDbClient implements TheSportsDbClientInterface {
    * 
    * @return \stdClass
    * 
-   * @throws TheSportsDbException
+   * @throws \Exception
    */
   public function doRequest($endpoint, array $parameters = array()) {
     $url = $this->getBaseUrl() . $endpoint;
@@ -69,7 +68,7 @@ class TheSportsDbClient implements TheSportsDbClientInterface {
     if ($response->getStatusCode() == 200) {
       return json_decode($response->getBody()->getContents());
     }
-    throw new TheSportsDbException('Request to ' . $url . ' failed: ' . $response->getReasonPhrase());
+    throw new \Exception('Request to ' . $url . ' failed: ' . $response->getReasonPhrase());
   }
 
 }

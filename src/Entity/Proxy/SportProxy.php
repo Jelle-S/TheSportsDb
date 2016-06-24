@@ -6,7 +6,6 @@
 
 namespace TheSportsDb\Entity\Proxy;
 
-use TheSportsDb\Exception\TheSportsDbException;
 use TheSportsDb\Entity\LeagueInterface;
 use TheSportsDb\Entity\SportInterface;
 
@@ -21,7 +20,7 @@ class SportProxy extends Proxy implements SportInterface {
    * {@inheritdoc}
    */
   protected function load() {
-    throw new TheSportsDbException('Could not fully load sport with id ' . $this->properties->id . '.');
+    throw new \Exception('Could not fully load sport with id ' . $this->properties->id . '.');
   }
 
   protected function loadLeagues() {
@@ -30,7 +29,7 @@ class SportProxy extends Proxy implements SportInterface {
       $this->update($this->entityManager->mapProperties((object) array('leagues' => $leagueData->countrys), $this->getEntityType()));
       return;
     }
-    throw new TheSportsDbException('Could not fully load sport with id ' . $this->properties->id . '.');
+    throw new \Exception('Could not fully load sport with id ' . $this->properties->id . '.');
   }
 
   public function getId() {
