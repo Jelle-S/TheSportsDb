@@ -6,12 +6,12 @@
 
 namespace TheSportsDb\Entity\Factory;
 
-use TheSportsDb\Http\TheSportsDbClientInterface;
-use TheSportsDb\Entity\EntityInterface;
-use TheSportsDb\Entity\Proxy\ProxyInterface;
 use FastNorth\PropertyMapper\MapperInterface;
-use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\Entity\EntityInterface;
 use TheSportsDb\Entity\EntityManagerConsumerTrait;
+use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\Entity\Proxy\ProxyInterface;
+use TheSportsDb\Http\TheSportsDbClientInterface;
 
 /**
  * Default implementation of factories.
@@ -32,16 +32,10 @@ class Factory implements FactoryInterface {
   /**
    * Creates a \TheSportsDb\Facotory\Factory object.
    *
-   * @param TheSportsDb\Http\TheSportsDbClientInterface $sportsDbClient
+   * @param TheSportsDbClientInterface $sportsDbClient
    *   The sports db client to make the requests.
-   * @param string $realClass
-   *   The fully qualified classname of the entity to create.
-   * @param string $proxyClass
-   *   The fully qualified classname of the proxy entity to create.
-   * @param TheSportsDb\Entity\EntityManagerInterface $entityManager
+   * @param EntityManagerInterface $entityManager
    *   The factory container.
-   * @param MapperInterface $propertyMapper
-   *   The property mapper.
    */
   public function __construct(TheSportsDbClientInterface $sportsDbClient, EntityManagerInterface $entityManager = NULL) {
     $this->sportsDbClient = $sportsDbClient;
@@ -67,6 +61,9 @@ class Factory implements FactoryInterface {
     return $entity;
   }
 
+  /**
+   * @param string $entityType
+   */
   public function isFullObject(\stdClass $object, $entityType) {
     $reflection = new \ReflectionClass($this->entityManager->getClass($entityType));
     $defaultProperties = $reflection->getDefaultProperties();

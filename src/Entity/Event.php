@@ -29,7 +29,7 @@ class Event extends Entity implements EventInterface {
     )),
     array('strDescriptionEN', 'description'),
     array('intHomeScore', 'homeScore'),
-    array('intRound' , 'round'),
+    array('intRound', 'round'),
     array('intAwayScore', 'awayScore'),
     array('intSpectators', 'spectators'),
     array('strHomeGoalDetails', 'homeGoalDetails'),
