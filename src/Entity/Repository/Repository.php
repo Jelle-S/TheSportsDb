@@ -77,11 +77,10 @@ abstract class Repository implements RepositoryInterface {
     if (isset($this->repository[$mapped->id])) {
       $entity = $this->repository[$mapped->id];
       $entity->update($mapped);
+      return $entity;
     }
-    else {
-      $factory =  $this->entityManager->factory($this->getEntityTypeName());
-      $this->repository[$mapped->id] = $factory->create($mapped, $this->getEntityTypeName(), FALSE);
-    }
+    $factory =  $this->entityManager->factory($this->getEntityTypeName());
+    $this->repository[$mapped->id] = $factory->create($mapped, $this->getEntityTypeName(), FALSE);
     return $this->repository[$mapped->id];
   }
 

@@ -98,12 +98,7 @@ abstract class Proxy implements ProxyInterface {
 
     // The property does not exist on the proxy, and the entity is not loaded in
     // full yet, so load it first and repeat the operation.
-    if (method_exists($this, 'load' . ucfirst($name))) {
-      $this->{'load' . ucfirst($name)}();
-    }
-    else {
-      $this->load();
-    }
+    method_exists($this, 'load' . ucfirst($name)) ? $this->{'load' . ucfirst($name)}() : $this->load();
     return $this->get($name);
     
   }

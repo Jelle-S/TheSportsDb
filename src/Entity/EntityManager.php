@@ -168,14 +168,7 @@ class EntityManager implements EntityManagerInterface {
    * {@inheritdoc}
    */
   public function reverseMapProperties(\stdClass $values, $entityType) {
-    static $cache = array();
-    if (isset($cache[$entityType][$values->id])) {
-      $reversed = $cache[$entityType][$values->id];
-    }
-    else {
-      $reversed = new \stdClass();
-      $cache[$entityType][$values->id] = &$reversed;
-    }
+    $reversed = new \stdClass();
     foreach ($this->getPropertyMapDefinition($entityType) as $propertyDefinition) {
       if (!isset($reversed->{$propertyDefinition[0]})) {
         $reversed->{$propertyDefinition[0]} = static::EMPTYPROPERTYPLACEHOLDER;
@@ -184,8 +177,7 @@ class EntityManager implements EntityManagerInterface {
         $values->{$propertyDefinition[1]} = static::EMPTYPROPERTYPLACEHOLDER;
       }
     }
-    $reversed = $this->sanitizeObject($this->propertyMapper->reverse($reversed, $values, $this->getPropertyMap($entityType)));
-    return $reversed;
+    return $this->sanitizeObject($this->propertyMapper->reverse($reversed, $values, $this->getPropertyMap($entityType)));
   }
 
   /**

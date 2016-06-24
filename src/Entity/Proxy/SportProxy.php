@@ -48,16 +48,15 @@ class SportProxy extends Proxy implements SportInterface {
    * {@inheritdoc}
    */
   public function addLeague(LeagueInterface $league) {
-    if (!$this->entity) {
-      if (!isset($this->properties->leagues)) {
-        $this->properties->leagues = array();
-      }
-      if (!isset($this->properties->leagues[$league->getId()])) {
-        $this->properties->leagues[$league->getId()] = $league;
-      }
-    }
-    else {
+    if ($this->entity) {
       $this->entity->addLeague($league);
+      return;
+    }
+    if (!isset($this->properties->leagues)) {
+      $this->properties->leagues = array();
+    }
+    if (!isset($this->properties->leagues[$league->getId()])) {
+      $this->properties->leagues[$league->getId()] = $league;
     }
   }
 
