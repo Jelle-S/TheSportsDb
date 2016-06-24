@@ -301,14 +301,10 @@ class Event extends Entity implements EventInterface {
   }
 
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
-    $id = is_object($value) ? $value->idLeague : $value;
-    $league = is_object($value) ? $value : (object) array('idLeague' => $id);
-    if (isset($context->strLeague)) {
-      $league->strLeague = $context->strLeague;
-    }
-    $leagueEntity = $entityManager->repository('league')->byId($id);
+    $data = $this->transformHelper($value, $context, 'idLeague', array('strLeague' => 'strLeague'));
+    $leagueEntity = $entityManager->repository('league')->byId($data['id']);
     // Update with given values.
-    $leagueEntity->update($league);
+    $leagueEntity->update($data['object']);
     return $leagueEntity;
   }
 
@@ -321,26 +317,18 @@ class Event extends Entity implements EventInterface {
   }
 
   public static function transformHomeTeam($value, $context, EntityManagerInterface $entityManager) {
-    $id = is_object($value) ? $value->idTeam : $value;
-    $team = is_object($value) ? $value : (object) array('idTeam' => $id);
-    if (isset($context->strHomeTeam)) {
-      $team->strTeam = $context->strHomeTeam;
-    }
-    $teamEntity = $entityManager->repository('team')->byId($id);
+    $data = $this->transformHelper($value, $context, 'idTeam', array('strHomeTeam' => 'strTeam'));
+    $teamEntity = $entityManager->repository('team')->byId($data['id']);
     // Update with given values.
-    $teamEntity->update($team);
+    $teamEntity->update($data['object']);
     return $teamEntity;
   }
 
   public static function transformAwayTeam($value, $context, EntityManagerInterface $entityManager) {
-    $id = is_object($value) ? $value->idTeam : $value;
-    $team = is_object($value) ? $value : (object) array('idTeam' => $id);
-    if (isset($context->strAwayTeam)) {
-      $team->strTeam = $context->strAwayTeam;
-    }
-    $teamEntity = $entityManager->repository('team')->byId($id);
+    $data = $this->transformHelper($value, $context, 'idTeam', array('strAwayTeam' => 'strTeam'));
+    $teamEntity = $entityManager->repository('team')->byId($data['id']);
     // Update with given values.
-    $teamEntity->update($team);
+    $teamEntity->update($data['object']);
     return $teamEntity;
   }
 }

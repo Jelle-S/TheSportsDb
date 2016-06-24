@@ -89,4 +89,16 @@ abstract class Entity implements EntityInterface {
     }
     return $reversed_entities;
   }
+
+  public static function transformHelper($value, $context, $idName, array $contextPropertyMap = array()) {
+    $data = array();
+    $data['id'] = is_object($value) ? $value->{$idName} : $value;
+    $data['object'] = is_object($value) ? $value : (object) array($idName => $data['id']);
+    foreach ($contextPropertyMap as $source => $dest) {
+      if (isset($context->{$source})) {
+        $data['object']->{$dest} = $context->{$source};
+      }
+    }
+    return $data;
+  }
 }
