@@ -1,4 +1,11 @@
 checks:
+    php: true
+filter: {  }
+coding_style:
     php:
-        code_rating: true
-        duplication: true
+        indentation:
+            general:
+                size: 2
+        spaces:
+            around_operators:
+                concatenation: true
