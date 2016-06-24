@@ -8,4 +8,4 @@ PHP Library to connect to the api of http://thesportsdb.com/
 - Write Query classes for all entities.
 
 
-[![Code Climate](https://codeclimate.com/github/Jelle-S/TheSportsDb/badges/gpa.svg)](https://codeclimate.com/github/Jelle-S/TheSportsDb)
+[![Code Climate](https://codeclimate.com/github/Jelle-S/TheSportsDb/badges/gpa.svg)](https://codeclimate.com/github/Jelle-S/TheSportsDb) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Jelle-S/TheSportsDb/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Jelle-S/TheSportsDb/?branch=master)
