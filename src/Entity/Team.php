@@ -221,35 +221,18 @@ class Team extends Entity implements TeamInterface {
   }
 
   public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
-    $id = $value;
-    if (is_object($value)) {
-      $id = $value->strSport;
-      $sport = $value;
-    }
-    else {
-      $sport = (object) array('strSport' => $id);
-    }
-    $sportEntity = $entityManager->repository('sport')->byId($id);
+    $data = static::transformHelper($value, $context, 'strSport');
+    $sportEntity = $entityManager->repository('sport')->byId($data['id']);
     // Update with given values.
-    $sportEntity->update($sport);
+    $sportEntity->update($data['object']);
     return $sportEntity;
   }
 
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
-     $id = $value;
-    if (is_object($value)) {
-      $id = $value->idLeague;
-      $league = $value;
-    }
-    else {
-      $league = (object) array('idLeague' => $id);
-      if (isset($context->strLeague)) {
-        $league->strLeague = $context->strLeague;
-      }
-    }
-    $leagueEntity = $entityManager->repository('league')->byId($id);
+    $data = static::transformHelper($value, $context, 'idLeague', array('strLeague' => 'strLeague'));
+    $leagueEntity = $entityManager->repository('league')->byId($data['id']);
     // Update with given values.
-    $leagueEntity->update($league);
+    $leagueEntity->update($data['object']);
     return $leagueEntity;
   }
 }
