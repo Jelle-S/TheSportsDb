@@ -301,7 +301,7 @@ class Event extends Entity implements EventInterface {
   }
 
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
-    $data = $this->transformHelper($value, $context, 'idLeague', array('strLeague' => 'strLeague'));
+    $data = static::transformHelper($value, $context, 'idLeague', array('strLeague' => 'strLeague'));
     $leagueEntity = $entityManager->repository('league')->byId($data['id']);
     // Update with given values.
     $leagueEntity->update($data['object']);
@@ -317,7 +317,7 @@ class Event extends Entity implements EventInterface {
   }
 
   public static function transformHomeTeam($value, $context, EntityManagerInterface $entityManager) {
-    $data = $this->transformHelper($value, $context, 'idTeam', array('strHomeTeam' => 'strTeam'));
+    $data = static::transformHelper($value, $context, 'idTeam', array('strHomeTeam' => 'strTeam'));
     $teamEntity = $entityManager->repository('team')->byId($data['id']);
     // Update with given values.
     $teamEntity->update($data['object']);
@@ -325,7 +325,7 @@ class Event extends Entity implements EventInterface {
   }
 
   public static function transformAwayTeam($value, $context, EntityManagerInterface $entityManager) {
-    $data = $this->transformHelper($value, $context, 'idTeam', array('strAwayTeam' => 'strTeam'));
+    $data = static::transformHelper($value, $context, 'idTeam', array('strAwayTeam' => 'strTeam'));
     $teamEntity = $entityManager->repository('team')->byId($data['id']);
     // Update with given values.
     $teamEntity->update($data['object']);
