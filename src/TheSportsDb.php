@@ -56,8 +56,8 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    *
    * @return \TheSportsDb\Entity\LeagueInterface
    */
-  public function getLeague($league_id) {
-    return $this->entityManager->repository('league')->byId($league_id);
+  public function getLeague($leagueId) {
+    return $this->entityManager->repository('league')->byId($leagueId);
   }
 
   public function getLeaguesByCountry($country) {

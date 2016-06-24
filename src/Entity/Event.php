@@ -301,16 +301,10 @@ class Event extends Entity implements EventInterface {
   }
 
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
-    $id = $value;
-    if (is_object($value)) {
-      $id = $value->idLeague;
-      $league = $value;
-    }
-    else {
-      $league = (object) array('idLeague' => $id);
-      if (isset($context->strLeague)) {
-        $league->strLeague = $context->strLeague;
-      }
+    $id = is_object($value) ? $value->idLeague : $value;
+    $league = is_object($value) ? $value : (object) array('idLeague' => $id);
+    if (isset($context->strLeague)) {
+      $league->strLeague = $context->strLeague;
     }
     $leagueEntity = $entityManager->repository('league')->byId($id);
     // Update with given values.
@@ -319,12 +313,7 @@ class Event extends Entity implements EventInterface {
   }
 
   public static function transformSeason($value, $context, EntityManagerInterface $entityManager) {
-    if (is_object($value)) {
-      $season = $value;
-    }
-    else {
-      $season = (object) array('idLeague' => $context->idLeague, 'strSeason' => $value);
-    }
+    $season = is_object($value) ? $value : (object) array('idLeague' => $context->idLeague, 'strSeason' => $value);
     $id = $season->strSeason . '|' . $season->idLeague;
     $seasonEntity = $entityManager->repository('season')->byId($id);
     $seasonEntity->update($season);
@@ -332,16 +321,10 @@ class Event extends Entity implements EventInterface {
   }
 
   public static function transformHomeTeam($value, $context, EntityManagerInterface $entityManager) {
-    $id = $value;
-    if (is_object($value)) {
-      $id = $value->idTeam;
-      $team = $value;
-    }
-    else {
-      $team = (object) array('idTeam' => $id);
-      if (isset($context->strHomeTeam)) {
-        $team->strTeam = $context->strHomeTeam;
-      }
+    $id = is_object($value) ? $value->idTeam : $value;
+    $team = is_object($value) ? $value : (object) array('idTeam' => $id);
+    if (isset($context->strHomeTeam)) {
+      $team->strTeam = $context->strHomeTeam;
     }
     $teamEntity = $entityManager->repository('team')->byId($id);
     // Update with given values.
@@ -350,16 +333,10 @@ class Event extends Entity implements EventInterface {
   }
 
   public static function transformAwayTeam($value, $context, EntityManagerInterface $entityManager) {
-    $id = $value;
-    if (is_object($value)) {
-      $id = $value->idTeam;
-      $team = $value;
-    }
-    else {
-      $team = (object) array('idTeam' => $id);
-      if (isset($context->strAwayTeam)) {
-        $team->strTeam = $context->strAwayTeam;
-      }
+    $id = is_object($value) ? $value->idTeam : $value;
+    $team = is_object($value) ? $value : (object) array('idTeam' => $id);
+    if (isset($context->strAwayTeam)) {
+      $team->strTeam = $context->strAwayTeam;
     }
     $teamEntity = $entityManager->repository('team')->byId($id);
     // Update with given values.

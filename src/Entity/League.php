@@ -191,11 +191,11 @@ class League extends Entity implements LeagueInterface {
   }
 
   public static function transformSeasons($value, $context, EntityManagerInterface $entityManager) {
-    $mapped_seasons = array();
+    $mappedSeasons = array();
     foreach ($value as $season) {
       $id = $season->strSeason . '|' . $season->idLeague;
-      $mapped_seasons[] = $entityManager->repository('season')->byId($id);
+      $mappedSeasons[] = $entityManager->repository('season')->byId($id);
     }
-    return $mapped_seasons;
+    return $mappedSeasons;
   }
 }
