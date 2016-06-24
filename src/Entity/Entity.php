@@ -83,11 +83,11 @@ abstract class Entity implements EntityInterface {
   }
 
   public static function reverseArray(array $entities, $context, EntityManagerInterface $entityManager) {
-    $reversed_entities = array();
+    $reversedEntities = array();
     foreach ($entities as $entity) {
-      $reversed_entities[] = static::reverse($entity, $context, $entityManager);
+      $reversedEntities[] = static::reverse($entity, $context, $entityManager);
     }
-    return $reversed_entities;
+    return $reversedEntities;
   }
 
   public static function transformHelper($value, $context, $idName, array $contextPropertyMap = array()) {
