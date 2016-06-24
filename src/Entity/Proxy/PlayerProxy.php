@@ -16,9 +16,9 @@ use TheSportsDb\Entity\PlayerInterface;
 class PlayerProxy extends Proxy implements PlayerInterface {
   
   protected function load() {
-    $player_data = $this->sportsDbClient->doRequest('lookuplayer.php', array('id' => $this->properties->id));
-    if (isset($player_data->players)) {
-      $this->update($this->entityManager->mapProperties(reset($player_data->players)), $this->getEntityType());
+    $playerData = $this->sportsDbClient->doRequest('lookuplayer.php', array('id' => $this->properties->id));
+    if (isset($playerData->players)) {
+      $this->update($this->entityManager->mapProperties(reset($playerData->players)), $this->getEntityType());
       return;
     }
     throw new TheSportsDbException('Could not fully load player with id ' . $this->properties->id . '.');

@@ -25,9 +25,9 @@ class SportProxy extends Proxy implements SportInterface {
   }
 
   protected function loadLeagues() {
-    $league_data = $this->sportsDbClient->doRequest('search_all_leagues.php', array('s' => urlencode(strtolower($this->properties->id))));
-    if (isset($league_data->countrys)) {
-      $this->update($this->entityManager->mapProperties((object) array('leagues' => $league_data->countrys), $this->getEntityType()));
+    $leagueData = $this->sportsDbClient->doRequest('search_all_leagues.php', array('s' => urlencode(strtolower($this->properties->id))));
+    if (isset($leagueData->countrys)) {
+      $this->update($this->entityManager->mapProperties((object) array('leagues' => $leagueData->countrys), $this->getEntityType()));
       return;
     }
     throw new TheSportsDbException('Could not fully load sport with id ' . $this->properties->id . '.');

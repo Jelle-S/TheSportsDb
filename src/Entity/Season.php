@@ -67,11 +67,11 @@ class Season extends Entity implements SeasonInterface {
   }
 
   public static function transformEvents(array $values, $context, EntityManagerInterface $entityManager) {
-    $mapped_events = array();
-    foreach ($values as $event_data) {
-      $mapped_events[] = $entityManager->repository('event')->byId($event_data->idEvent);
+    $mappedEvents = array();
+    foreach ($values as $eventData) {
+      $mappedEvents[] = $entityManager->repository('event')->byId($eventData->idEvent);
     }
-    return $mapped_events;
+    return $mappedEvents;
   }
 
   public static function transformId($value, $context) {
