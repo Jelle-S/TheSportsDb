@@ -91,7 +91,7 @@ abstract class Entity implements EntityInterface {
   }
 
   public static function transform($value, $context, EntityManagerInterface $entityManager, $entityType, $idName, array $contextPropertyMap = array()) {
-    $data = static::transformHelper($value, $context, $idName);
+    $data = static::transformHelper($value, $context, $idName, $contextPropertyMap);
     $entity = $entityManager->repository($entityType)->byId($data['id']);
     // Update with given values.
     $entity->update($data['object']);
