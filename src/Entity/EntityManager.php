@@ -6,10 +6,10 @@
 
 namespace TheSportsDb\Entity;
 
+use FastNorth\PropertyMapper\Map;
+use FastNorth\PropertyMapper\MapperInterface;
 use TheSportsDb\Entity\Factory\FactoryContainerInterface;
 use TheSportsDb\Entity\Repository\RepositoryContainerInterface;
-use FastNorth\PropertyMapper\MapperInterface;
-use FastNorth\PropertyMapper\Map;
 use TheSportsDb\PropertyMapper\Transformer\Callback;
 
 /**
@@ -191,13 +191,13 @@ class EntityManager implements EntityManagerInterface {
         $transform = $args[2][0];
         $reverse = $args[2][1];
         $args[2] = new Callback(
-          function ($value, $context) use ($entityManager, $transform) {
+          function($value, $context) use ($entityManager, $transform) {
             if ($entityManager->isEmptyValue($value)) {
               return $value;
             }
             return call_user_func_array($transform, array($value, $context, $entityManager));
           },
-          function ($value, $context) use ($entityManager, $reverse) {
+          function($value, $context) use ($entityManager, $reverse) {
             if ($entityManager->isEmptyValue($value)) {
               return $value;
             }
@@ -212,7 +212,8 @@ class EntityManager implements EntityManagerInterface {
   /**
    * Gets the property map.
    *
-   * @return FastNorth\PropertyMapper\Map
+   * @param string $entityType
+   * @return \FastNorth\PropertyMapper\MapInterface
    *   The property map.
    */
   protected function getPropertyMap($entityType) {

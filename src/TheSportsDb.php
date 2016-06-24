@@ -51,7 +51,7 @@ class TheSportsDb implements EntityManagerConsumerInterface {
   /**
    * Get a league by id.
    *
-   * @param int $league_id
+   * @param int $leagueId
    *   The league id.
    *
    * @return \TheSportsDb\Entity\LeagueInterface

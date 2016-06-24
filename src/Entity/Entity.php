@@ -90,6 +90,10 @@ abstract class Entity implements EntityInterface {
     return $reversedEntities;
   }
 
+  /**
+   * @param string $entityType
+   * @param string $idName
+   */
   public static function transform($value, $context, EntityManagerInterface $entityManager, $entityType, $idName, array $contextPropertyMap = array()) {
     $data = static::transformHelper($value, $context, $idName, $contextPropertyMap);
     $entity = $entityManager->repository($entityType)->byId($data['id']);

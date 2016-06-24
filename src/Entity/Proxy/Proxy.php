@@ -6,10 +6,10 @@
 
 namespace TheSportsDb\Entity\Proxy;
 
-use TheSportsDb\Http\TheSportsDbClientInterface;
-use TheSportsDb\Entity\EntityManagerInterface;
 use TheSportsDb\Entity\EntityInterface;
 use TheSportsDb\Entity\EntityManagerConsumerTrait;
+use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\Http\TheSportsDbClientInterface;
 
 /**
  * Default implementation of proxy objects.
@@ -44,10 +44,6 @@ abstract class Proxy implements ProxyInterface {
    *
    * @param \stdClass $values
    *   The sport data.
-   * @param \TheSportsDb\Http\TheSportsDbClientInterface $sportsDbClient
-   *   A sports db client
-   * @param \TheSportsDb\Entity\Factory\FactoryInterface $factory
-   *   The sport factory.
    */
   public function __construct(\stdClass $values) {
     $this->properties = new \stdClass();
