@@ -6,8 +6,6 @@
 
 namespace TheSportsDb\Entity;
 
-use TheSportsDb\Entity\LeagueInterface;
-
 /**
  * Interface for events.
  *

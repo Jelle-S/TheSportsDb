@@ -107,5 +107,4 @@ class Factory implements FactoryInterface {
     return $this->entityManager;
   }
 
-
 }
