@@ -188,18 +188,10 @@ class Player extends Entity implements PlayerInterface {
   }
 
   public static function transformTeam($value, $context, EntityManagerInterface $entityManager) {
-    $data = static::transformHelper($value, $context, 'idTeam', array('strTeam' => 'strTeam'));
-    $teamEntity = $entityManager->repository('team')->byId($data['id']);
-    // Update with given values.
-    $teamEntity->update($data['object']);
-    return $teamEntity;
+    return static::transform($value, $context, $entityManager, 'team', 'idTeam', array('strTeam' => 'strTeam'));
   }
 
   public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
-    $data = static::transformHelper($value, $context, 'strSport');
-    $sportEntity = $entityManager->repository('sport')->byId($data['id']);
-    // Update with given values.
-    $sportEntity->update($data['object']);
-    return $sportEntity;
+    return static::transform($value, $context, $entityManager, 'sport', 'strSport');
   }
 }

@@ -59,11 +59,7 @@ class Season extends Entity implements SeasonInterface {
   }
 
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
-    $data = static::transformHelper($value, $context, 'idLeague', array('strLeague' => 'strLeague'));
-    $leagueEntity = $entityManager->repository('league')->byId($data['id']);
-    // Update with given values.
-    $leagueEntity->update($data['object']);
-    return $leagueEntity;
+    return static::transform($value, $context, $entityManager, 'league', 'idLeague', array('strLeague' => 'strLeague'));
   }
 
   public static function transformEvents(array $values, $context, EntityManagerInterface $entityManager) {

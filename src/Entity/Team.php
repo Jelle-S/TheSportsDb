@@ -221,18 +221,10 @@ class Team extends Entity implements TeamInterface {
   }
 
   public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
-    $data = static::transformHelper($value, $context, 'strSport');
-    $sportEntity = $entityManager->repository('sport')->byId($data['id']);
-    // Update with given values.
-    $sportEntity->update($data['object']);
-    return $sportEntity;
+    return static::transform($value, $context, $entityManager, 'sport', 'strSport');
   }
 
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
-    $data = static::transformHelper($value, $context, 'idLeague', array('strLeague' => 'strLeague'));
-    $leagueEntity = $entityManager->repository('league')->byId($data['id']);
-    // Update with given values.
-    $leagueEntity->update($data['object']);
-    return $leagueEntity;
+    return static::transform($value, $context, $entityManager, 'league', 'idLeague', array('strLeague' => 'strLeague'));
   }
 }

@@ -176,11 +176,7 @@ class League extends Entity implements LeagueInterface {
   }
 
   public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
-    $data = static::transformHelper($value, $context, 'strSport');
-    $sportEntity = $entityManager->repository('sport')->byId($data['id']);
-    // Update with given values.
-    $sportEntity->update($data['object']);
-    return $sportEntity;
+    return static::transform($value, $context, $entityManager, 'sport', 'strSport');
   }
 
   public static function transformSeasons($value, $context, EntityManagerInterface $entityManager) {
