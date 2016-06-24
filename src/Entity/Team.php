@@ -31,47 +31,47 @@ class Team extends Entity implements TeamInterface {
     )),
     array('strDivision', 'division'),
     array('strManager', 'manager'),
-	array('strStadium', 'stadium'),
+    array('strStadium', 'stadium'),
     array('strKeywords', 'keywords'),
-	array('strRSS', 'rss'),
+    array('strRSS', 'rss'),
     array('strStadiumThumb', 'stadiumThumb'),
     array('strStadiumDescription', 'stadiumDescription'),
-	array('strStadiumLocation', 'stadiumLocation'),
-	array('intStadiumCapacity', 'stadiumCapacity'),
-	array('strWebsite', 'website'),
+    array('strStadiumLocation', 'stadiumLocation'),
+    array('intStadiumCapacity', 'stadiumCapacity'),
+    array('strWebsite', 'website'),
     array('strFacebook', 'facebook'),
-	array('strTwitter', 'twitter'),
-	array('strInstagram', 'instagram'),
-	array('strDescriptionEN', 'description'),
-	array('strGender', 'gender'),
+    array('strTwitter', 'twitter'),
+    array('strInstagram', 'instagram'),
+    array('strDescriptionEN', 'description'),
+    array('strGender', 'gender'),
     array('strCountry', 'country'),
-	array('strTeamBadge', 'badge'),
+    array('strTeamBadge', 'badge'),
     array('strTeamJersey', 'jersey'),
-	array('strTeamLogo', 'logo'),
-	array('strTeamBanner', 'banner'),
-	array('strYoutube', 'youtube'),
+    array('strTeamLogo', 'logo'),
+    array('strTeamBanner', 'banner'),
+    array('strYoutube', 'youtube'),
     array('strLocked', 'locked'),
     // idSoccerXML
     // intLoved
     // strLeague
     // strDescriptionDE
-	// strDescriptionFR
-	// strDescriptionCN
-	// strDescriptionIT
-	// strDescriptionJP
-	// strDescriptionRU
-	// strDescriptionES
-	// strDescriptionPT
-	// strDescriptionSE
-	// strDescriptionNL
-	// strDescriptionHU
-	// strDescriptionNO
-	// strDescriptionIL
-	// strDescriptionPL
+    // strDescriptionFR
+    // strDescriptionCN
+    // strDescriptionIT
+    // strDescriptionJP
+    // strDescriptionRU
+    // strDescriptionES
+    // strDescriptionPT
+    // strDescriptionSE
+    // strDescriptionNL
+    // strDescriptionHU
+    // strDescriptionNO
+    // strDescriptionIL
+    // strDescriptionPL
     // strTeamFanart1
-	// strTeamFanart2
-	// strTeamFanart3
-	// strTeamFanart4
+    // strTeamFanart2
+    // strTeamFanart3
+    // strTeamFanart4
   );
 
   protected $id;
