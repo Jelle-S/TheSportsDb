@@ -21,7 +21,7 @@ class LeagueProxy extends Proxy implements LeagueInterface {
   protected function load() {
     $leagueData = $this->sportsDbClient->doRequest('lookupleague.php', array('id' => $this->properties->id));
     if (isset($leagueData->leagues)) {
-      $this->update($this->entityManager->mapProperties(reset($leagueData->leagues), 'league'));
+      $this->update($this->entityManager->mapProperties(reset($leagueData->leagues), $this->getEntityType()));
       return;
     }
     throw new \Exception('Could not fully load league with id ' . $this->properties->id . '.');
