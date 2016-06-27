@@ -21,7 +21,7 @@
     <!-- Customizations -->
     <rule ref="rulesets/codesize.xml/ExcessivePublicCount">
         <properties>
-            <property name="maxmethods" value="50" />
+            <property name="maximum" value="50" />
         </properties>
     </rule>
     <rule ref="rulesets/codesize.xml/TooManyFields">
