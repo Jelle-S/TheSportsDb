@@ -7,6 +7,7 @@
 namespace TheSportsDb\Entity;
 
 use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\Entity\EntityPropertyUtil;
 
 /**
  * Description of Entity
@@ -44,16 +45,7 @@ abstract class Entity implements EntityInterface {
         $prop = lcfirst(substr($methodName, 3));
         if ($reflection->hasProperty($prop)) {
           $val = $this->{$methodName}();
-          $this->_raw->{$prop} = $val;
-          if (method_exists($val, 'raw')) {
-            $this->_raw->{$prop} = $val->raw();
-          }
-          elseif (is_array($val)) {
-            $this->_raw->{$prop} = array();
-            foreach ($val as $v) {
-              $this->_raw->{$prop}[] = method_exists($v, 'raw') ? $v->raw() : $v;
-            }
-          }
+          $this->_raw->{$prop} = EntityPropertyUtil::getRawValue($val);
         }
       }
     }

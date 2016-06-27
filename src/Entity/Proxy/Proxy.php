@@ -10,6 +10,7 @@ use TheSportsDb\Entity\EntityInterface;
 use TheSportsDb\Entity\EntityManagerConsumerTrait;
 use TheSportsDb\Entity\EntityManagerInterface;
 use TheSportsDb\Http\TheSportsDbClientInterface;
+use TheSportsDb\Entity\EntityPropertyUtil;
 
 /**
  * Default implementation of proxy objects.
@@ -124,16 +125,7 @@ abstract class Proxy implements ProxyInterface {
         if (isset($this->properties->{$prop}) && !property_exists($this->_raw, $prop)) {
           $this->_raw->{$prop} = NULL;
           $val = $this->{$methodName}();
-          $this->_raw->{$prop} = $val;
-          if (method_exists($val, 'raw')) {
-            $this->_raw->{$prop} = $val->raw();
-          }
-          elseif (is_array($val)) {
-            $this->_raw->{$prop} = array();
-            foreach ($val as $v) {
-              $this->_raw->{$prop}[] = method_exists($v, 'raw') ? $v->raw() : $v;
-            }
-          }
+          $this->_raw->{$prop} = EntityPropertyUtil::getRawValue($val);
         }
       }
     }
