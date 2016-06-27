@@ -96,6 +96,10 @@ class TheSportsDb implements EntityManagerConsumerInterface {
     return $this->entityManager->repository('player')->byId($playerId);
   }
 
+  public function getPlayersByTeam($teamId) {
+    return $this->entityManager->repository('player')->byTeam($teamId);
+  }
+
   public function getPlayersByTeamName($teamName) {
     return $this->entityManager->repository('player')->byTeamName($teamName);
   }
@@ -111,6 +115,7 @@ class TheSportsDb implements EntityManagerConsumerInterface {
   public function getEvent($eventId) {
     return $this->entityManager->repository('event')->byId($eventId);
   }
+
   public function getEventsByName($name) {
     return $this->entityManager->repository('event')->byName($name);
   }
@@ -121,6 +126,14 @@ class TheSportsDb implements EntityManagerConsumerInterface {
 
   public function getEventsByNameAndSeason($name, $season) {
     return $this->entityManager->repository('event')->byNameAndSeason($name, $season);
+  }
+
+  public function getNextFiveEventsByTeam($teamId) {
+    return $this->entityManager->repository('event')->nextFiveByTeam($teamId);
+  }
+
+  public function getNextFifteenEventsByLeague($leagueId) {
+    return $this->entityManager->repository('event')->nextFifteenEventsByLeague($leagueId);
   }
 
   public function getSeasonsByLeague($leagueId) {

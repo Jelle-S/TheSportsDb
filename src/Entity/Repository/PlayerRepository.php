@@ -27,4 +27,8 @@ class PlayerRepository extends Repository implements PlayerRepositoryInterface {
     return $this->normalizeArray($this->sportsDbClient->doRequest('searchplayers.php', array('p' => $name, 't' => $teamName))->player);
   }
 
+  public function byTeam($teamId) {
+    return $this->normalizeArray($this->sportsDbClient->doRequest('lookup_all_players.php', array('id' => $teamId))->player);
+  }
+
 }

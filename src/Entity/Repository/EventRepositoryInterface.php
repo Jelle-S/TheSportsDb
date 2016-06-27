@@ -15,4 +15,6 @@ interface EventRepositoryInterface extends RepositoryInterface {
   public function byName($name);
   public function byFileName($fileName);
   public function byNameAndSeason($name, $season);
+  public function nextFiveByTeam($teamId);
+  public function nextFifteenEventsByLeague($leagueId);
 }

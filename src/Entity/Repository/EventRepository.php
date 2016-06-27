@@ -26,4 +26,12 @@ class EventRepository extends Repository implements EventRepositoryInterface {
     return $this->normalizeArray($this->sportsDbClient->doRequest('searchevents.php', array('e' => $name, 's' => $season))->event);
   }
 
+  public function nextFiveByTeam($teamId) {
+    return $this->normalizeArray($this->sportsDbClient->doRequest('eventsnext.php', array('id' => $teamId))->events);
+  }
+
+  public function nextFifteenEventsByLeague($leagueId) {
+    return $this->normalizeArray($this->sportsDbClient->doRequest('eventsnextleague.php', array('id' => $leagueId))->events);
+  }
+
 }
