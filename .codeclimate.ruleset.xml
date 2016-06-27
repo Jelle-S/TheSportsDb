@@ -7,6 +7,7 @@
     
     <rule ref="rulesets/codesize.xml">
         <exclude name="ExcessivePublicCount"/>
+        <exclude name="TooManyFields" />
     </rule>
     <rule ref="rulesets/cleancode.xml" />
     <rule ref="rulesets/controversial.xml" />
@@ -18,6 +19,11 @@
     <rule ref="rulesets/codesize.xml/ExcessivePublicCount">
         <properties>
             <property name="maxmethods" value="50" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/codesize.xml/TooManyFields">
+        <properties>
+            <property name="maxfields" value="50" />
         </properties>
     </rule>
 </ruleset>
