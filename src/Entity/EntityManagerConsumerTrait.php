@@ -17,7 +17,7 @@ trait EntityManagerConsumerTrait {
   /**
    * The entity manager.
    *
-   * @var TheSportsDb\Entity\EntityManagerInterface
+   * @var \TheSportsDb\Entity\EntityManagerInterface
    */
   protected $entityManager;
 

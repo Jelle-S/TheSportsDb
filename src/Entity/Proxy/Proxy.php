@@ -21,7 +21,7 @@ abstract class Proxy implements ProxyInterface {
   /**
    * The sports db client.
    *
-   * @var TheSportsDb\Http\TheSportsDbClientInterface
+   * @var \TheSportsDb\Http\TheSportsDbClientInterface
    */
   protected $sportsDbClient;
 

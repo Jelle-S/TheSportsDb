@@ -31,7 +31,7 @@ abstract class Repository implements RepositoryInterface {
   /**
    * The sports db client.
    *
-   * @var TheSportsDb\Http\TheSportsDbClientInterface
+   * @var \TheSportsDb\Http\TheSportsDbClientInterface
    */
   protected $sportsDbClient;
 
