@@ -6,7 +6,6 @@
 
 namespace TheSportsDb\Entity\Factory;
 
-use FastNorth\PropertyMapper\MapperInterface;
 use TheSportsDb\Entity\EntityInterface;
 use TheSportsDb\Entity\EntityManagerConsumerTrait;
 use TheSportsDb\Entity\EntityManagerInterface;
