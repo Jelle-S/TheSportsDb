@@ -33,7 +33,7 @@ class SeasonProxy extends Proxy implements SeasonInterface {
   protected function loadEvents() {
     $eventData = $this->sportsDbClient->doRequest('eventsseason.php', array('id' => $this->getLeague()->getId(), 's' => $this->getId()));
     if (isset($eventData->events)) {
-      $this->update($this->factory->mapProperties((object) array('events' => $eventData->events)));
+      $this->update($this->entityManager->mapProperties((object) array('events' => $eventData->events), $this->getEntityType()));
       return;
     }
     throw new \Exception('Could not fully load season with id ' . $this->getId() . ' and league id ' . $this->getLeague()->getId() . '.');
