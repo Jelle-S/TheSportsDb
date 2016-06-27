@@ -26,6 +26,11 @@ abstract class Repository implements RepositoryInterface {
    */
   protected $repository;
 
+  /**
+   * The entity type for this repository.
+   *
+   * @var string
+   */
   protected $entityType;
 
   /**
