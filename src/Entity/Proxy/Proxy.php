@@ -18,7 +18,9 @@ use TheSportsDb\Entity\EntityPropertyUtil;
  * @author Jelle Sebreghts
  */
 abstract class Proxy implements ProxyInterface {
+
   use EntityManagerConsumerTrait;
+
   /**
    * The sports db client.
    *
@@ -41,27 +43,30 @@ abstract class Proxy implements ProxyInterface {
   protected $entity;
 
   /**
-   * Creates a new Proxy object.
-   *
-   * @param \stdClass $values
-   *   The sport data.
+   * {@inheritdoc}
    */
   public function __construct(\stdClass $values) {
     $this->properties = new \stdClass();
     $this->update($values);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function update(\stdClass $values) {
     foreach ((array) $values as $prop => $val) {
       if (method_exists($this, 'get' . ucfirst($prop))) {
         $this->properties->{$prop} = $val;
       }
     }
-    if ($this->entityManager && $this->entityManager->factory($this->getEntityType())->isFullObject($this->properties, $this->getEntityType())) {
+    if ($this->entityManager && $this->entityManager->isFullObject($this->properties, $this->getEntityType())) {
       $this->entity = $this->entityManager->factory($this->getEntityType())->create($this->properties, $this->getEntityType());
     }
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function setEntityManager(EntityManagerInterface $entityManager) {
     $this->entityManager = $entityManager;
     // Check if we can create a full object once the entity manager is set.
@@ -69,6 +74,9 @@ abstract class Proxy implements ProxyInterface {
     $this->update($stub);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function setSportsDbClient(TheSportsDbClientInterface $sportsDbClient) {
     $this->sportsDbClient = $sportsDbClient;
   }
@@ -108,6 +116,9 @@ abstract class Proxy implements ProxyInterface {
    */
   abstract protected function load();
 
+  /**
+   * {@inheritdoc}
+   */
   public function raw() {
     if ($this->entity) {
       $this->_raw = $this->entity->raw();
@@ -132,11 +143,17 @@ abstract class Proxy implements ProxyInterface {
     return $this->_raw;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function getEntityType() {
     $reflection = new \ReflectionClass(static::class);
     return strtolower(substr($reflection->getShortName(), 0, -5));
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function getPropertyMapDefinition() {
     $reflection = new \ReflectionClass(substr(static::class, 0, -5));
     return $reflection->getStaticPropertyValue('propertyMapDefinition');

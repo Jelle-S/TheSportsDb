@@ -83,4 +83,18 @@ interface EntityManagerInterface {
    */
   public function reverseMapProperties(\stdClass $values, $entityType);
 
+
+  /**
+   * Checks whether a fully loaded entity can be created with given values.
+   *
+   * @param \stdClass $object
+   *   The values to check.
+   * @param string $entityType
+   *   The entity type to check
+   *
+   * @return bool
+   *   TRUE if we can create a fully loaded entity, FALSE otherwise.
+   */
+  public function isFullObject(\stdClass $object, $entityType);
+
 }

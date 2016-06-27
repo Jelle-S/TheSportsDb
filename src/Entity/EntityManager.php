@@ -181,6 +181,23 @@ class EntityManager implements EntityManagerInterface {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function isFullObject(\stdClass $object, $entityType) {
+    $reflection = new \ReflectionClass($this->getClass($entityType));
+    $defaultProperties = $reflection->getDefaultProperties();
+    $properties = array_flip(array_filter(array_keys($defaultProperties), function($prop) use ($reflection) {
+      // Filter out static properties.
+      $reflectionProp = $reflection->getProperty($prop);
+      if ($reflectionProp->isStatic()) {
+        return FALSE;
+      }
+      return TRUE;
+    }));
+    return count(array_intersect_key($properties, (array) $object)) === count($properties);
+  }
+
+  /**
    * Initializes the property map.
    * @param string $entityType
    */

@@ -23,6 +23,14 @@ class SportProxy extends Proxy implements SportInterface {
     throw new \Exception('Could not fully load sport with id ' . $this->properties->id . '.');
   }
 
+  /**
+   * Lazy loads the leagues for this sport.
+   *
+   * @throws \Exception
+   *   When the leagues cannot be loaded.
+   *
+   * @return void
+   */
   protected function loadLeagues() {
     $leagueData = $this->sportsDbClient->doRequest('search_all_leagues.php', array('s' => urlencode(strtolower($this->properties->id))));
     if (isset($leagueData->countrys)) {
@@ -32,14 +40,23 @@ class SportProxy extends Proxy implements SportInterface {
     throw new \Exception('Could not fully load sport with id ' . $this->properties->id . '.');
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getId() {
     return $this->get('id');
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLeagues() {
     return $this->get('leagues');
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getName() {
     return $this->get('name');
   }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains TheSportsDb\Entity\Factory\Factory.
+ * Contains \TheSportsDb\Entity\Factory\Factory.
  */
 
 namespace TheSportsDb\Entity\Factory;
@@ -31,10 +31,10 @@ class Factory implements FactoryInterface {
   /**
    * Creates a \TheSportsDb\Facotory\Factory object.
    *
-   * @param TheSportsDbClientInterface $sportsDbClient
+   * @param \TheSportsDb\Http\TheSportsDbClientInterface $sportsDbClient
    *   The sports db client to make the requests.
-   * @param EntityManagerInterface $entityManager
-   *   The factory container.
+   * @param \TheSportsDb\Entity\EntityManagerInterface $entityManager
+   *   The entity manager.
    */
   public function __construct(TheSportsDbClientInterface $sportsDbClient, EntityManagerInterface $entityManager = NULL) {
     $this->sportsDbClient = $sportsDbClient;
@@ -48,7 +48,7 @@ class Factory implements FactoryInterface {
    */
   public function create(\stdClass $values, $entityType) {
     // Check if we should return a proxy or a full entity.
-    $reflection = !$this->isFullObject($values, $entityType) ?
+    $reflection = !$this->entityManager->isFullObject($values, $entityType) ?
         new \ReflectionClass($this->entityManager->getClass($entityType, 'proxy'))
         : new \ReflectionClass($this->entityManager->getClass($entityType));
 
@@ -59,35 +59,26 @@ class Factory implements FactoryInterface {
   }
 
   /**
-   * @param string $entityType
-   */
-  public function isFullObject(\stdClass $object, $entityType) {
-    $reflection = new \ReflectionClass($this->entityManager->getClass($entityType));
-    $defaultProperties = $reflection->getDefaultProperties();
-    $properties = array_flip(array_filter(array_keys($defaultProperties), function($prop) use ($reflection) {
-      // Filter out static properties.
-      $reflectionProp = $reflection->getProperty($prop);
-      if ($reflectionProp->isStatic()) {
-        return FALSE;
-      }
-      return TRUE;
-    }));
-    return count(array_intersect_key($properties, (array) $object)) === count($properties);
-  }
-
-  /**
    * Finalize the entity (or proxy).
    *
    * @param \TheSportsDb\Entity\EntityInterface $entity
    *   Either the real or the proxy entity for this factory.
+   *
+   * @return void
    */
-  public function finalizeEntity(EntityInterface $entity) {
+  protected function finalizeEntity(EntityInterface $entity) {
     if ($entity instanceof ProxyInterface) {
       $entity->setEntityManager($this->entityManager);
       $entity->setSportsDbClient($this->sportsDbClient);
     }
   }
 
+  /**
+   * Gets the entity manager of this factory.
+   *
+   * @return \TheSportsDb\Entity\EntityManagerInterface
+   *   The entity manager for this factory.
+   */
   public function getEntityManager() {
     return $this->entityManager;
   }

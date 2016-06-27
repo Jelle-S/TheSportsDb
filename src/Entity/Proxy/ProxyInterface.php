@@ -18,6 +18,11 @@ use TheSportsDb\Http\TheSportsDbClientInterface;
 interface ProxyInterface extends EntityInterface, EntityManagerConsumerInterface {
 
   /**
+   * Set the client to make requests with.
+   *
+   * @param \TheSportsDb\Http\TheSportsDbClientInterface $sportsDbClient
+   *   The client to make the requests with.
+   *
    * @return void
    */
   public function setSportsDbClient(TheSportsDbClientInterface $sportsDbClient);

@@ -37,6 +37,10 @@ interface FactoryContainerInterface {
   public function getFactory($class);
 
   /**
+   * Set the default factory to use.
+   *
+   * @param \TheSportsDb\Entity\Factory\FactoryInterface $factory
+   *
    * @return void
    */
   public function setDefaultFactory(FactoryInterface $factory);
