@@ -27,11 +27,11 @@ interface FactoryInterface extends EntityManagerConsumerInterface {
    */
   public function create(\stdClass $values, $entityType);
 
-    /**
-     * Gets the entity manager of this factory.
-     *
-     * @return \TheSportsDb\Entity\EntityManagerInterface
-     *   The entity manager for this factory.
-     */
+  /**
+   * Gets the entity manager of this factory.
+   *
+   * @return \TheSportsDb\Entity\EntityManagerInterface
+   *   The entity manager for this factory.
+   */
   public function getEntityManager();
 }
