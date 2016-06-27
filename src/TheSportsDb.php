@@ -136,6 +136,30 @@ class TheSportsDb implements EntityManagerConsumerInterface {
     return $this->entityManager->repository('event')->nextFifteenEventsByLeague($leagueId);
   }
 
+  public function getNextFifteenEventsByLeagueAndRound($leagueId, $round) {
+    return $this->entityManager->repository('event')->nextFifteenEventsByLeagueAndRound($leagueId, $round);
+  }
+
+  public function getLastFiveEventsByTeam($teamId) {
+    return $this->entityManager->repository('event')->lastFiveByTeam($teamId);
+  }
+
+  public function getLastFifteenEventsByLeague($leagueId) {
+    return $this->entityManager->repository('event')->lastFifteenEventsByLeague($leagueId);
+  }
+
+  public function getEventsByDay(\DateTime $date, $sport = NULL, $leagueName = NULL) {
+    return $this->entityManager->repository('event')->byDay($date, $sport, $leagueName);
+  }
+
+  public function getEventsByLeagueRoundAndSeason($leagueId, $round, $season) {
+    return $this->entityManager->repository('event')->byLeagueRoundAndSeason($leagueId, $round, $season);
+  }
+
+  public function getEventsByLeagueAndSeason($leagueId, $season) {
+    return $this->entityManager->repository('event')->byLeagueAndSeason($leagueId, $season);
+  }
+
   public function getSeasonsByLeague($leagueId) {
     return $this->entityManager->repository('season')->byLeague($leagueId);
   }

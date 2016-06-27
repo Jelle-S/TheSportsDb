@@ -64,7 +64,7 @@ class TheSportsDbClient implements TheSportsDbClientInterface {
    */
   public function doRequest($endpoint, array $parameters = array()) {
     $url = $this->getBaseUrl() . $endpoint;
-    $response = $this->httpClient->request('GET', $url, array('query' => $parameters));
+    $response = $this->httpClient->request('GET', $url, array('query' => array_filter($parameters)));
     if ($response->getStatusCode() == 200) {
       return json_decode($response->getBody()->getContents());
     }
