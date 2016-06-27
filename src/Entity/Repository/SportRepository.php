@@ -22,10 +22,7 @@ class SportRepository extends Repository implements SportRepositoryInterface {
     if (!isset($this->repository[$id])) {
       $factory = $this->entityManager->factory($this->getEntityTypeName());
       $this->repository[$id] = $factory->create(
-        $this->entityManager->reverseMapProperties(
-          (object) array('id' => $id, 'name' => $id),
-          $this->getEntityTypeName()
-        ),
+        (object) array('id' => $id, 'name' => $id),
         $this->getEntityTypeName()
       );
     }
@@ -39,7 +36,7 @@ class SportRepository extends Repository implements SportRepositoryInterface {
     $data = $this->sportsDbClient->doRequest('all_leagues.php');
     foreach ($data->leagues as $league) {
       if (!isset($this->repository[$league->strSport])) {
-        $this->repository[$league->strSport] = $this->factory->create((object) array('strSport' => $league->strSport));
+        $this->repository[$league->strSport] = $this->factory->create((object) array('id' => $league->strSport, 'name' => $league->strSport), $this->getEntityTypeName());
       }
     }
     return $this->repository;

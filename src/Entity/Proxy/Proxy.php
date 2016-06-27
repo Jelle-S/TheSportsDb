@@ -57,7 +57,7 @@ abstract class Proxy implements ProxyInterface {
       }
     }
     if ($this->entityManager && $this->entityManager->factory($this->getEntityType())->isFullObject($this->properties, $this->getEntityType())) {
-      $this->entity = $this->entityManager->factory($this->getEntityType())->create($this->properties, $this->getEntityType(), FALSE);
+      $this->entity = $this->entityManager->factory($this->getEntityType())->create($this->properties, $this->getEntityType());
     }
   }
 

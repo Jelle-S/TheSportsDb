@@ -47,15 +47,13 @@ class Factory implements FactoryInterface {
   /**
    * {@inheritdoc}
    */
-  public function create(\stdClass $values, $entityType, $mapProperties = TRUE) {
-    $givenProperties = $mapProperties ? $this->entityManager->mapProperties($values, $entityType) : $values;
-
+  public function create(\stdClass $values, $entityType) {
     // Check if we should return a proxy or a full entity.
-    $reflection = !$this->isFullObject($givenProperties, $entityType) ?
+    $reflection = !$this->isFullObject($values, $entityType) ?
         new \ReflectionClass($this->entityManager->getClass($entityType, 'proxy'))
         : new \ReflectionClass($this->entityManager->getClass($entityType));
 
-    $entity = $reflection->newInstance($givenProperties);
+    $entity = $reflection->newInstance($values);
     $this->finalizeEntity($entity);
 
     return $entity;

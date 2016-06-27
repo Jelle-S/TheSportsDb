@@ -23,10 +23,7 @@ class SeasonRepository extends Repository implements SeasonRepositoryInterface {
       list($name, $league) = explode('|', $id);
       $factory = $this->entityManager->factory($this->getEntityTypeName());
       $this->repository[$id] = $factory->create(
-        $this->entityManager->reverseMapProperties(
-          (object) array('id' => $id, 'name' => $name, 'league' => (object) array('id' => $league)),
-          $this->getEntityTypeName()
-        ),
+        (object) array('id' => $id, 'name' => $name, 'league' => (object) array('id' => $league)),
         $this->getEntityTypeName()
       );
     }

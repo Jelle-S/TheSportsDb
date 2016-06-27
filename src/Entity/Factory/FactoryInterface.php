@@ -25,7 +25,7 @@ interface FactoryInterface extends EntityManagerConsumerInterface {
    * @return mixed
    *   The entity object.
    */
-  public function create(\stdClass $values, $entityType, $mapProperties = TRUE);
+  public function create(\stdClass $values, $entityType);
 
   public function getEntityManager();
 }
