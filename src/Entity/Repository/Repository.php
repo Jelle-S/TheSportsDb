@@ -6,8 +6,8 @@
 
 namespace TheSportsDb\Entity\Repository;
 
-use TheSportsDb\Entity\EntityManagerInterface;
 use TheSportsDb\Entity\EntityManagerConsumerTrait;
+use TheSportsDb\Entity\EntityManagerInterface;
 use TheSportsDb\Http\TheSportsDbClientInterface;
 
 /**
@@ -48,7 +48,7 @@ abstract class Repository implements RepositoryInterface {
    */
   public function byId($id) {
     if (!isset($this->repository[$id])) {
-      $factory =  $this->entityManager->factory($this->getEntityTypeName());
+      $factory = $this->entityManager->factory($this->getEntityTypeName());
       $this->repository[$id] = $factory->create(
         (object) array('id' => $id),
         $this->getEntityTypeName(),

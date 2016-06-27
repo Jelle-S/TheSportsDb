@@ -25,6 +25,7 @@ interface SportInterface extends EntityInterface {
    *
    * @param \TheSportsDb\Entity\LeagueInterface $league
    *   The league to add.
+   * @return void
    */
   public function addLeague(LeagueInterface $league);
 }

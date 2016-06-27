@@ -94,6 +94,9 @@ abstract class Entity implements EntityInterface {
     return $entity;
   }
 
+  /**
+   * @param string $idName
+   */
   public static function transformHelper($value, $context, $idName, array $contextPropertyMap = array()) {
     $data = array();
     $data['id'] = is_object($value) ? $value->{$idName} : $value;

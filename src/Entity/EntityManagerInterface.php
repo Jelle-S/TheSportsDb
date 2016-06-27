@@ -28,7 +28,7 @@ interface EntityManagerInterface {
    *
    * @param string $entityType
    *
-   * @return TheSportsDb\Entity\Factory\FactoryInterface
+   * @return Factory\FactoryInterface
    *   The repositort for the given entity type.
    */
   public function factory($entityType);
