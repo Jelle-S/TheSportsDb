@@ -50,10 +50,10 @@ class Sport extends Entity implements SportInterface {
   }
 
   public static function transformLeagues($values, $context, EntityManagerInterface $entityManager) {
-    $mapped_leagues = array();
+    $mappedLeagues = array();
     foreach ($values as $league_data) {
-      $mapped_leagues[] = $entityManager->repository('league')->byId($league_data->idLeague);
+      $mappedLeagues[] = $entityManager->repository('league')->byId($league_data->idLeague);
     }
-    return $mapped_leagues;
+    return $mappedLeagues;
   }
 }
