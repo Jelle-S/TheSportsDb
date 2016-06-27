@@ -13,7 +13,7 @@ engines:
   phpmd:
     enabled: true
     config:
-      ruleses: .codeclimate.ruleset.xml
+      rulesets: ".codeclimate.ruleset.xml"
 ratings:
   paths:
   - "**.inc"
