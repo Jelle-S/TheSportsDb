@@ -27,5 +27,8 @@ interface FactoryInterface extends EntityManagerConsumerInterface {
    */
   public function create(\stdClass $values, $entityType);
 
+  /**
+   * @return \TheSportsDb\Entity\EntityManagerInterface
+   */
   public function getEntityManager();
 }

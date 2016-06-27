@@ -182,6 +182,7 @@ class EntityManager implements EntityManagerInterface {
 
   /**
    * Initializes the property map.
+   * @param string $entityType
    */
   protected function initPropertyMap($entityType) {
     $this->propertyMaps[$entityType] = new Map();
@@ -191,12 +192,20 @@ class EntityManager implements EntityManagerInterface {
         $transform = $args[2][0];
         $reverse = $args[2][1];
         $args[2] = new Callback(
+
+          /**
+           * @param string $value
+           */
           function($value, $context) use ($entityManager, $transform) {
             if ($entityManager->isEmptyValue($value)) {
               return $value;
             }
             return call_user_func_array($transform, array($value, $context, $entityManager));
           },
+
+          /**
+           * @param string $value
+           */
           function($value, $context) use ($entityManager, $reverse) {
             if ($entityManager->isEmptyValue($value)) {
               return $value;

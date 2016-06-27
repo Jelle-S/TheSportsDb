@@ -18,6 +18,7 @@ interface FactoryContainerInterface {
    *
    * @param \TheSportsDb\Entity\Factory\FactoryInterface $factory
    *   The factory to add.
+   * @return void
    */
   public function addFactory(FactoryInterface $factory, $entityType);
 
@@ -35,5 +36,8 @@ interface FactoryContainerInterface {
    */
   public function getFactory($class);
 
+  /**
+   * @return void
+   */
   public function setDefaultFactory(FactoryInterface $factory);
 }

@@ -15,6 +15,8 @@ interface TheSportsDbClientInterface {
 
   /**
    * {@inheritdoc}
+   * @param string $endpoint
+   * @return \stdClass
    */
   public function doRequest($endpoint, array $parameters = array());
 }

@@ -16,8 +16,9 @@ interface RepositoryContainerInterface {
   /**
    * Add a repository for a class.
    *
-   * @param \TheSportsDb\Repository\RepositoryInterface $repository
+   * @param RepositoryInterface $repository
    *   The repository to add.
+   * @return void
    */
   public function addRepository(RepositoryInterface $repository);
 
