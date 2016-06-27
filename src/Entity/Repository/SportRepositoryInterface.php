@@ -12,6 +12,7 @@ namespace TheSportsDb\Entity\Repository;
  * @author Jelle Sebreghts
  */
 interface SportRepositoryInterface extends RepositoryInterface {
+
   /**
    * Loads all sports.
    *
