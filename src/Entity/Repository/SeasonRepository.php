@@ -36,4 +36,13 @@ class SeasonRepository extends Repository implements SeasonRepositoryInterface {
     // Loading all seasons without any further context is rediculous.
     return array();
   }
+
+  public function byLeague($leagueId) {
+    $data = $this->sportsDbClient->doRequest('search_all_seasons.php', array('id' => $leagueId))->seasons;
+    foreach ($data as &$season) {
+      $season->idLeague = $leagueId;
+    }
+    return $this->normalizeArray($data);
+  }
+
 }

@@ -22,4 +22,12 @@ class TeamRepository extends Repository implements TeamRepositoryInterface {
     return $this->normalizeArray($this->sportsDbClient->doRequest('search_all_teams.php', array('l' => $leagueName))->teams);
   }
 
+  public function bySportAndCountry($sport, $country) {
+    return $this->normalizeArray($this->sportsDbClient->doRequest('search_all_teams.php', array('s' => $sport, 'c' => $country))->teams);
+  }
+
+  public function byLeague($leagueId) {
+    return $this->normalizeArray($this->sportsDbClient->doRequest('lookup_all_teams.php', array('id' => $leagueId))->teams);
+  }
+
 }

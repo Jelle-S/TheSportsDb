@@ -19,9 +19,9 @@ class PlayerProxy extends Proxy implements PlayerInterface {
    * {@inheritdoc}
    */
   protected function load() {
-    $playerData = $this->sportsDbClient->doRequest('lookuplayer.php', array('id' => $this->properties->id));
+    $playerData = $this->sportsDbClient->doRequest('lookupplayer.php', array('id' => $this->properties->id));
     if (isset($playerData->players)) {
-      $this->update($this->entityManager->mapProperties(reset($playerData->players)), $this->getEntityType());
+      $this->update($this->entityManager->mapProperties(reset($playerData->players), $this->getEntityType()), $this->getEntityType());
       return;
     }
     throw new \Exception('Could not fully load player with id ' . $this->properties->id . '.');

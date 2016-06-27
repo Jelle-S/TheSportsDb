@@ -19,4 +19,6 @@ interface SeasonRepositoryInterface extends RepositoryInterface {
    *   An array of seasons.
    */
   public function all();
+
+  public function byLeague($leagueId);
 }
