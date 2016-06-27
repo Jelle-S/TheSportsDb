@@ -18,6 +18,7 @@ interface RepositoryContainerInterface {
    *
    * @param RepositoryInterface $repository
    *   The repository to add.
+   *
    * @return void
    */
   public function addRepository(RepositoryInterface $repository);

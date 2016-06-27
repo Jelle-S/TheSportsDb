@@ -77,7 +77,16 @@ abstract class Repository implements RepositoryInterface {
     return $this->entityType;
   }
 
-  protected function normalizeEntity($data) {
+  /**
+   * Gets the entity from cache or loads it & updates it with given data.
+   *
+   * @param \stdClass $data
+   *   The data of the entity.
+   *
+   * @return \TheSportsDb\Entity\EntityInterface
+   *   The matched entity.
+   */
+  protected function normalizeEntity(\stdClass $data) {
     $mapped = $this->entityManager->mapProperties($data, $this->getEntityTypeName());
     if (isset($this->repository[$mapped->id])) {
       $entity = $this->repository[$mapped->id];
@@ -89,6 +98,17 @@ abstract class Repository implements RepositoryInterface {
     return $this->repository[$mapped->id];
   }
 
+  /**
+   * Gets an array of entities based on given data.
+   *
+   * @see \TheSportsDb\Entity\Repository\Repository::normilizeEntity()
+   *
+   * @param \stdClass $data
+   *   The data of the entity.
+   *
+   * @return \TheSportsDb\Entity\EntityInterface[]
+   *   The matched entities.
+   */
   public function normalizeArray($data) {
     $normalized = array();
     if ($data) {
