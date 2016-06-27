@@ -21,7 +21,7 @@
     <!-- Customizations -->
     <rule ref="rulesets/codesize.xml/ExcessivePublicCount">
         <properties>
-            <property name="maximum" value="50" />
+            <property name="minimum" value="50" />
         </properties>
     </rule>
     <rule ref="rulesets/codesize.xml/TooManyFields">
