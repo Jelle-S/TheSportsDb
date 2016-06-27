@@ -18,17 +18,17 @@ use TheSportsDb\PropertyMapper\Transformer\Callback;
  * @author Jelle Sebreghts
  */
 class EntityManager implements EntityManagerInterface {
-  
+
   /**
    * The factory container.
-   * 
+   *
    * @var \TheSportsDb\Entity\Factory\FactoryContainerInterface
    */
   protected $factoryContainer;
-  
+
   /**
    * The repository container.
-   * 
+   *
    * @var \TheSportsDb\Entity\Repository\RepositoryContainerInterface
    */
   protected $repositoryContainer;

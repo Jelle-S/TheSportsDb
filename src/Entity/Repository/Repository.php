@@ -16,7 +16,7 @@ use TheSportsDb\Http\TheSportsDbClientInterface;
  * @author Jelle Sebreghts
  */
 abstract class Repository implements RepositoryInterface {
-  
+
   use EntityManagerConsumerTrait;
 
   /**

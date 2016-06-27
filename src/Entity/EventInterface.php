@@ -14,7 +14,7 @@ namespace TheSportsDb\Entity;
 interface EventInterface extends EntityInterface {
 
   public function getId();
-  
+
   public function getName();
 
   public function getLeague();

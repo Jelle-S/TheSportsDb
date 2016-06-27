@@ -52,14 +52,14 @@ class TheSportsDbClient implements TheSportsDbClientInterface {
 
   /**
    * Makes a request to the sports db.
-   * 
+   *
    * @param string $endpoint
    *   The endpoint for the request.
    * @param array $parameters
    *   The parameters for this request.
-   * 
+   *
    * @return \stdClass
-   * 
+   *
    * @throws \Exception
    */
   public function doRequest($endpoint, array $parameters = array()) {

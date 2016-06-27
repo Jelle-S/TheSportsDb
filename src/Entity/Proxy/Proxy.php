@@ -96,7 +96,7 @@ abstract class Proxy implements ProxyInterface {
     // full yet, so load it first and repeat the operation.
     method_exists($this, 'load' . ucfirst($name)) ? $this->{'load' . ucfirst($name)}() : $this->load();
     return $this->get($name);
-    
+
   }
 
   /**
