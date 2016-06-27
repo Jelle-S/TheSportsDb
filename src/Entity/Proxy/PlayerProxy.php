@@ -15,6 +15,9 @@ use TheSportsDb\Entity\PlayerInterface;
  */
 class PlayerProxy extends Proxy implements PlayerInterface {
 
+  /**
+   * {@inheritdoc}
+   */
   protected function load() {
     $playerData = $this->sportsDbClient->doRequest('lookuplayer.php', array('id' => $this->properties->id));
     if (isset($playerData->players)) {
