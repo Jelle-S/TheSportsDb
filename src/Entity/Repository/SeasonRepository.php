@@ -13,6 +13,9 @@ namespace TheSportsDb\Entity\Repository;
  */
 class SeasonRepository extends Repository implements SeasonRepositoryInterface {
 
+  /**
+   * {@inheritdoc}
+   */
   protected $entityType = 'season';
 
   /**
@@ -29,6 +32,7 @@ class SeasonRepository extends Repository implements SeasonRepositoryInterface {
     }
     return $this->repository[$id];
   }
+
   /**
    * {@inheritdoc}
    */
@@ -37,6 +41,9 @@ class SeasonRepository extends Repository implements SeasonRepositoryInterface {
     return array();
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function byLeague($leagueId) {
     $data = $this->sportsDbClient->doRequest('search_all_seasons.php', array('id' => $leagueId))->seasons;
     foreach ($data as &$season) {

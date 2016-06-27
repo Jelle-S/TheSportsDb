@@ -20,5 +20,14 @@ interface SeasonRepositoryInterface extends RepositoryInterface {
    */
   public function all();
 
+  /**
+   * Loads all seasons of a league.
+   *
+   * @param string $leagueId
+   *   The id of the league of the season.
+   *
+   * @return \TheSportsDb\Entity\SeasonInterface[]
+   *   An array of seasons.
+   */
   public function byLeague($leagueId);
 }

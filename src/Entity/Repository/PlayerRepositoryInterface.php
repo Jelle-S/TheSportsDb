@@ -27,7 +27,7 @@ interface PlayerRepositoryInterface extends RepositoryInterface {
   /**
    * Get players by team name.
    *
-   * @param string $teamName
+   * @param string $name
    *   The name of the team of the player.
    *
    * @return \TheSportsDb\Entity\PlayerInterface[]
