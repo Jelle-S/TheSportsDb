@@ -131,7 +131,7 @@ abstract class Entity implements EntityInterface {
    *   sportsdb api this property is from.
    * @param EntityManagerInterface $entityManager
    *   The entity manager.
-   * @param type $entityType
+   * @param string $entityType
    *   The enitity type to transform this value to.
    * @param string $idName
    *   The name of the identifier property as defined by the sportsdb api.
@@ -162,8 +162,10 @@ abstract class Entity implements EntityInterface {
    * @param array $contextPropertyMap
    *   Extra properties to map from the context
    *
-   * @return \stdClass
-   *   The raw data representing the entity.
+   * @return array
+   *   An array with following keys:
+   *     - object: The raw data representing the entity.
+   *     - id: The id of the entity.
    */
   public static function transformHelper($value, $context, $idName, array $contextPropertyMap = array()) {
     $data = array();
