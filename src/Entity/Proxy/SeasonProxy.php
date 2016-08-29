@@ -9,7 +9,7 @@ namespace TheSportsDb\Entity\Proxy;
 use TheSportsDb\Entity\SeasonInterface;
 
 /**
- * A sport object that is not yet fully loaded.
+ * A season object that is not yet fully loaded.
  *
  * @author Jelle Sebreghts
  */

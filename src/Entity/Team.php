@@ -15,6 +15,11 @@ use TheSportsDb\Entity\EntityManagerInterface;
  */
 class Team extends Entity implements TeamInterface {
 
+  /**
+   * The property map definition.
+   *
+   * @var array
+   */
   protected static $propertyMapDefinition = array(
     array('idTeam', 'id'),
     array('strTeam', 'name'),
@@ -104,126 +109,219 @@ class Team extends Entity implements TeamInterface {
   protected $youtube;
   protected $locked;
 
+  /**
+   * {@inheritdoc}
+   */
   public function getId() {
     return $this->id;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getName() {
     return $this->name;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getTeamShort() {
     return $this->teamShort;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAlternateName() {
     return $this->alternateName;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFormedYear() {
     return $this->formedYear;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getSport() {
     return $this->sport;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLeague() {
     return $this->league;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getDivision() {
     return $this->division;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getManager() {
     return $this->manager;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getStadium() {
     return $this->stadium;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getKeywords() {
     return $this->keywords;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getRss() {
     return $this->rss;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getStadiumThumb() {
     return $this->stadiumThumb;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getStadiumDescription() {
     return $this->stadiumDescription;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getStadiumLocation() {
     return $this->stadiumLocation;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getStadiumCapacity() {
     return $this->stadiumCapacity;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getWebsite() {
     return $this->website;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFacebook() {
     return $this->facebook;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getTwitter() {
     return $this->twitter;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getInstagram() {
     return $this->instagram;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getDescription() {
     return $this->description;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getGender() {
     return $this->gender;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getCountry() {
     return $this->country;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getBadge() {
     return $this->badge;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getJersey() {
     return $this->jersey;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLogo() {
     return $this->logo;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getBanner() {
     return $this->banner;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getYoutube() {
     return $this->youtube;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLocked() {
     return $this->locked;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'sport', 'strSport');
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'league', 'idLeague', array('strLeague' => 'strLeague'));
   }

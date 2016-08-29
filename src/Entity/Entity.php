@@ -52,6 +52,9 @@ abstract class Entity implements EntityInterface {
     return $this->_raw;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function update(\stdClass $values) {
     foreach ((array) $values as $prop => $val) {
       if (property_exists($this, $prop)) {
@@ -60,20 +63,53 @@ abstract class Entity implements EntityInterface {
     }
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function getEntityType() {
     $reflection = new \ReflectionClass(static::class);
     return strtolower($reflection->getShortName());
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function getPropertyMapDefinition() {
     return static::$propertyMapDefinition;
   }
 
+  /**
+   * Reverse map a property that is an entity.
+   *
+   * @param array $entity
+   *   The entity to reverse map.
+   * @param mixed $context
+   *   The context for this mapping. Usually the raw entity this property is
+   *   from.
+   * @param EntityManagerInterface $entityManager
+   *   The entity manager.
+   *
+   * @return mixed
+   *   The reverse mapped value for this property, usually the entity id.
+   */
   public static function reverse($entity, $context, EntityManagerInterface $entityManager) {
     $data = ($entity instanceof EntityInterface) ? $entity->raw() : $entity;
     return $data->id;
   }
 
+  /**
+   * Reverse map a property that is an array of entities.
+   *
+   * @param array $entities
+   *   The entities to reverse map.
+   * @param mixed $context
+   *   The context for this mapping. Usually the raw entity.
+   * @param EntityManagerInterface $entityManager
+   *   The entity manager.
+   *
+   * @return array
+   *   The reverse mapped value for this property, usually an array of ids.
+   */
   public static function reverseArray(array $entities, $context, EntityManagerInterface $entityManager) {
     $reversedEntities = array();
     foreach ($entities as $entity) {
@@ -83,8 +119,24 @@ abstract class Entity implements EntityInterface {
   }
 
   /**
-   * @param string $entityType
+   * Transforms a property value to an entity.
+   *
+   * @param mixed $value
+   *   The value to transform.
+   * @param mixed $context
+   *   The context for this mapping. Usually the raw entity as defined by the
+   *   sportsdb api this property is from.
+   * @param EntityManagerInterface $entityManager
+   *   The entity manager.
+   * @param type $entityType
+   *   The enitity type to transform this value to.
    * @param string $idName
+   *   The name of the identifier property as defined by the sportsdb api.
+   * @param array $contextPropertyMap
+   *   Extra properties to map from the context
+   *
+   * @return \TheSportsDb\Entity\EntityInterface
+   *   The mapped entity.
    */
   public static function transform($value, $context, EntityManagerInterface $entityManager, $entityType, $idName, array $contextPropertyMap = array()) {
     $data = static::transformHelper($value, $context, $idName, $contextPropertyMap);
@@ -95,7 +147,20 @@ abstract class Entity implements EntityInterface {
   }
 
   /**
+   * Helper function to transform an entity.
+   *
+   * @param mixed $value
+   *   The value to transform.
+   * @param mixed $context
+   *   The context for this mapping. Usually the raw entity as defined by the
+   *   sportsdb api this property is from.
    * @param string $idName
+   *   The name of the identifier property as defined by the sportsdb api.
+   * @param array $contextPropertyMap
+   *   Extra properties to map from the context
+   *
+   * @return \stdClass
+   *   The raw data representing the entity.
    */
   public static function transformHelper($value, $context, $idName, array $contextPropertyMap = array()) {
     $data = array();

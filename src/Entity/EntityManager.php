@@ -54,12 +54,25 @@ class EntityManager implements EntityManagerInterface {
    */
   protected $propertyMaps = array();
 
+  /**
+   * The property mapper.
+   *
+   * @var \FastNorth\PropertyMapper\MapperInterface
+   */
   protected $propertyMapper;
 
 
+  /**
+   * Placeholder for empty properties.
+   *
+   * @var string
+   */
   const EMPTYPROPERTYPLACEHOLDER = '__EMPTY_PROPERTY_PLACEHOLDER__';
 
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct(MapperInterface $propertyMapper, FactoryContainerInterface $factoryContainer = NULL, RepositoryContainerInterface $repositoryContainer = NULL) {
     if ($factoryContainer instanceof FactoryContainerInterface) {
       $this->factoryContainer = $factoryContainer;
@@ -70,6 +83,9 @@ class EntityManager implements EntityManagerInterface {
     $this->propertyMapper = $propertyMapper;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function setFactoryContainer(FactoryContainerInterface $factoryContainer) {
     if ($this->factoryContainer instanceof FactoryContainerInterface) {
       throw new \Exception('Factory container already set.');
@@ -77,6 +93,9 @@ class EntityManager implements EntityManagerInterface {
     $this->factoryContainer = $factoryContainer;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function setRepositoryContainer(RepositoryContainerInterface $repositoryContainer) {
     if ($this->repositoryContainer instanceof RepositoryContainerInterface) {
       throw new \Exception('Repository container already set.');
@@ -199,6 +218,7 @@ class EntityManager implements EntityManagerInterface {
 
   /**
    * Initializes the property map.
+   *
    * @param string $entityType
    */
   protected function initPropertyMap($entityType) {
@@ -239,6 +259,8 @@ class EntityManager implements EntityManagerInterface {
    * Gets the property map.
    *
    * @param string $entityType
+   *   The entity type to get the map for.
+   *
    * @return \FastNorth\PropertyMapper\MapInterface
    *   The property map.
    */
@@ -249,6 +271,15 @@ class EntityManager implements EntityManagerInterface {
     return $this->propertyMaps[$entityType];
   }
 
+  /**
+   * Sanitize empty values from an object.
+   *
+   * @param \stdClass $object
+   *   The object to sanitize.
+   *
+   * @return \stdClass
+   *   The sanitized object.
+   */
   protected function sanitizeObject(\stdClass $object) {
     $arr = (array) $object;
     foreach ($arr as $prop => $val) {
@@ -259,7 +290,15 @@ class EntityManager implements EntityManagerInterface {
     return (object) $arr;
   }
 
-
+  /**
+   * Check if a value is considered to be empty.
+   *
+   * @param mixed $value
+   *   The value to check.
+   *
+   * @return bool
+   *   Whether or not this value is considered to be empty.
+   */
   public function isEmptyValue($value) {
     return $value === static::EMPTYPROPERTYPLACEHOLDER;
   }

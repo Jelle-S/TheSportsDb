@@ -18,6 +18,7 @@ interface FactoryContainerInterface {
    *
    * @param \TheSportsDb\Entity\Factory\FactoryInterface $factory
    *   The factory to add.
+   *
    * @return void
    */
   public function addFactory(FactoryInterface $factory, $entityType);
@@ -40,6 +41,7 @@ interface FactoryContainerInterface {
    * Set the default factory to use.
    *
    * @param \TheSportsDb\Entity\Factory\FactoryInterface $factory
+   *   The default factory.
    *
    * @return void
    */
