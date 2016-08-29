@@ -21,6 +21,20 @@ trait EntityManagerConsumerTrait {
    */
   protected $entityManager;
 
+  /**
+   * setEntityManager
+   * Insert description here
+   *
+   * @param EntityManagerInterface
+   * @param $entityManager
+   *
+   * @return
+   *
+   * @access
+   * @static
+   * @see
+   * @since
+   */
   public function setEntityManager(EntityManagerInterface $entityManager) {
     if ($this->entityManager instanceof EntityManagerInterface) {
       throw new \Exception('Entity manager already set.');

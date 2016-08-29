@@ -46,22 +46,45 @@ class Season extends Entity implements SeasonInterface {
     return $this->id;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getName() {
     return $this->name;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLeague() {
     return $this->league;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getEvents() {
     return $this->events;
   }
 
+  /**
+   *
+   * @param type $value
+   * @param type $context
+   * @param EntityManagerInterface $entityManager
+   * @return type
+   */
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'league', 'idLeague', array('strLeague' => 'strLeague'));
   }
 
+  /**
+   *
+   * @param array $values
+   * @param type $context
+   * @param EntityManagerInterface $entityManager
+   * @return type
+   */
   public static function transformEvents(array $values, $context, EntityManagerInterface $entityManager) {
     $mappedEvents = array();
     foreach ($values as $eventData) {
@@ -70,10 +93,22 @@ class Season extends Entity implements SeasonInterface {
     return $mappedEvents;
   }
 
+  /**
+   *
+   * @param type $value
+   * @param type $context
+   * @return type
+   */
   public static function transformId($value, $context) {
     return $value . '|' . $context->idLeague;
   }
 
+  /**
+   *
+   * @param type $value
+   * @param type $context
+   * @return type
+   */
   public static function reverseId($value, $context) {
     $id = explode('|', $value);
     return reset($id);

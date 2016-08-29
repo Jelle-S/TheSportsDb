@@ -91,94 +91,171 @@ class League extends Entity implements LeagueInterface {
     return $this->id;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getName() {
     return $this->name;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getSport() {
     return $this->sport;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAlternateName() {
     return $this->alternateName;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFormedYear() {
     return $this->formedYear;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getDateFirstEvent() {
     return $this->dateFirstEvent;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getGender() {
     return $this->gender;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getCountry() {
     return $this->country;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getWebsite() {
     return $this->website;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFacebook() {
     return $this->facebook;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getTwitter() {
     return $this->twitter;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getYoutube() {
     return $this->youtube;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getRss() {
     return $this->rss;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getDescription() {
     return $this->description;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getBanner() {
     return $this->banner;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getBadge() {
     return $this->badge;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLogo() {
     return $this->logo;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getPoster() {
     return $this->poster;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getTrophy() {
     return $this->trophy;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getNaming() {
     return $this->naming;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLocked() {
     return $this->locked;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getSeasons() {
     return $this->seasons;
   }
 
+  /**
+   *
+   * @param type $value
+   * @param type $context
+   * @param EntityManagerInterface $entityManager
+   * @return type
+   */
   public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'sport', 'strSport');
   }
 
+  /**
+   *
+   * @param type $value
+   * @param type $context
+   * @param EntityManagerInterface $entityManager
+   * @return type
+   */
   public static function transformSeasons($value, $context, EntityManagerInterface $entityManager) {
     $mappedSeasons = array();
     foreach ($value as $season) {

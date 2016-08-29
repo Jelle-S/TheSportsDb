@@ -13,5 +13,19 @@ use TheSportsDb\Entity\EntityManagerInterface;
  * @author Jelle Sebreghts
  */
 interface EntityManagerConsumerInterface {
+  /**
+   * setEntityManager
+   * Insert description here
+   *
+   * @param EntityManagerInterface
+   * @param $entityManager
+   *
+   * @return
+   *
+   * @access
+   * @static
+   * @see
+   * @since
+   */
   public function setEntityManager(EntityManagerInterface $entityManager);
 }

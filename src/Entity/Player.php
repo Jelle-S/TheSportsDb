@@ -95,94 +95,163 @@ class Player extends Entity implements PlayerInterface {
   protected $cutout;
   protected $locked;
 
+  /**
+   * {@inheritdoc}
+   */
   public function getId() {
     return $this->id;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getTeam() {
     return $this->team;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getNationality() {
     return $this->nationality;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getName() {
     return $this->name;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getSport() {
     return $this->sport;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getBirthDay() {
     return $this->birthDay;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getDateSigned() {
     return $this->dateSigned;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getSigning() {
     return $this->signing;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getWage() {
     return $this->wage;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getBirthLocation() {
     return $this->birthLocation;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getDescription() {
     return $this->description;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getGender() {
     return $this->gender;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getPosition() {
     return $this->position;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFacebook() {
     return $this->facebook;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getWebsite() {
     return $this->website;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getTwitter() {
     return $this->twitter;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getInstagram() {
     return $this->instagram;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getYoutube() {
     return $this->youtube;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHeight() {
     return $this->height;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getWeight() {
     return $this->weight;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getThumb() {
     return $this->thumb;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getCutout() {
     return $this->cutout;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLocked() {
     return $this->locked;
   }

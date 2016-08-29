@@ -313,14 +313,23 @@ class Team extends Entity implements TeamInterface {
   }
 
   /**
-   * {@inheritdoc}
+   *
+   * @param type $value
+   * @param type $context
+   * @param EntityManagerInterface $entityManager
+   * @return type
    */
   public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'sport', 'strSport');
   }
 
+
   /**
-   * {@inheritdoc}
+   *
+   * @param type $value
+   * @param type $context
+   * @param EntityManagerInterface $entityManager
+   * @return type
    */
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'league', 'idLeague', array('strLeague' => 'strLeague'));

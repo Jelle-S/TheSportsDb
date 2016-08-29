@@ -28,6 +28,9 @@ abstract class Entity implements EntityInterface {
     $this->update($values);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function raw() {
     if (isset($this->_raw)) {
       return $this->_raw;

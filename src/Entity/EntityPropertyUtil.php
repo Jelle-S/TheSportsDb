@@ -14,6 +14,19 @@ namespace TheSportsDb\Entity;
  */
 class EntityPropertyUtil {
 
+  /**
+   * getRawValue
+   * Insert description here
+   *
+   * @param $val
+   *
+   * @return
+   *
+   * @access
+   * @static
+   * @see
+   * @since
+   */
   public static function getRawValue($val) {
     $return = $val;
     if (method_exists($val, 'raw')) {

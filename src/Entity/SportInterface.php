@@ -14,10 +14,46 @@ namespace TheSportsDb\Entity;
  */
 interface SportInterface extends EntityInterface {
 
+  /**
+   * getId
+   * Insert description here
+   *
+   *
+   * @return
+   *
+   * @access
+   * @static
+   * @see
+   * @since
+   */
   public function getId();
 
+  /**
+   * getName
+   * Insert description here
+   *
+   *
+   * @return
+   *
+   * @access
+   * @static
+   * @see
+   * @since
+   */
   public function getName();
 
+  /**
+   * getLeagues
+   * Insert description here
+   *
+   *
+   * @return
+   *
+   * @access
+   * @static
+   * @see
+   * @since
+   */
   public function getLeagues();
 
   /**

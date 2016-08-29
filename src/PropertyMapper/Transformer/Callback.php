@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains heSportsDb\PropertyMapper\Transformer\Callback.
+ * Contains TheSportsDb\PropertyMapper\Transformer\Callback.
  */
 namespace TheSportsDb\PropertyMapper\Transformer;
 

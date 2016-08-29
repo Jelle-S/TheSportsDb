@@ -32,10 +32,16 @@ class Sport extends Entity implements SportInterface {
     return $this->id;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getName() {
     return $this->name;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLeagues() {
     return $this->leagues;
   }
@@ -49,6 +55,13 @@ class Sport extends Entity implements SportInterface {
     }
   }
 
+  /**
+   *
+   * @param type $values
+   * @param type $context
+   * @param EntityManagerInterface $entityManager
+   * @return type
+   */
   public static function transformLeagues($values, $context, EntityManagerInterface $entityManager) {
     $mappedLeagues = array();
     foreach ($values as $leagueData) {

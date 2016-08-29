@@ -132,178 +132,318 @@ class Event extends Entity implements EventInterface {
     return $this->id;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getName() {
     return $this->name;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLeague() {
     return $this->league;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFilename() {
     return $this->filename;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getSeason() {
     return $this->season;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getDescription() {
     return $this->description;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeScore() {
     return $this->homeScore;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getRound() {
     return $this->round;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayScore() {
     return $this->awayScore;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getSpecators() {
     return $this->specators;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeGoalDetails() {
     return $this->homeGoalDetails;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeRedCards() {
     return $this->homeRedCards;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeYellowCards() {
     return $this->homeYellowCards;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeLineupGoalkeeper() {
     return $this->homeLineupGoalkeeper;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeLineupDefense() {
     return $this->homeLineupDefense;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeLineupMidfield() {
     return $this->homeLineupMidfield;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeLineupForward() {
     return $this->homeLineupForward;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeLineupSubstitues() {
     return $this->homeLineupSubstitues;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeFormation() {
     return $this->homeFormation;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayRedCards() {
     return $this->awayRedCards;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayYellowCards() {
     return $this->awayYellowCards;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayGoalDetails() {
     return $this->awayGoalDetails;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayLineupGoalkeeper() {
     return $this->awayLineupGoalkeeper;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayLineupDefense() {
     return $this->awayLineupDefense;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayLineupMidfield() {
     return $this->awayLineupMidfield;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayLineupForward() {
     return $this->awayLineupForward;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayLineupSubstitutes() {
     return $this->awayLineupSubstitutes;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayFormation() {
     return $this->awayFormation;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeShots() {
     return $this->homeShots;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayShots() {
     return $this->awayShots;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getDate() {
     return $this->date;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getTvStation() {
     return $this->tvStation;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getHomeTeam() {
     return $this->homeTeam;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getAwayTeam() {
     return $this->awayTeam;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getResult() {
     return $this->result;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getCircuit() {
     return $this->circuit;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getCountry() {
     return $this->country;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getCity() {
     return $this->city;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getPoster() {
     return $this->poster;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getThumb() {
     return $this->thumb;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getBanner() {
     return $this->banner;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getMap() {
     return $this->map;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLocked() {
     return $this->locked;
   }
 
+  /**
+   *
+   * @param type $value
+   * @param type $context
+   * @param EntityManagerInterface $entityManager
+   * @return type
+   */
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'league', 'idLeague', array('strLeague' => 'strLeague'));
   }
 
+  /**
+   *
+   * @param type $value
+   * @param type $context
+   * @param EntityManagerInterface $entityManager
+   * @return type
+   */
   public static function transformSeason($value, $context, EntityManagerInterface $entityManager) {
     $season = is_object($value) ? $value : (object) array('idLeague' => $context->idLeague, 'strSeason' => $value);
     $id = $season->strSeason . '|' . $season->idLeague;
@@ -312,10 +452,24 @@ class Event extends Entity implements EventInterface {
     return $seasonEntity;
   }
 
+  /**
+   *
+   * @param type $value
+   * @param type $context
+   * @param EntityManagerInterface $entityManager
+   * @return type
+   */
   public static function transformHomeTeam($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'team', 'idTeam', array('strHomeTeam' => 'strTeam'));
   }
 
+  /**
+   *
+   * @param type $value
+   * @param type $context
+   * @param EntityManagerInterface $entityManager
+   * @return type
+   */
   public static function transformAwayTeam($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'team', 'idTeam', array('strAwayTeam' => 'strTeam'));
   }
