@@ -15,15 +15,36 @@ namespace TheSportsDb\PropertyMapper;
  */
 class PropertyDefinition {
 
+  /**
+   * The property name.
+   *
+   * @var string
+   */
   protected $name;
 
+  /**
+   * The entity type if this property is an entity.
+   *
+   * @var string
+   */
   protected $entityType;
 
+  /**
+   * Whether this property is an array or not.
+   *
+   * @var bool
+   */
   protected $isArray;
 
   /**
+   * Creates a new property definition.
+   *
    * @param string $name
-   * @param string $entityType
+   *   The name of the property.
+   * @param string|null $entityType
+   *   The entity type of the property if it's an entity.
+   * @param bool $isArray
+   *   Whether or not this property is an array.
    */
   public function __construct($name, $entityType = NULL, $isArray = FALSE) {
     $this->name = $name;
@@ -31,14 +52,32 @@ class PropertyDefinition {
     $this->isArray = $isArray;
   }
 
+  /**
+   * Gets the property name.
+   *
+   * @return string
+   *   The property name.
+   */
   public function getName() {
     return $this->name;
   }
 
+  /**
+   * Gets the entity type.
+   *
+   * @return string|null
+   *   The entity type of the property if it's an entity.
+   */
   public function getEntityType() {
     return $this->entityType;
   }
 
+  /**
+   * Whether or not this property is an array.
+   *
+   * @return bool
+   *   TRUE if it's an array, FALSE, otherwise.
+   */
   public function isArray() {
     return $this->isArray;
   }
