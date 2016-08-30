@@ -52,6 +52,17 @@ interface EntityManagerInterface {
   public function registerClass($entityType, $realClass = NULL, $proxyClass = NULL);
 
   /**
+   * Get the property map definition.
+   *
+   * @param string $entityType
+   *   The entity type to get the definition for.
+   *
+   * @return array
+   *   The property map definition.
+   */
+  public function getPropertyMapDefinition($entityType);
+
+  /**
    * Get the registered class for an entity type.
    *
    * @param string $entityType
