@@ -41,9 +41,9 @@ interface EntityManagerInterface {
    * @param string $entityType
    *   The entity type to register the classes for.
    *
-   * @param string $realClass
+   * @param string|null $realClass
    *   The real class to register.
-   * @param string $proxyClass
+   * @param string|null $proxyClass
    *   The proxy class to register.
    *
    * @return array

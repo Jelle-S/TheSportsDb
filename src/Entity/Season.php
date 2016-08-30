@@ -119,7 +119,7 @@ class Season extends Entity implements SeasonInterface {
    * @param EntityManagerInterface $entityManager
    *   The entity manager.
    *
-   * @return \TheSportsDb\Entity\EventInterface
+   * @return \TheSportsDb\Entity\EventInterface[]
    *   The event entity.
    */
   public static function transformEvents(array $values, $context, EntityManagerInterface $entityManager) {

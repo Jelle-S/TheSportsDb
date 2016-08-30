@@ -53,9 +53,9 @@ interface EventRepositoryInterface extends RepositoryInterface {
    *
    * @param \DateTime $date
    *   The date of the event.
-   * @param string $sport
+   * @param string|null $sport
    *   The sport of the event.
-   * @param string $leagueName
+   * @param string|null $leagueName
    *   The name of the league of the event.
    *
    * @return \TheSportsDb\Entity\EventInterface[]

@@ -33,7 +33,7 @@ class Factory implements FactoryInterface {
    *
    * @param \TheSportsDb\Http\TheSportsDbClientInterface $sportsDbClient
    *   The sports db client to make the requests.
-   * @param \TheSportsDb\Entity\EntityManagerInterface $entityManager
+   * @param \TheSportsDb\Entity\EntityManagerInterface|null $entityManager
    *   The entity manager.
    */
   public function __construct(TheSportsDbClientInterface $sportsDbClient, EntityManagerInterface $entityManager = NULL) {

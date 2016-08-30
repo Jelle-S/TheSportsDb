@@ -113,6 +113,8 @@ abstract class Proxy implements ProxyInterface {
    *
    * @throws \Exception
    *   When the entity is not found.
+   *
+   * @return void
    */
   abstract protected function load();
 

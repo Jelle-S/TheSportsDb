@@ -239,7 +239,7 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    *
    * @param string $teamName
    *   The team name.
-   * @param string $name.
+   * @param string $name
    *   The name.
    *
    * @return \TheSportsDb\Entity\PlayerInterface[]
@@ -375,9 +375,9 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    *
    * @param \DateTime $date
    *   The day.
-   * @param mixed $sport
+   * @param string|null $sport
    *   The sport.
-   * @param string $leagueName
+   * @param string|null $leagueName
    *   The league name.
    *
    * @return \TheSportsDb\Entity\EventInterface[]

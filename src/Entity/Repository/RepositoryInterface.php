@@ -30,6 +30,9 @@ interface RepositoryInterface extends EntityManagerConsumerInterface {
    * Clear an entity from the repository.
    *
    * @param mixed $id
+   *   The id of the entity to clear.
+   *
+   * @return void
    */
   public function clear($id);
 

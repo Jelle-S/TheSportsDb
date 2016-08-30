@@ -207,11 +207,7 @@ class EntityManager implements EntityManagerInterface {
     $defaultProperties = $reflection->getDefaultProperties();
     $properties = array_flip(array_filter(array_keys($defaultProperties), function($prop) use ($reflection) {
       // Filter out static properties.
-      $reflectionProp = $reflection->getProperty($prop);
-      if ($reflectionProp->isStatic()) {
-        return FALSE;
-      }
-      return TRUE;
+      return !$reflection->getProperty($prop)->isStatic();
     }));
     return count(array_intersect_key($properties, (array) $object)) === count($properties);
   }
