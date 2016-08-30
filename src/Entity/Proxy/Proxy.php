@@ -9,8 +9,8 @@ namespace TheSportsDb\Entity\Proxy;
 use TheSportsDb\Entity\EntityInterface;
 use TheSportsDb\Entity\EntityManagerConsumerTrait;
 use TheSportsDb\Entity\EntityManagerInterface;
-use TheSportsDb\Http\TheSportsDbClientInterface;
 use TheSportsDb\Entity\EntityPropertyUtil;
+use TheSportsDb\Http\TheSportsDbClientInterface;
 
 /**
  * Default implementation of proxy objects.

@@ -154,7 +154,7 @@ abstract class Entity implements EntityInterface {
    *
    * @param mixed $value
    *   The value to transform.
-   * @param mixed $context
+   * @param \stdClass $context
    *   The context for this mapping. Usually the raw entity as defined by the
    *   sportsdb api this property is from.
    * @param string $idName
