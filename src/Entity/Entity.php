@@ -8,6 +8,7 @@ namespace TheSportsDb\Entity;
 
 use TheSportsDb\Entity\EntityManagerInterface;
 use TheSportsDb\Entity\EntityPropertyUtil;
+use TheSportsDb\PropertyMapper\PropertyMapDefinition;
 
 /**
  * Description of Entity
@@ -16,7 +17,12 @@ use TheSportsDb\Entity\EntityPropertyUtil;
  */
 abstract class Entity implements EntityInterface {
 
-  protected static $propertyMapDefinition = array();
+  /**
+   * The property map definition.
+   *
+   * @var \TheSportsDb\PropertyMapper\PropertyMapDefinition
+   */
+  protected static $propertyMapDefinition;
 
   /**
    * Creates a new Entity object.
@@ -78,8 +84,19 @@ abstract class Entity implements EntityInterface {
    * {@inheritdoc}
    */
   public static function getPropertyMapDefinition() {
+    if (!isset(static::$propertyMapDefinition))  {
+      static::$propertyMapDefinition = new PropertyMapDefinition();
+      static::initPropertyMapDefinition();
+    }
     return static::$propertyMapDefinition;
   }
+
+  /**
+   * Initialize the property map definition for this entity type.
+   *
+   * @return void
+   */
+  abstract protected static function initPropertyMapDefinition();
 
   /**
    * Reverse map a property that is an entity.

@@ -57,7 +57,7 @@ interface EntityManagerInterface {
    * @param string $entityType
    *   The entity type to get the definition for.
    *
-   * @return array
+   * @return \TheSportsDb\PropertyMapper\PropertyMapDefinition
    *   The property map definition.
    */
   public function getPropertyMapDefinition($entityType);
@@ -115,5 +115,28 @@ interface EntityManagerInterface {
    *   TRUE if we can create a fully loaded entity, FALSE otherwise.
    */
   public function isFullObject(\stdClass $object, $entityType);
+
+  /**
+   * Sanitizes values before passing them to the factory.
+   *
+   * @param \stdClass $values
+   *   Values to sanitize.
+   * @param string $entityType
+   *   The entity type to sanitize the values for.
+   *
+   * @return void
+   */
+  public function sanitizeValues(\stdClass &$values, $entityType);
+
+  /**
+   * Check if a value is considered to be empty.
+   *
+   * @param mixed $value
+   *   The value to check.
+   *
+   * @return bool
+   *   Whether or not this value is considered to be empty.
+   */
+  public function isEmptyValue($value);
 
 }

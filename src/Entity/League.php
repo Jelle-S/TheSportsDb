@@ -7,6 +7,7 @@
 namespace TheSportsDb\Entity;
 
 use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\PropertyMapper\PropertyDefinition;
 
 /**
  * A fully loaded league object.
@@ -16,58 +17,9 @@ use TheSportsDb\Entity\EntityManagerInterface;
 class League extends Entity implements LeagueInterface {
 
   /**
-   * The property map definition.
-   *
-   * @var array
+   * {@inheritdoc}
    */
-  protected static $propertyMapDefinition = array(
-    array('idLeague', 'id'),
-    array('strLeague', 'name'),
-    array('strSport', 'sport', array(
-      array(self::class, 'transformSport'),
-      array(Sport::class, 'reverse'),
-    )),
-    array('strLeagueAlternate', 'alternateName'),
-    array('intFormedYear', 'formedYear'),
-    array('dateFirstEvent', 'dateFirstEvent'), //"2013-03-02",
-    array('strGender', 'gender'),
-    array('strCountry', 'country'),
-    array('strWebsite', 'website'),
-    array('strFacebook', 'facebook'),
-    array('strTwitter', 'twitter'),
-    array('strYoutube', 'youtube'),
-    array('strRSS', 'rss'),
-    array('strDescriptionEN', 'description'),
-    array('strBanner', 'banner'),
-    array('strBadge', 'badge'),
-    array('strLogo', 'logo'),
-    array('strPoster', 'poster'),
-    array('strTrophy', 'trophy'),
-    array('strNaming', 'naming'),
-    array('strLocked', 'locked'),
-    array('seasons', 'seasons', array(
-      array(self::class, 'transformSeasons'),
-      array(Season::class, 'reverseArray'),
-    )),
-    // idSoccerXML
-    // strDescriptionDE
-    // strDescriptionFR
-    // strDescriptionIT
-    // strDescriptionCN
-    // strDescriptionJP
-    // strDescriptionRU
-    // strDescriptionES
-    // strDescriptionPT
-    // strDescriptionSE
-    // strDescriptionNL
-    // strDescriptionHU
-    // strDescriptionNO
-    // strDescriptionPL
-    // strFanart1
-    // strFanart2
-    // strFanart3
-    // strFanart4
-  );
+  protected static $propertyMapDefinition;
 
   /**
    * The primary identifier.
@@ -415,4 +367,121 @@ class League extends Entity implements LeagueInterface {
     }
     return $mappedSeasons;
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static function initPropertyMapDefinition() {
+    static::$propertyMapDefinition
+      ->addPropertyMap(
+        new PropertyDefinition('idLeague'),
+        new PropertyDefinition('id')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strLeague'),
+        new PropertyDefinition('name')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strSport'),
+        new PropertyDefinition('sport', 'sport'),
+        [self::class, 'transformSport'],
+        [Sport::class, 'reverse']
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strLeagueAlternate'),
+        new  PropertyDefinition('alternateName')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('intFormedYear'),
+        new  PropertyDefinition('formedYear')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('dateFirstEvent'),
+        new  PropertyDefinition('dateFirstEvent')) //"2013-03-02",
+      ->addPropertyMap(
+        new PropertyDefinition('strGender'),
+        new  PropertyDefinition('gender')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strCountry'),
+        new  PropertyDefinition('country')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strWebsite'),
+        new  PropertyDefinition('website')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strFacebook'),
+        new  PropertyDefinition('facebook')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strTwitter'),
+        new  PropertyDefinition('twitter')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strYoutube'),
+        new  PropertyDefinition('youtube')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strRSS'),
+        new  PropertyDefinition('rss')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strDescriptionEN'),
+        new  PropertyDefinition('description')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strBanner'),
+        new  PropertyDefinition('banner')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strBadge'),
+        new  PropertyDefinition('badge')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strLogo'),
+        new  PropertyDefinition('logo')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strPoster'),
+        new  PropertyDefinition('poster')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strTrophy'),
+        new  PropertyDefinition('trophy')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strNaming'),
+        new  PropertyDefinition('naming')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strLocked'),
+        new  PropertyDefinition('locked')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('seasons'),
+        new  PropertyDefinition('seasons', 'season', TRUE),
+        [self::class, 'transformSeasons'],
+        [Season::class, 'reverseArray']
+      );
+    // idSoccerXML
+    // strDescriptionDE
+    // strDescriptionFR
+    // strDescriptionIT
+    // strDescriptionCN
+    // strDescriptionJP
+    // strDescriptionRU
+    // strDescriptionES
+    // strDescriptionPT
+    // strDescriptionSE
+    // strDescriptionNL
+    // strDescriptionHU
+    // strDescriptionNO
+    // strDescriptionPL
+    // strFanart1
+    // strFanart2
+    // strFanart3
+    // strFanart4
+  }
+
 }

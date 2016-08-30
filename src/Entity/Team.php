@@ -7,6 +7,7 @@
 namespace TheSportsDb\Entity;
 
 use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\PropertyMapper\PropertyDefinition;
 
 /**
  * A fully loaded team object.
@@ -16,68 +17,9 @@ use TheSportsDb\Entity\EntityManagerInterface;
 class Team extends Entity implements TeamInterface {
 
   /**
-   * The property map definition.
-   *
-   * @var array
+   * {@inheritdoc}
    */
-  protected static $propertyMapDefinition = array(
-    array('idTeam', 'id'),
-    array('strTeam', 'name'),
-    array('strTeamShort', 'teamShort'),
-    array('strAlternateName', 'alternateName'),
-    array('strFormedYear', 'formedYear'),
-    array('strSport', 'sport', array(
-      array(self::class, 'transformSport'),
-      array(Sport::class, 'reverse'),
-    )),
-    array('idLeague', 'league', array(
-      array(self::class, 'transformLeague'),
-      array(League::class, 'reverse'),
-    )),
-    array('strDivision', 'division'),
-    array('strManager', 'manager'),
-    array('strStadium', 'stadium'),
-    array('strKeywords', 'keywords'),
-    array('strRSS', 'rss'),
-    array('strStadiumThumb', 'stadiumThumb'),
-    array('strStadiumDescription', 'stadiumDescription'),
-    array('strStadiumLocation', 'stadiumLocation'),
-    array('intStadiumCapacity', 'stadiumCapacity'),
-    array('strWebsite', 'website'),
-    array('strFacebook', 'facebook'),
-    array('strTwitter', 'twitter'),
-    array('strInstagram', 'instagram'),
-    array('strDescriptionEN', 'description'),
-    array('strGender', 'gender'),
-    array('strCountry', 'country'),
-    array('strTeamBadge', 'badge'),
-    array('strTeamJersey', 'jersey'),
-    array('strTeamLogo', 'logo'),
-    array('strTeamBanner', 'banner'),
-    array('strYoutube', 'youtube'),
-    array('strLocked', 'locked'),
-    // idSoccerXML
-    // intLoved
-    // strLeague
-    // strDescriptionDE
-    // strDescriptionFR
-    // strDescriptionCN
-    // strDescriptionIT
-    // strDescriptionJP
-    // strDescriptionRU
-    // strDescriptionES
-    // strDescriptionPT
-    // strDescriptionSE
-    // strDescriptionNL
-    // strDescriptionHU
-    // strDescriptionNO
-    // strDescriptionIL
-    // strDescriptionPL
-    // strTeamFanart1
-    // strTeamFanart2
-    // strTeamFanart3
-    // strTeamFanart4
-  );
+  protected static $propertyMapDefinition;
 
   /**
    * The primary identifier.
@@ -519,4 +461,153 @@ class Team extends Entity implements TeamInterface {
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'league', 'idLeague', array('strLeague' => 'strLeague'));
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static function initPropertyMapDefinition() {
+    static::$propertyMapDefinition
+      ->addPropertyMap(
+        new PropertyDefinition('idTeam'),
+        new PropertyDefinition('id')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strTeam'),
+        new PropertyDefinition('name')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strTeamShort'),
+        new PropertyDefinition('teamShort')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strAlternateName'),
+        new PropertyDefinition('alternateName')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strFormedYear'),
+        new PropertyDefinition('formedYear')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strSport'),
+        new PropertyDefinition('sport', 'sport'),
+        [self::class, 'transformSport'],
+        [Sport::class, 'reverse']
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('idLeague'),
+        new PropertyDefinition('league', 'league'),
+        [self::class, 'transformLeague'],
+        [League::class, 'reverse']
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strDivision'),
+        new PropertyDefinition('division')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strManager'),
+        new PropertyDefinition('manager')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strStadium'),
+        new PropertyDefinition('stadium')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strKeywords'),
+        new PropertyDefinition('keywords')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strRSS'),
+        new PropertyDefinition('rss')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strStadiumThumb'),
+        new PropertyDefinition('stadiumThumb')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strStadiumDescription'),
+        new PropertyDefinition('stadiumDescription')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strStadiumLocation'),
+        new PropertyDefinition('stadiumLocation')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('intStadiumCapacity'),
+        new PropertyDefinition('stadiumCapacity')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strWebsite'),
+        new PropertyDefinition('website')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strFacebook'),
+        new PropertyDefinition('facebook')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strTwitter'),
+        new PropertyDefinition('twitter')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strInstagram'),
+        new PropertyDefinition('instagram')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strDescriptionEN'),
+        new PropertyDefinition('description')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strGender'),
+        new PropertyDefinition('gender')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strCountry'),
+        new PropertyDefinition('country')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strTeamBadge'),
+        new PropertyDefinition('badge')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strTeamJersey'),
+        new PropertyDefinition('jersey')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strTeamLogo'),
+        new PropertyDefinition('logo')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strTeamBanner'),
+        new PropertyDefinition('banner')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strYoutube'),
+        new PropertyDefinition('youtube')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strLocked'),
+        new PropertyDefinition('locked')
+      );
+      // idSoccerXML
+      // intLoved
+      // strLeague
+      // strDescriptionDE
+      // strDescriptionFR
+      // strDescriptionCN
+      // strDescriptionIT
+      // strDescriptionJP
+      // strDescriptionRU
+      // strDescriptionES
+      // strDescriptionPT
+      // strDescriptionSE
+      // strDescriptionNL
+      // strDescriptionHU
+      // strDescriptionNO
+      // strDescriptionIL
+      // strDescriptionPL
+      // strTeamFanart1
+      // strTeamFanart2
+      // strTeamFanart3
+      // strTeamFanart4
+  }
+
 }

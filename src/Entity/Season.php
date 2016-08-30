@@ -7,6 +7,7 @@
 namespace TheSportsDb\Entity;
 
 use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\PropertyMapper\PropertyDefinition;
 
 /**
  * A fully loaded season object.
@@ -16,25 +17,9 @@ use TheSportsDb\Entity\EntityManagerInterface;
 class Season extends Entity implements SeasonInterface {
 
   /**
-   * The property map definition.
-   *
-   * @var array
+   * {@inheritdoc}
    */
-  protected static $propertyMapDefinition = array(
-    array('strSeason', 'id', array(
-      array(self::class, 'transformId'),
-      array(self::class, 'reverseId'),
-    )),
-    array('strSeason', 'name'),
-    array('idLeague', 'league', array(
-      array(self::class, 'transformLeague'),
-      array(League::class, 'reverse'),
-    )),
-    array('events', 'events', array(
-      array(self::class, 'transformEvents'),
-      array(Event::class, 'reverseArray'),
-    )),
-  );
+  protected static $propertyMapDefinition;
 
   /**
    * The primary identifier.
@@ -160,4 +145,34 @@ class Season extends Entity implements SeasonInterface {
     $id = explode('|', $value);
     return reset($id);
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static function initPropertyMapDefinition() {
+    static::$propertyMapDefinition
+      ->addPropertyMap(
+        new PropertyDefinition('strSeason'),
+        new PropertyDefinition('id'),
+        [self::class, 'transformId'],
+        [self::class, 'reverseId']
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strSeason'),
+        new PropertyDefinition('name')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('idLeague'),
+        new PropertyDefinition('league', 'league'),
+        [self::class, 'transformLeague'],
+        [League::class, 'reverse']
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('events'),
+        new PropertyDefinition('events', 'event', TRUE),
+        [self::class, 'transformEvents'],
+        [Event::class, 'reverseArray']
+      );
+  }
+
 }

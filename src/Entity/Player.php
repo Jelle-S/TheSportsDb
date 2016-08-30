@@ -7,6 +7,7 @@
 namespace TheSportsDb\Entity;
 
 use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\PropertyMapper\PropertyDefinition;
 
 /**
  * A fully loaded player object.
@@ -16,65 +17,9 @@ use TheSportsDb\Entity\EntityManagerInterface;
 class Player extends Entity implements PlayerInterface {
 
   /**
-   * The property map definition.
-   *
-   * @var array
+   * {@inheritdoc}
    */
-  protected static $propertyMapDefinition = array(
-    array('idPlayer', 'id'),
-    array('idTeam', 'team', array(
-      array(self::class, 'transformTeam'),
-      array(Team::class, 'reverse'),
-    )),
-    array('strNationality', 'nationality'),
-    array('strPlayer', 'name'),
-    array('strSport', 'sport', array(
-      array(self::class, 'transformSport'),
-      array(Sport::class, 'reverse'),
-    )),
-    array('dateBorn', 'birthDay'), // transform to date
-    array('dateSigned', 'dateSigned'), // transform to date
-    array('strSigning', 'signing'),
-    array('strWage', 'wage'),
-    array('strBirthLocation', 'birthLocation'),
-    array('strDescriptionEN', 'description'),
-    array('strGender', 'gender'),
-    array('strPosition', 'position'),
-    array('strFacebook', 'facebook'),
-    array('strWebsite', 'website'),
-    array('strTwitter', 'strTwitter'),
-    array('strInstagram', 'instagram'),
-    array('strYoutube', 'youtube'),
-    array('strHeight', 'height'),
-    array('strWeight', 'weight'),
-    array('strThumb', 'thumb'),
-    array('strCutout', 'strCutout'),
-    array('strLocked', 'locked'),
-    // strTeam
-    // idSoccerXML
-    // idPlayerManager
-    // intSoccerXMLTeamID
-    // strDescriptionDE
-    // strDescriptionFR
-    // strDescriptionCN
-    // strDescriptionIT
-    // strDescriptionJP
-    // strDescriptionRU
-    // strDescriptionES
-    // strDescriptionPT
-    // strDescriptionSE
-    // strDescriptionNL
-    // strDescriptionHU
-    // strDescriptionNO
-    // strDescriptionIL
-    // strDescriptionPL
-    // strCollege
-    // intLoved
-    // strFanart1
-    // strFanart2
-    // strFanart3
-    // strFanart4
-  );
+  protected static $propertyMapDefinition;
 
   /**
    * The primary identifier.
@@ -431,4 +376,132 @@ class Player extends Entity implements PlayerInterface {
   public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'sport', 'strSport');
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static function initPropertyMapDefinition() {
+    static::$propertyMapDefinition
+      ->addPropertyMap(
+        new PropertyDefinition('idPlayer'),
+        new PropertyDefinition('id')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('idTeam'),
+        new PropertyDefinition('team'),
+        [self::class, 'transformTeam'],
+        [Team::class, 'reverse']
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strNationality'),
+        new PropertyDefinition('nationality')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strPlayer'),
+        new PropertyDefinition('name')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strSport'),
+        new PropertyDefinition('sport', 'sport'),
+        [self::class, 'transformSport'],
+        [Sport::class, 'reverse']
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('dateBorn'),
+        new PropertyDefinition('birthDay') // transform to date
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('dateSigned'),
+        new PropertyDefinition('dateSigned') // transform to date
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strSigning'),
+        new PropertyDefinition('signing')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strWage'),
+        new PropertyDefinition('wage')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strBirthLocation'),
+        new PropertyDefinition('birthLocation')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strDescriptionEN'),
+        new PropertyDefinition('description')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strGender'),
+        new PropertyDefinition('gender')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strPosition'),
+        new PropertyDefinition('position')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strFacebook'),
+        new PropertyDefinition('facebook')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strWebsite'),
+        new PropertyDefinition('website')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strTwitter'),
+        new PropertyDefinition('strTwitter')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strInstagram'),
+        new PropertyDefinition('instagram')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strYoutube'),
+        new PropertyDefinition('youtube')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strHeight'),
+        new PropertyDefinition('height')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strWeight'),
+        new PropertyDefinition('weight')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strThumb'),
+        new PropertyDefinition('thumb')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strCutout'),
+        new PropertyDefinition('strCutout')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strLocked'),
+        new PropertyDefinition('locked')
+      );
+      // strTeam
+      // idSoccerXML
+      // idPlayerManager
+      // intSoccerXMLTeamID
+      // strDescriptionDE
+      // strDescriptionFR
+      // strDescriptionCN
+      // strDescriptionIT
+      // strDescriptionJP
+      // strDescriptionRU
+      // strDescriptionES
+      // strDescriptionPT
+      // strDescriptionSE
+      // strDescriptionNL
+      // strDescriptionHU
+      // strDescriptionNO
+      // strDescriptionIL
+      // strDescriptionPL
+      // strCollege
+      // intLoved
+      // strFanart1
+      // strFanart2
+      // strFanart3
+      // strFanart4
+  }
+
 }

@@ -32,7 +32,7 @@ class SportProxy extends Proxy implements SportInterface {
    * @return void
    */
   protected function loadLeagues() {
-    $leagueData = $this->sportsDbClient->doRequest('search_all_leagues.php', array('s' => urlencode(strtolower($this->properties->id))));
+    $leagueData = $this->sportsDbClient->doRequest('search_all_leagues.php', array('s' => $this->properties->id));
     if (isset($leagueData->countrys)) {
       $this->update($this->entityManager->mapProperties((object) array('leagues' => $leagueData->countrys), $this->getEntityType()));
       return;

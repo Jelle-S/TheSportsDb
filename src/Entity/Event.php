@@ -7,6 +7,7 @@
 namespace TheSportsDb\Entity;
 
 use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\PropertyMapper\PropertyDefinition;
 
 /**
  * A fully loaded event object.
@@ -16,73 +17,9 @@ use TheSportsDb\Entity\EntityManagerInterface;
 class Event extends Entity implements EventInterface {
 
   /**
-   * The property map definition.
-   *
-   * @var array
+   * {@inheritdoc}
    */
-  protected static $propertyMapDefinition = array(
-    array('idEvent', 'id'),
-    array('strEvent', 'name'),
-    array('strFilename', 'filename'),
-    array('idLeague', 'league', array(
-      array(self::class, 'transformLeague'),
-      array(League::class, 'reverse'),
-    )),
-    array('strSeason', 'season', array(
-      array(self::class, 'transformSeason'),
-      array(Season::class, 'reverse'),
-    )),
-    array('strDescriptionEN', 'description'),
-    array('intHomeScore', 'homeScore'),
-    array('intRound', 'round'),
-    array('intAwayScore', 'awayScore'),
-    array('intSpectators', 'spectators'),
-    array('strHomeGoalDetails', 'homeGoalDetails'),
-    array('strHomeRedCards', 'homeRedCards'),
-    array('strHomeYellowCards', 'homeYellowCards'),
-    array('strHomeLineupGoalkeeper', 'homeLineupGoalkeeper'),
-    array('strHomeLineupDefense', 'homeLineupDefense'),
-    array('strHomeLineupMidfield', 'homeLineupMidfield'),
-    array('strHomeLineupForward', 'homeLineupForward'),
-    array('strHomeLineupSubstitutes', 'homeLineupSubstitutes'),
-    array('strHomeLineupFormation', 'homeLineupFormation'),
-    array('intHomeShots', 'homeShots'),
-    array('strAwayGoalDetails', 'awayGoalDetails'),
-    array('strAwayRedCards', 'awayRedCards'),
-    array('strAwayYellowCards', 'awayYellowCards'),
-    array('strAwayLineupGoalkeeper', 'awayLineupGoalkeeper'),
-    array('strAwayLineupDefense', 'awayLineupDefense'),
-    array('strAwayLineupMidfield', 'awayLineupMidfield'),
-    array('strAwayLineupForward', 'awayLineupForward'),
-    array('strAwayLineupSubstitutes', 'awayLineupSubstitutes'),
-    array('strAwayLineupFormation', 'awayLineupFormation'),
-    array('intAwayShots', 'awayShots'),
-    array('dateEvent', 'date'/*, map dateEvent and strTime to date*/),
-    array('strTVStation', 'tvStation'),
-    array('idHomeTeam', 'homeTeam', array(
-      array(self::class, 'transformHomeTeam'),
-      array(Team::class, 'reverse'),
-    )),
-    array('idAwayTeam', 'awayTeam', array(
-      array(self::class, 'transformAwayTeam'),
-      array(Team::class, 'reverse'),
-    )),
-    array('strResult', 'result'),
-    array('strCircuit', 'circuit'),
-    array('strCountry', 'country'),
-    array('strCity', 'city'),
-    array('strPoster', 'poster'),
-    array('strThumb', 'thumb'),
-    array('strBanner', 'banner'),
-    array('strMap', 'map'),
-    array('strLocked', 'locked'),
-    // idSoccerXML
-    // strLeague
-    // strHomeTeam
-    // strAwayTeam
-    // strFanart
-    // strTime
-  );
+  protected static $propertyMapDefinition;
 
   /**
    * The primary identifier.
@@ -307,7 +244,19 @@ class Event extends Entity implements EventInterface {
    * @var string
    */
   protected $tvStation;
+
+  /**
+   * The home team.
+   *
+   * @var \TheSportsDb\Entity\TeamInterface
+   */
   protected $homeTeam;
+
+  /**
+   * The away team.
+   *
+   * @var \TheSportsDb\Entity\TeamInterface
+   */
   protected $awayTeam;
 
   /**
@@ -745,4 +694,198 @@ class Event extends Entity implements EventInterface {
   public static function transformAwayTeam($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'team', 'idTeam', array('strAwayTeam' => 'strTeam'));
   }
+
+  /**
+   * {@inhertidoc}
+   */
+  protected static function initPropertyMapDefinition() {
+    static::$propertyMapDefinition
+      ->addPropertyMap(
+        new PropertyDefinition('idEvent'),
+        new PropertyDefinition('id')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strEvent'),
+        new PropertyDefinition('name')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strFilename'),
+        new PropertyDefinition('filename')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('idLeague'),
+        new PropertyDefinition('league', 'league'),
+        [static::class, 'transformLeague'],
+        [League::class, 'reverse']
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strSeason'),
+        new PropertyDefinition('season', 'season'),
+        [static::class, 'transformSeason'],
+        [Season::class, 'reverse']
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strDescriptionEN'),
+        new PropertyDefinition('description')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('intHomeScore'),
+        new PropertyDefinition('homeScore')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('intRound'),
+        new PropertyDefinition('round')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('intAwayScore'),
+        new PropertyDefinition('awayScore')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('intSpectators'),
+        new PropertyDefinition('spectators')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strHomeGoalDetails'),
+        new PropertyDefinition('homeGoalDetails')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strHomeRedCards'),
+        new PropertyDefinition('homeRedCards')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strHomeYellowCards'),
+        new PropertyDefinition('homeYellowCards')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strHomeLineupGoalkeeper'),
+        new PropertyDefinition('homeLineupGoalkeeper')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strHomeLineupDefense'),
+        new PropertyDefinition('homeLineupDefense')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strHomeLineupMidfield'),
+        new PropertyDefinition('homeLineupMidfield')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strHomeLineupForward'),
+        new PropertyDefinition('homeLineupForward')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strHomeLineupSubstitutes'),
+        new PropertyDefinition('homeLineupSubstitutes')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strHomeLineupFormation'),
+        new PropertyDefinition('homeLineupFormation')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('intHomeShots'),
+        new PropertyDefinition('homeShots')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strAwayGoalDetails'),
+        new PropertyDefinition('awayGoalDetails')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strAwayRedCards'),
+        new PropertyDefinition('awayRedCards')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strAwayYellowCards'),
+        new PropertyDefinition('awayYellowCards')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strAwayLineupGoalkeeper'),
+        new PropertyDefinition('awayLineupGoalkeeper')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strAwayLineupDefense'),
+        new PropertyDefinition('awayLineupDefense')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strAwayLineupMidfield'),
+        new PropertyDefinition('awayLineupMidfield')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strAwayLineupForward'),
+        new PropertyDefinition('awayLineupForward')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strAwayLineupSubstitutes'),
+        new PropertyDefinition('awayLineupSubstitutes')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strAwayLineupFormation'),
+        new PropertyDefinition('awayLineupFormation')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('intAwayShots'),
+        new PropertyDefinition('awayShots')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('dateEvent'),
+        new PropertyDefinition('date')
+      )/* todo: map dateEvent and strTime to date*/
+      ->addPropertyMap(
+        new PropertyDefinition('strTVStation'),
+        new PropertyDefinition('tvStation')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('idHomeTeam'),
+        new PropertyDefinition('homeTeam', 'team'),
+        [static::class, 'transformHomeTeam'],
+        [Team::class, 'reverse']
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('idAwayTeam'),
+        new PropertyDefinition('awayTeam', 'team'),
+        [self::class, 'transformAwayTeam'],
+        [Team::class, 'reverse']
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strResult'),
+        new PropertyDefinition('result')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strCircuit'),
+        new PropertyDefinition('circuit')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strCountry'),
+        new PropertyDefinition('country')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strCity'),
+        new PropertyDefinition('city')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strPoster'),
+        new PropertyDefinition('poster')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strThumb'),
+        new PropertyDefinition('thumb')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strBanner'),
+        new PropertyDefinition('banner')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strMap'),
+        new PropertyDefinition('map')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strLocked'),
+        new PropertyDefinition('locked')
+      );
+      // idSoccerXML
+      // strLeague
+      // strHomeTeam
+      // strAwayTeam
+      // strFanart
+      // strTime
+  }
+
 }

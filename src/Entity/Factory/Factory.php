@@ -47,6 +47,7 @@ class Factory implements FactoryInterface {
    * {@inheritdoc}
    */
   public function create(\stdClass $values, $entityType) {
+    $this->entityManager->sanitizeValues($values, $entityType);
     // Check if we should return a proxy or a full entity.
     $reflection = !$this->entityManager->isFullObject($values, $entityType) ?
         new \ReflectionClass($this->entityManager->getClass($entityType, 'proxy'))

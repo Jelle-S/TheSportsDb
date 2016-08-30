@@ -10,6 +10,7 @@ use FastNorth\PropertyMapper\Map;
 use FastNorth\PropertyMapper\MapperInterface;
 use TheSportsDb\Entity\Factory\FactoryContainerInterface;
 use TheSportsDb\Entity\Repository\RepositoryContainerInterface;
+use TheSportsDb\PropertyMapper\PropertyDefinition;
 use TheSportsDb\PropertyMapper\Transformer\Callback;
 
 /**
@@ -173,10 +174,10 @@ class EntityManager implements EntityManagerInterface {
    */
   public function mapProperties(\stdClass $values, $entityType) {
     $mapped = new \stdClass();
-    foreach ($this->getPropertyMapDefinition($entityType) as $propertyDefinition) {
-      $mapped->{$propertyDefinition[1]} = NULL;
-      if (!isset($values->{$propertyDefinition[0]})) {
-        $values->{$propertyDefinition[0]} = static::EMPTYPROPERTYPLACEHOLDER;
+    foreach ($this->getPropertyMapDefinition($entityType)->getPropertyMaps() as $map) {
+      $mapped->{$map->getDestination()->getName()} = NULL;
+      if (!isset($values->{$map->getSource()->getName()})) {
+        $values->{$map->getSource()->getName()} = static::EMPTYPROPERTYPLACEHOLDER;
       }
     }
     return $this->sanitizeObject($this->propertyMapper->process($values, $mapped, $this->getPropertyMap($entityType)));
@@ -188,12 +189,12 @@ class EntityManager implements EntityManagerInterface {
    */
   public function reverseMapProperties(\stdClass $values, $entityType) {
     $reversed = new \stdClass();
-    foreach ($this->getPropertyMapDefinition($entityType) as $propertyDefinition) {
-      if (!isset($reversed->{$propertyDefinition[0]})) {
-        $reversed->{$propertyDefinition[0]} = static::EMPTYPROPERTYPLACEHOLDER;
+    foreach ($this->getPropertyMapDefinition($entityType)->getPropertyMaps() as $map) {
+      if (!isset($reversed->{$map->getSource()->getName()})) {
+        $reversed->{$map->getSource()->getName()} = static::EMPTYPROPERTYPLACEHOLDER;
       }
-      if (!isset($values->{$propertyDefinition[1]})) {
-        $values->{$propertyDefinition[1]} = static::EMPTYPROPERTYPLACEHOLDER;
+      if (!isset($values->{$map->getDestination()->getName()})) {
+        $values->{$map->getDestination()->getName()} = static::EMPTYPROPERTYPLACEHOLDER;
       }
     }
     return $this->sanitizeObject($this->propertyMapper->reverse($reversed, $values, $this->getPropertyMap($entityType)));
@@ -223,11 +224,15 @@ class EntityManager implements EntityManagerInterface {
   protected function initPropertyMap($entityType) {
     $this->propertyMaps[$entityType] = new Map();
     $entityManager = $this;
-    foreach ($this->getPropertyMapDefinition($entityType) as $args) {
-      if (isset($args[2]) && is_array($args[2])) {
-        $transform = $args[2][0];
-        $reverse = $args[2][1];
-        $args[2] = new Callback(
+    foreach ($this->getPropertyMapDefinition($entityType)->getPropertyMaps() as $map) {
+      $args = [
+        $map->getSource()->getName(),
+        $map->getDestination()->getName(),
+      ];
+      if ($map->getTransform()) {
+        $transform = $map->getTransform();
+        $reverse = $map->getReverse();
+        $args[] = new Callback(
 
           /**
            * @param string $value
@@ -290,15 +295,45 @@ class EntityManager implements EntityManagerInterface {
   }
 
   /**
-   * Check if a value is considered to be empty.
-   *
-   * @param mixed $value
-   *   The value to check.
-   *
-   * @return bool
-   *   Whether or not this value is considered to be empty.
+   * {@inheritdoc}
    */
   public function isEmptyValue($value) {
     return $value === static::EMPTYPROPERTYPLACEHOLDER;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function sanitizeValues(\stdClass &$values, $entityType) {
+    foreach ($this->getPropertyMapDefinition($entityType)->getPropertyMaps() as $map) {
+      $this->sanitizeProperty($values, $map->getDestination());
+    }
+  }
+
+  /**
+   * Helper function for sanitizeValues.
+   *
+   * @param \stdClass $object
+   *   The object of which to sanitize the property.
+   * @param PropertyDefinition $property
+   *   The property definition of the property to sanitize.
+   *
+   * @return void
+   */
+  protected function sanitizeProperty(\stdClass &$object, PropertyDefinition $property) {
+    if (($propType = $property->getEntityType()) && isset($object->{$property->getName()})) {
+      $value = &$object->{$property->getName()};
+      if ($property->isArray()) {
+        foreach ($value as &$val) {
+          if ($val instanceof EntityInterface) {
+            continue;
+          }
+          $val = $this->factory($propType)->create($val, $propType);
+        }
+      }
+      elseif (!($value instanceof EntityInterface)) {
+        $value = $this->factory($propType)->create($value, $propType);
+      }
+    }
   }
 }

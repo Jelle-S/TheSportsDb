@@ -31,7 +31,8 @@ class SeasonProxy extends Proxy implements SeasonInterface {
    * @return void
    */
   protected function loadEvents() {
-    $eventData = $this->sportsDbClient->doRequest('eventsseason.php', array('id' => $this->getLeague()->getId(), 's' => $this->getId()));
+    $id = explode('|', $this->getId());
+    $eventData = $this->sportsDbClient->doRequest('eventsseason.php', array('id' => $this->getLeague()->getId(), 's' => reset($id)));
     if (isset($eventData->events)) {
       $this->update($this->entityManager->mapProperties((object) array('events' => $eventData->events), $this->getEntityType()));
       return;

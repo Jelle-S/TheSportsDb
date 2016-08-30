@@ -7,6 +7,7 @@
 namespace TheSportsDb\Entity;
 
 use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\PropertyMapper\PropertyDefinition;
 
 /**
  * A fully loaded sport object.
@@ -16,18 +17,9 @@ use TheSportsDb\Entity\EntityManagerInterface;
 class Sport extends Entity implements SportInterface {
 
   /**
-   * The property map definition.
-   *
-   * @var array
+   * {@inheritdoc}
    */
-  protected static $propertyMapDefinition = array(
-    array('strSport', 'id'),
-    array('strSport', 'name'),
-    array('leagues', 'leagues', array(
-      array(self::class, 'transformLeagues'),
-      array(League::class, 'reverseArray'),
-    )),
-  );
+  protected static $propertyMapDefinition;
 
   /**
    * The primary identifier.
@@ -100,4 +92,26 @@ class Sport extends Entity implements SportInterface {
     }
     return $mappedLeagues;
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected static function initPropertyMapDefinition() {
+    static::$propertyMapDefinition
+      ->addPropertyMap(
+        new PropertyDefinition('strSport'),
+        new PropertyDefinition('id')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('strSport'),
+        new PropertyDefinition('name')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('leagues'),
+        new PropertyDefinition('leagues', 'league', TRUE),
+        [self::class, 'transformLeagues'],
+        [League::class, 'reverseArray']
+      );
+  }
+
 }

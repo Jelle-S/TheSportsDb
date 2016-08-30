@@ -1,4 +1,7 @@
 <?php
+
+include_once __DIR__ . '/vendor/autoload.php';
+
 if (!defined('THESPORTSDB_API_KEY')) {
   define('THESPORTSDB_API_KEY', '1');
 }
