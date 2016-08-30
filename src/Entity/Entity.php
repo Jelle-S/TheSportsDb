@@ -84,7 +84,7 @@ abstract class Entity implements EntityInterface {
    * {@inheritdoc}
    */
   public static function getPropertyMapDefinition() {
-    if (!isset(static::$propertyMapDefinition))  {
+    if (!isset(static::$propertyMapDefinition)) {
       static::$propertyMapDefinition = new PropertyMapDefinition();
       static::initPropertyMapDefinition();
     }

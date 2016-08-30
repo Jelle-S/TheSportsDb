@@ -21,6 +21,10 @@ class PropertyDefinition {
 
   protected $isArray;
 
+  /**
+   * @param string $name
+   * @param string $entityType
+   */
   public function __construct($name, $entityType = NULL, $isArray = FALSE) {
     $this->name = $name;
     $this->entityType = $entityType;
