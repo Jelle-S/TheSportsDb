@@ -39,7 +39,7 @@ class SportRepository extends Repository implements SportRepositoryInterface {
     $data = $this->sportsDbClient->doRequest('all_leagues.php');
     foreach ($data->leagues as $league) {
       if (!isset($this->repository[$league->strSport])) {
-        $factory =  $this->entityManager->factory($this->getEntityTypeName());
+        $factory = $this->entityManager->factory($this->getEntityTypeName());
         $this->repository[$league->strSport] = $factory->create(
           (object) array('id' => $league->strSport, 'name' => $league->strSport),
           $this->getEntityTypeName()
