@@ -15,6 +15,11 @@ use TheSportsDb\Entity\EntityManagerInterface;
  */
 class Player extends Entity implements PlayerInterface {
 
+  /**
+   * The property map definition.
+   *
+   * @var array
+   */
   protected static $propertyMapDefinition = array(
     array('idPlayer', 'id'),
     array('idTeam', 'team', array(
@@ -71,28 +76,165 @@ class Player extends Entity implements PlayerInterface {
     // strFanart4
   );
 
+  /**
+   * The primary identifier.
+   *
+   * @var mixed
+   */
   protected $id;
+
+  /**
+   * The team.
+   *
+   * @var \TheSportsDb\Entity\TeamInterface
+   */
   protected $team;
+
+  /**
+   * The nationality.
+   *
+   * @var string
+   */
   protected $nationality;
+
+  /**
+   * The name.
+   *
+   * @var string
+   */
   protected $name;
+
+  /**
+   * The sport.
+   *
+   * @var \TheSportsDb\Entity\SportInterface
+   */
   protected $sport;
+
+  /**
+   * The birthday.
+   *
+   * @var string
+   */
   protected $birthDay;
+
+  /**
+   * The date this player signed.
+   *
+   * @var string
+   */
   protected $dateSigned;
+
+  /**
+   * The amount this player signed for.
+   *
+   * @var string
+   */
   protected $signing;
+
+  /**
+   * The wage.
+   *
+   * @var string
+   */
   protected $wage;
+
+  /**
+   * The birth location.
+   *
+   * @var string
+   */
   protected $birthLocation;
+
+  /**
+   * The description.
+   *
+   * @var string
+   */
   protected $description;
+
+  /**
+   * The gender.
+   *
+   * @var string
+   */
   protected $gender;
+
+  /**
+   * The position.
+   *
+   * @var string
+   */
   protected $position;
+
+  /**
+   * The facebook URL.
+   *
+   * @var string
+   */
   protected $facebook;
+
+  /**
+   * The website URL.
+   *
+   * @var string
+   */
   protected $website;
+
+  /**
+   * The twitter profile URL.
+   *
+   * @var string
+   */
   protected $twitter;
+
+  /**
+   * The instagram URL.
+   *
+   * @var string
+   */
   protected $instagram;
+
+  /**
+   * The youtube URL.
+   *
+   * @var string
+   */
   protected $youtube;
+
+  /**
+   * The height.
+   *
+   * @var float
+   */
   protected $height;
+
+  /**
+   * The weight.
+   *
+   * @var float
+   */
   protected $weight;
+
+  /**
+   * The thumbnail URL.
+   *
+   * @var string
+   */
   protected $thumb;
+
+  /**
+   * The cutout URL.
+   *
+   * @var string
+   */
   protected $cutout;
+
+  /**
+   * Whether this player is locked or not.
+   *
+   * @var string
+   */
   protected $locked;
 
   /**
@@ -256,10 +398,36 @@ class Player extends Entity implements PlayerInterface {
     return $this->locked;
   }
 
+  /**
+   * Transforms the team property to a team entity.
+   *
+   * @param mixed $value
+   *   The source value of the team property.
+   * @param \stdClass $context
+   *   The source object representing this player.
+   * @param EntityManagerInterface $entityManager
+   *   The entity manager.
+   *
+   * @return \TheSportsDb\Entity\TeamInterface
+   *   The team entity.
+   */
   public static function transformTeam($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'team', 'idTeam', array('strTeam' => 'strTeam'));
   }
 
+  /**
+   * Transforms the sport property to a sport entity.
+   *
+   * @param mixed $value
+   *   The source value of the sport property.
+   * @param \stdClass $context
+   *   The source object representing this player.
+   * @param EntityManagerInterface $entityManager
+   *   The entity manager.
+   *
+   * @return \TheSportsDb\Entity\SportInterface
+   *   The sport entity.
+   */
   public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'sport', 'strSport');
   }

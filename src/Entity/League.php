@@ -15,6 +15,11 @@ use TheSportsDb\Entity\EntityManagerInterface;
  */
 class League extends Entity implements LeagueInterface {
 
+  /**
+   * The property map definition.
+   *
+   * @var array
+   */
   protected static $propertyMapDefinition = array(
     array('idLeague', 'id'),
     array('strLeague', 'name'),
@@ -64,29 +69,163 @@ class League extends Entity implements LeagueInterface {
     // strFanart4
   );
 
+  /**
+   * The primary identifier.
+   *
+   * @var mixed
+   */
   protected $id;
+
+  /**
+   * The name.
+   *
+   * @var string
+   */
   protected $name;
+
+  /**
+   * The sport
+   *
+   * @var \TheSportsDb\Entity\SportInterface
+   */
   protected $sport;
+
+  /**
+   * The alternate name.
+   *
+   * @var string
+   */
   protected $alternateName;
+
+  /**
+   * The year the league was formed.
+   *
+   * @var int
+   */
   protected $formedYear;
+
+  /**
+   * The date of the first event.
+   *
+   * @var string
+   */
   protected $dateFirstEvent;
+
+  /**
+   * The gender.
+   *
+   * @var string
+   */
   protected $gender;
+
+  /**
+   * The country.
+   *
+   * @var string
+   */
   protected $country;
+
+  /**
+   * The website URL.
+   *
+   * @var string
+   */
   protected $website;
+
+  /**
+   * The facebook URL.
+   *
+   * @var string
+   */
   protected $facebook;
+
+  /**
+   * The twitter URL.
+   *
+   * @var string
+   */
   protected $twitter;
+
+  /**
+   * The youtube URL.
+   *
+   * @var string
+   */
   protected $youtube;
+
+  /**
+   * The RSS URL.
+   *
+   * @var string
+   */
   protected $rss;
+
+  /**
+   * The description.
+   *
+   * @var string
+   */
   protected $description;
+
+  /**
+   * The banner URL.
+   *
+   * @var string
+   */
   protected $banner;
+
+  /**
+   * The badge URL.
+   *
+   * @var string
+   */
   protected $badge;
+
+  /**
+   * The logo URL.
+   *
+   * @var string
+   */
   protected $logo;
+
+  /**
+   * The poster URL.
+   *
+   * @var string
+   */
   protected $poster;
+
+  /**
+   * The trophy URL.
+   *
+   * @var string
+   */
   protected $trophy;
+
+  /**
+   * The event naming pattern.
+   *
+   * @var string
+   */
   protected $naming;
+
+  /**
+   * Whether or not the league is locked.
+   *
+   * @var string
+   */
   protected $locked;
+
+  /**
+   * The seasons.
+   *
+   * @var \TheSportsDb\Entity\SeasonInterface[]
+   */
   protected $seasons = array();
 
+  /**
+   * {@inheritdoc}
+   */
   public function getId() {
     return $this->id;
   }
@@ -239,26 +378,38 @@ class League extends Entity implements LeagueInterface {
   }
 
   /**
+   * Transforms the sport property to a sport entity.
    *
-   * @param type $value
-   * @param type $context
+   * @param mixed $value
+   *   The source value of the sport property.
+   * @param \stdClass $context
+   *   The source object representing this league.
    * @param EntityManagerInterface $entityManager
-   * @return type
+   *   The entity manager.
+   *
+   * @return \TheSportsDb\Entity\SportInterface
+   *   The sport entity.
    */
   public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'sport', 'strSport');
   }
 
   /**
+   * Transforms the seasons property to season entities.
    *
-   * @param type $value
-   * @param type $context
+   * @param array $values
+   *   The source value of the seasons property.
+   * @param \stdClass $context
+   *   The source object representing this league.
    * @param EntityManagerInterface $entityManager
-   * @return type
+   *   The entity manager.
+   *
+   * @return \TheSportsDb\Entity\SeasonInterface[]
+   *   The season entities.
    */
-  public static function transformSeasons($value, $context, EntityManagerInterface $entityManager) {
+  public static function transformSeasons($values, $context, EntityManagerInterface $entityManager) {
     $mappedSeasons = array();
-    foreach ($value as $season) {
+    foreach ($values as $season) {
       $id = $season->strSeason . '|' . $season->idLeague;
       $mappedSeasons[] = $entityManager->repository('season')->byId($id);
     }

@@ -14,6 +14,7 @@ use TheSportsDb\Entity\EntityManagerConsumerInterface;
  * @author Jelle Sebreghts
  */
 interface FactoryInterface extends EntityManagerConsumerInterface {
+
   /**
    * Creates a sportsdb entity object based on given values.
    *

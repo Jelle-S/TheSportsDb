@@ -15,17 +15,13 @@ namespace TheSportsDb\Entity;
 class EntityPropertyUtil {
 
   /**
-   * getRawValue
-   * Insert description here
+   * Get the raw value of any value.
    *
-   * @param $val
+   * @param mixed $val
+   *   The value to get the raw value of.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return mixed
+   *   The raw value.
    */
   public static function getRawValue($val) {
     $return = $val;

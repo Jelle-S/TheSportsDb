@@ -15,58 +15,34 @@ namespace TheSportsDb\Entity;
 interface SeasonInterface extends EntityInterface {
 
   /**
-   * getId
-   * Insert description here
+   * Gets the primary identifier.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return int
+   *   The primary identifier.
    */
   public function getId();
 
   /**
-   * getName
-   * Insert description here
+   * Gets the name
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The name.
    */
   public function getName();
 
   /**
-   * getEvents
-   * Insert description here
+   * Gets the events of this season.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events of this season.
    */
   public function getEvents();
 
   /**
-   * getLeague
-   * Insert description here
+   * Gets the league of this season.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\LeagueInterface
+   *   The league of this season.
    */
   public function getLeague();
 }

@@ -29,16 +29,10 @@ class TheSportsDb implements EntityManagerConsumerInterface {
   }
 
   /**
-   * getSports
-   * Insert description here
+   * Gets all sports.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\SportInterface[]
+   *   The sports.
    */
   public function getSports() {
     return $this->entityManager->repository('sport')->all();
@@ -51,22 +45,17 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    *   The sport name.
    *
    * @return \TheSportsDb\Entity\SportInterface
+   *   The sport.
    */
   public function getSport($name) {
     return $this->entityManager->repository('sport')->byId($name);
   }
 
   /**
-   * getLeagues
-   * Insert description here
+   * Gets all leagues.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\LeagueInterface[]
+   *   The leagues.
    */
   public function getLeagues() {
     return $this->entityManager->repository('league')->all();
@@ -79,460 +68,365 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    *   The league id.
    *
    * @return \TheSportsDb\Entity\LeagueInterface
+   *   The league.
    */
   public function getLeague($leagueId) {
     return $this->entityManager->repository('league')->byId($leagueId);
   }
 
   /**
-   * getLeaguesByCountry
-   * Insert description here
+   * Gets all leagues by country.
    *
-   * @param $country
+   * @param string $country
+   *   The country of which to get the leagues.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\LeagueInterface[]
+   *   The leagues.
    */
   public function getLeaguesByCountry($country) {
     return $this->entityManager->repository('league')->byCountry($country);
   }
 
   /**
-   * getLeaguesBySport
-   * Insert description here
+   * Gets all leagues by sport.
    *
-   * @param $sport
+   * @param mixed $sport
+   *   The sport of which to get the leagues.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\LeagueInterface[]
+   *   The leagues.
    */
   public function getLeaguesBySport($sport) {
     return $this->entityManager->repository('league')->bySport($sport);
   }
 
   /**
-   * getLeaguesByCountryAndSport
-   * Insert description here
+   * Gets all leagues by country and sport.
    *
-   * @param $country
-   * @param $sport
+   * @param string $country
+   *   The country of which to get the leagues.
+   * @param mixed $sport
+   *   The sport of which to get the leagues.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\LeagueInterface[]
+   *   The leagues.
    */
   public function getLeaguesByCountryAndSport($country, $sport) {
     return $this->entityManager->repository('league')->byCountryAndSport($country, $sport);
   }
 
   /**
-   * getTeam
-   * Insert description here
+   * Gets a team by id.
    *
-   * @param $teamId
+   * @param mixed $teamId
+   *   The team id.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\TeamInterface
+   *   The team.
    */
   public function getTeam($teamId) {
     return $this->entityManager->repository('team')->byId($teamId);
   }
 
-    /**
-     * getTeamByName
-     * Insert description here
-     *
-     * @param $teamName
-     *
-     * @return
-     *
-     * @access
-     * @static
-     * @see
-     * @since
-     */
-    public function getTeamByName($teamName) {
+  /**
+   * Gets a team by name.
+   *
+   * @param string $teamName
+   *   The team name.
+   *
+   * @return \TheSportsDb\Entity\TeamInterface
+   *   The team.
+   */
+  public function getTeamByName($teamName) {
     return $this->entityManager->repository('team')->byName($teamName);
   }
 
   /**
-   * getTeamsByLeague
-   * Insert description here
+   * Gets a teams by league id.
    *
-   * @param $leagueId
+   * @param mixed $leagueId
+   *   The league id.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\TeamInterface[]
+   *   The teams.
    */
   public function getTeamsByLeague($leagueId) {
     return $this->entityManager->repository('team')->byLeague($leagueId);
   }
 
   /**
-   * getTeamsByLeagueName
-   * Insert description here
+   * Gets a teams by league name.
    *
-   * @param $leagueName
+   * @param string $leagueName
+   *   The league name.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\TeamInterface[]
+   *   The teams.
    */
   public function getTeamsByLeagueName($leagueName) {
     return $this->entityManager->repository('team')->byLeagueName($leagueName);
   }
 
   /**
-   * getTeamsBySportAndCountry
-   * Insert description here
+   * Gets a teams by sport and country.
    *
-   * @param $sport
-   * @param $country
+   * @param mixed $sport
+   *   The sport.
+   * @param string $country
+   *   The country.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\TeamInterface[]
+   *   The teams.
    */
   public function getTeamsBySportAndCountry($sport, $country) {
     return $this->entityManager->repository('team')->bySportAndCountry($sport, $country);
   }
 
   /**
-   * getPlayer
-   * Insert description here
+   * Get a player by id.
    *
-   * @param $playerId
+   * @param mixed $playerId
+   *   The player id.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\PlayerInterface
+   *   The player.
    */
   public function getPlayer($playerId) {
     return $this->entityManager->repository('player')->byId($playerId);
   }
 
   /**
-   * getPlayersByTeam
-   * Insert description here
+   * Get a players by team id.
    *
-   * @param $teamId
+   * @param mixed $teamId
+   *   The team id.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\PlayerInterface[]
+   *   The players.
    */
   public function getPlayersByTeam($teamId) {
     return $this->entityManager->repository('player')->byTeam($teamId);
   }
 
   /**
-   * getPlayersByTeamName
-   * Insert description here
+   * Get a players by team name.
    *
-   * @param $teamName
+   * @param mixed $teamName
+   *   The team name.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\PlayerInterface[]
+   *   The players.
    */
   public function getPlayersByTeamName($teamName) {
     return $this->entityManager->repository('player')->byTeamName($teamName);
   }
 
   /**
-   * getPlayersByName
-   * Insert description here
+   * Get a players by name.
    *
-   * @param $teamName
+   * @param mixed $name
+   *   The name.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\PlayerInterface[]
+   *   The players.
    */
-  public function getPlayersByName($teamName) {
-    return $this->entityManager->repository('player')->byName($teamName);
+  public function getPlayersByName($name) {
+    return $this->entityManager->repository('player')->byName($name);
   }
 
   /**
-   * getPlayersByTeamNameAndName
-   * Insert description here
+   * Get a players by team and name.
    *
-   * @param $teamName
-   * @param $name
+   * @param string $teamName
+   *   The team name.
+   * @param string $name.
+   *   The name.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\PlayerInterface[]
+   *   The players.
    */
   public function getPlayersByTeamNameAndName($teamName, $name) {
     return $this->entityManager->repository('player')->byTeamNameAndName($teamName, $name);
   }
 
   /**
-   * getEvent
-   * Insert description here
+   * Get an event by id.
    *
-   * @param $eventId
+   * @param mixed $eventId
+   *   The event id.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface
+   *   The event.
    */
   public function getEvent($eventId) {
     return $this->entityManager->repository('event')->byId($eventId);
   }
 
   /**
-   * getEventsByName
-   * Insert description here
+   * Get events by name.
    *
-   * @param $name
+   * @param string $eventName
+   *   The event name.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events.
    */
   public function getEventsByName($name) {
     return $this->entityManager->repository('event')->byName($name);
   }
 
   /**
-   * getEventsByFileName
-   * Insert description here
+   * Get events by file name.
    *
-   * @param $name
+   * @param string $name
+   *   The file name.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events.
    */
   public function getEventsByFileName($name) {
     return $this->entityManager->repository('event')->byFileName($name);
   }
 
   /**
-   * getEventsByNameAndSeason
-   * Insert description here
+   * Get events by name and season.
    *
-   * @param $name
-   * @param $season
+   * @param string $name
+   *   The event name.
+   * @param mixed $season
+   *   The season.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events.
    */
   public function getEventsByNameAndSeason($name, $season) {
     return $this->entityManager->repository('event')->byNameAndSeason($name, $season);
   }
 
   /**
-   * getNextFiveEventsByTeam
-   * Insert description here
+   * Get next five events by team.
    *
-   * @param $teamId
+   * @param mixed $teamId
+   *   The team id.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events.
    */
   public function getNextFiveEventsByTeam($teamId) {
     return $this->entityManager->repository('event')->nextFiveByTeam($teamId);
   }
 
   /**
-   * getNextFifteenEventsByLeague
-   * Insert description here
+   * Get next fifteen events by league.
    *
-   * @param $leagueId
+   * @param mixed $leagueId
+   *   The league id.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events.
    */
   public function getNextFifteenEventsByLeague($leagueId) {
     return $this->entityManager->repository('event')->nextFifteenEventsByLeague($leagueId);
   }
 
   /**
-   * getNextFifteenEventsByLeagueAndRound
-   * Insert description here
+   * Get next fifteen events by league and round.
    *
-   * @param $leagueId
-   * @param $round
+   * @param mixed $leagueId
+   *   The league id.
+   * @param int $round
+   *   The round.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events.
    */
   public function getNextFifteenEventsByLeagueAndRound($leagueId, $round) {
     return $this->entityManager->repository('event')->nextFifteenEventsByLeagueAndRound($leagueId, $round);
   }
 
   /**
-   * getLastFiveEventsByTeam
-   * Insert description here
+   * Get last five events by team.
    *
-   * @param $teamId
+   * @param mixed $teamId
+   *   The team id.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events.
    */
   public function getLastFiveEventsByTeam($teamId) {
     return $this->entityManager->repository('event')->lastFiveByTeam($teamId);
   }
 
   /**
-   * getLastFifteenEventsByLeague
-   * Insert description here
+   * Get last fifteen events by league.
    *
-   * @param $leagueId
+   * @param mixed $leagueId
+   *   The league id.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events.
    */
   public function getLastFifteenEventsByLeague($leagueId) {
     return $this->entityManager->repository('event')->lastFifteenEventsByLeague($leagueId);
   }
 
   /**
-   * getEventsByDay
-   * Insert description here
+   * Get events by day.
    *
-   * @param \
-   * @param DateTime
-   * @param $date
-   * @param $sport
-   * @param $leagueName
+   * @param \DateTime $date
+   *   The day.
+   * @param mixed $sport
+   *   The sport.
+   * @param string $leagueName
+   *   The league name.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events.
    */
   public function getEventsByDay(\DateTime $date, $sport = NULL, $leagueName = NULL) {
     return $this->entityManager->repository('event')->byDay($date, $sport, $leagueName);
   }
 
   /**
-   * getEventsByLeagueRoundAndSeason
-   * Insert description here
+   * Get events by league, round and season.
    *
-   * @param $leagueId
-   * @param $round
-   * @param $season
+   * @param mixed $leagueId
+   *   The league id.
+   * @param int $round
+   *   The round.
+   * @param mixed $season
+   *   The season.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events.
    */
   public function getEventsByLeagueRoundAndSeason($leagueId, $round, $season) {
     return $this->entityManager->repository('event')->byLeagueRoundAndSeason($leagueId, $round, $season);
   }
 
   /**
-   * getEventsByLeagueAndSeason
-   * Insert description here
+   * Get events by league and season.
    *
-   * @param $leagueId
-   * @param $season
+   * @param mixed $leagueId
+   *   The league id.
+   * @param mixed $season
+   *   The season.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\EventInterface[]
+   *   The events.
    */
   public function getEventsByLeagueAndSeason($leagueId, $season) {
     return $this->entityManager->repository('event')->byLeagueAndSeason($leagueId, $season);
   }
 
   /**
-   * getSeasonsByLeague
-   * Insert description here
+   * Get seasons by league.
    *
-   * @param $leagueId
+   * @param mixed $leagueId
+   *   The league id.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\SeasonInterface[]
+   *   The seasons.
    */
   public function getSeasonsByLeague($leagueId) {
     return $this->entityManager->repository('season')->byLeague($leagueId);

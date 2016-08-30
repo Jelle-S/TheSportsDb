@@ -220,6 +220,9 @@ class EntityManager implements EntityManagerInterface {
    * Initializes the property map.
    *
    * @param string $entityType
+   *   The entity type to initialize the property map for.
+   *
+   * @return void
    */
   protected function initPropertyMap($entityType) {
     $this->propertyMaps[$entityType] = new Map();

@@ -79,34 +79,207 @@ class Team extends Entity implements TeamInterface {
     // strTeamFanart4
   );
 
+  /**
+   * The primary identifier.
+   *
+   * @var mixed
+   */
   protected $id;
+
+  /**
+   * The name.
+   *
+   * @var string
+   */
   protected $name;
+
+  /**
+   * The short name.
+   *
+   * @var string
+   */
   protected $teamShort;
+
+  /**
+   * The alternate name
+   *
+   * @var string
+   */
   protected $alternateName;
+
+  /**
+   * The year the team was formed.
+   *
+   * @var int
+   */
   protected $formedYear;
+
+  /**
+   * The sport of this team.
+   *
+   * @var \TheSportsDb\Entity\SportInterface
+   */
   protected $sport;
+
+  /**
+   * The league of this team.
+   *
+   * @var \TheSportsDb\Entity\LeagueInterface
+   */
   protected $league;
+
+  /**
+   * The division.
+   *
+   * @var string
+   */
   protected $division;
+
+  /**
+   * The manager.
+   *
+   * @var string
+   */
   protected $manager;
+
+  /**
+   * The stadium.
+   *
+   * @var string
+   */
   protected $stadium;
+
+  /**
+   * The keywords.
+   *
+   * @var string
+   */
   protected $keywords;
+
+  /**
+   * The URL of the RSS feed.
+   *
+   * @var string
+   */
   protected $rss;
+
+  /**
+   * The URL of the stadium thumbnail.
+   *
+   * @var string
+   */
   protected $stadiumThumb;
+
+  /**
+   * The stadium description.
+   *
+   * @var string
+   */
   protected $stadiumDescription;
+
+  /**
+   * The stadium location.
+   *
+   * @var string
+   */
   protected $stadiumLocation;
+
+  /**
+   * The stadium location.
+   *
+   * @var int
+   */
   protected $stadiumCapacity;
+
+  /**
+   * The URL to the website.
+   *
+   * @var string
+   */
   protected $website;
+
+  /**
+   * The URL to the facebook page.
+   *
+   * @var string
+   */
   protected $facebook;
+
+  /**
+   * The URL to the twitter profile.
+   *
+   * @var string
+   */
   protected $twitter;
+
+  /**
+   * The URL to the instagram page.
+   *
+   * @var string
+   */
   protected $instagram;
+
+  /**
+   * The description.
+   *
+   * @var string
+   */
   protected $description;
+
+  /**
+   * The gender.
+   *
+   * @var string
+   */
   protected $gender;
+
+  /**
+   * The country.
+   *
+   * @var string
+   */
   protected $country;
+
+  /**
+   * The URL to the badge.
+   *
+   * @var string
+   */
   protected $badge;
+
+  /**
+   * The URL to the jersey.
+   *
+   * @var string
+   */
   protected $jersey;
+
+  /**
+   * The URL to the logo.
+   *
+   * @var string
+   */
   protected $logo;
+
+  /**
+   * The URL to the banner.
+   *
+   * @var string
+   */
   protected $banner;
+
+  /**
+   * The URL to the youtube page.
+   *
+   * @var string
+   */
   protected $youtube;
+
+  /**
+   * Whether or not the team is locked.
+   *
+   * @var string
+   */
   protected $locked;
 
   /**
@@ -313,11 +486,17 @@ class Team extends Entity implements TeamInterface {
   }
 
   /**
+   * Transforms the sport property to a sport entity.
    *
-   * @param type $value
-   * @param type $context
+   * @param mixed $value
+   *   The source value of the sport property.
+   * @param \stdClass $context
+   *   The source object representing this team.
    * @param EntityManagerInterface $entityManager
-   * @return type
+   *   The entity manager.
+   *
+   * @return \TheSportsDb\Entity\SportInterface
+   *   The sport entity.
    */
   public static function transformSport($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'sport', 'strSport');
@@ -325,11 +504,17 @@ class Team extends Entity implements TeamInterface {
 
 
   /**
+   * Transforms the league property to a league entity.
    *
-   * @param type $value
-   * @param type $context
+   * @param mixed $value
+   *   The source value of the league property.
+   * @param \stdClass $context
+   *   The source object representing this team.
    * @param EntityManagerInterface $entityManager
-   * @return type
+   *   The entity manager.
+   *
+   * @return \TheSportsDb\Entity\LeagueInterface
+   *   The league entity.
    */
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'league', 'idLeague', array('strLeague' => 'strLeague'));

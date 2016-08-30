@@ -12,6 +12,7 @@ namespace TheSportsDb\Entity\Repository;
  * @author Jelle Sebreghts
  */
 interface LeagueRepositoryInterface extends RepositoryInterface {
+
   /**
    * Load all leagues.
    *

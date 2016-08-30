@@ -14,6 +14,12 @@ use TheSportsDb\Entity\EntityManagerInterface;
  * @author Jelle Sebreghts
  */
 class Season extends Entity implements SeasonInterface {
+
+  /**
+   * The property map definition.
+   *
+   * @var array
+   */
   protected static $propertyMapDefinition = array(
     array('strSeason', 'id', array(
       array(self::class, 'transformId'),
@@ -30,7 +36,18 @@ class Season extends Entity implements SeasonInterface {
     )),
   );
 
+  /**
+   * The primary identifier.
+   *
+   * @var mixed
+   */
   protected $id;
+
+  /**
+   * The name.
+   *
+   * @var string
+   */
   protected $name;
 
   /**
@@ -40,8 +57,16 @@ class Season extends Entity implements SeasonInterface {
    */
   protected $league;
 
+  /**
+   * The events of this season.
+   *
+   * @var \TheSportsDb\Entity\EventInterface[]
+   */
   protected $events = array();
 
+  /**
+   * {@inheritdoc}
+   */
   public function getId() {
     return $this->id;
   }
@@ -68,22 +93,34 @@ class Season extends Entity implements SeasonInterface {
   }
 
   /**
+   * Transforms the league property to a league entity.
    *
-   * @param type $value
-   * @param type $context
+   * @param mixed $value
+   *   The source value of the league property.
+   * @param \stdClass $context
+   *   The source object representing this season.
    * @param EntityManagerInterface $entityManager
-   * @return type
+   *   The entity manager.
+   *
+   * @return \TheSportsDb\Entity\LeagueInterface
+   *   The league entity.
    */
   public static function transformLeague($value, $context, EntityManagerInterface $entityManager) {
     return static::transform($value, $context, $entityManager, 'league', 'idLeague', array('strLeague' => 'strLeague'));
   }
 
   /**
+   * Transforms the events property to event entities.
    *
    * @param array $values
-   * @param type $context
+   *   The source value of the event property.
+   * @param \stdClass $context
+   *   The source object representing this season.
    * @param EntityManagerInterface $entityManager
-   * @return type
+   *   The entity manager.
+   *
+   * @return \TheSportsDb\Entity\EventInterface
+   *   The event entity.
    */
   public static function transformEvents(array $values, $context, EntityManagerInterface $entityManager) {
     $mappedEvents = array();
@@ -94,20 +131,32 @@ class Season extends Entity implements SeasonInterface {
   }
 
   /**
+   * Transforms the id property to a unique identifier.
    *
-   * @param type $value
-   * @param type $context
-   * @return type
+   * @param mixed $value
+   *   The source value of the id property.
+   * @param \stdClass $context
+   *   The source object representing this season.
+   * @param EntityManagerInterface $entityManager
+   *   The entity manager.
+   *
+   * @return string
+   *   The unique identifier.
    */
   public static function transformId($value, $context) {
     return $value . '|' . $context->idLeague;
   }
 
   /**
+   * Reverses the transformation of the id property.
    *
-   * @param type $value
-   * @param type $context
-   * @return type
+   * @param mixed $value
+   *   The source value of the id property.
+   * @param \stdClass $context
+   *   The source object representing this season.
+   *
+   * @return string
+   *   The id property value.
    */
   public static function reverseId($value, $context) {
     $id = explode('|', $value);

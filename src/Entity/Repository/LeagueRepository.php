@@ -14,9 +14,7 @@ namespace TheSportsDb\Entity\Repository;
 class LeagueRepository extends Repository implements LeagueRepositoryInterface {
 
   /**
-   * The entity type for this repository.
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected $entityType = 'league';
 

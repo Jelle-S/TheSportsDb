@@ -15,44 +15,26 @@ namespace TheSportsDb\Entity;
 interface SportInterface extends EntityInterface {
 
   /**
-   * getId
-   * Insert description here
+   * Gets the primary identifier.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return int
+   *   The primary identifier.
    */
   public function getId();
 
   /**
-   * getName
-   * Insert description here
+   * Gets the name
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The name.
    */
   public function getName();
 
   /**
-   * getLeagues
-   * Insert description here
+   * Gets the leagues of this sport.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\LeagueInterface[]
+   *   The leagues of this sport.
    */
   public function getLeagues();
 
@@ -61,6 +43,7 @@ interface SportInterface extends EntityInterface {
    *
    * @param \TheSportsDb\Entity\LeagueInterface $league
    *   The league to add.
+   *
    * @return void
    */
   public function addLeague(LeagueInterface $league);

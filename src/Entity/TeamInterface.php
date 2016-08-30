@@ -240,8 +240,8 @@ interface TeamInterface extends EntityInterface {
   /**
    * Whether this team is locked or not.
    *
-   * @return bool
-   *   Whether or not this team is locked.
+   * @return string
+   *   Returns 'locked' or 'unlocked'.
    */
   public function getLocked();
 }

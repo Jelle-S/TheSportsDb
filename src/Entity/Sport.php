@@ -15,6 +15,11 @@ use TheSportsDb\Entity\EntityManagerInterface;
  */
 class Sport extends Entity implements SportInterface {
 
+  /**
+   * The property map definition.
+   *
+   * @var array
+   */
   protected static $propertyMapDefinition = array(
     array('strSport', 'id'),
     array('strSport', 'name'),
@@ -24,10 +29,30 @@ class Sport extends Entity implements SportInterface {
     )),
   );
 
+  /**
+   * The primary identifier.
+   *
+   * @var mixed
+   */
   protected $id;
+
+  /**
+   * The name.
+   *
+   * @var string
+   */
   protected $name;
+
+  /**
+   * The leagues of this sport.
+   *
+   * @var \TheSportsDb\Entity\LeagueInterface[]
+   */
   protected $leagues = array();
 
+  /**
+   * {@inheritdoc}
+   */
   public function getId() {
     return $this->id;
   }
@@ -56,11 +81,17 @@ class Sport extends Entity implements SportInterface {
   }
 
   /**
+   * Transforms the leagues property to league entities.
    *
-   * @param type $values
-   * @param type $context
+   * @param array $values
+   *   The source value of the leagues property.
+   * @param \stdClass $context
+   *   The source object representing this sport.
    * @param EntityManagerInterface $entityManager
-   * @return type
+   *   The entity manager.
+   *
+   * @return \TheSportsDb\Entity\LeagueInterface[]
+   *   The league entities.
    */
   public static function transformLeagues($values, $context, EntityManagerInterface $entityManager) {
     $mappedLeagues = array();

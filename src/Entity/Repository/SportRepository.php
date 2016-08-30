@@ -13,6 +13,9 @@ namespace TheSportsDb\Entity\Repository;
  */
 class SportRepository extends Repository implements SportRepositoryInterface {
 
+  /**
+   * {@inheritdoc}
+   */
   protected $entityType = 'sport';
 
   /**

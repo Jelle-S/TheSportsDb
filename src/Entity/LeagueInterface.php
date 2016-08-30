@@ -14,310 +14,179 @@ namespace TheSportsDb\Entity;
 interface LeagueInterface extends EntityInterface {
 
   /**
-   * getId
-   * Insert description here
+   * Gets the primary identifier.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return mixed
+   *   The primary identifier.
    */
   public function getId();
 
   /**
-   * getName
-   * Insert description here
+   * Gets the name.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The name.
    */
   public function getName();
 
+
   /**
-   * getSport
-   * Insert description here
+   * Gets the sport.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\SportInterface
+   *   The sport of this team.
    */
   public function getSport();
 
   /**
-   * getAlternateName
-   * Insert description here
+   * Gets the alternate name.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The alternate name.
    */
   public function getAlternateName();
 
   /**
-   * getFormedYear
-   * Insert description here
+   * Gets the year this league was formed.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return int
+   *   The year this league was formed.
    */
   public function getFormedYear();
 
   /**
-   * getDateFirstEvent
-   * Insert description here
+   * Gets the date of the first event.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The date of the first event.
    */
   public function getDateFirstEvent();
 
   /**
-   * getGender
-   * Insert description here
+   * Gets the gender.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The gender.
    */
   public function getGender();
 
   /**
-   * getCountry
-   * Insert description here
+   * Gets the country.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The country.
    */
   public function getCountry();
 
   /**
-   * getWebsite
-   * Insert description here
+   * Gets the website.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The URL to the website of this team.
    */
   public function getWebsite();
 
   /**
-   * getFacebook
-   * Insert description here
+   * Gets the Facebook page.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The URL to the facebook page of this team.
    */
   public function getFacebook();
 
   /**
-   * getTwitter
-   * Insert description here
+   * Gets the Twitter profile page.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The URL to the twitter profile page of this team.
    */
   public function getTwitter();
 
   /**
-   * getYoutube
-   * Insert description here
+   * Gets the youtube URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The URL to the youtube page of this team.
    */
   public function getYoutube();
 
   /**
-   * getRss
-   * Insert description here
+   * Gets the RSS URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The URL to the RSS.
    */
   public function getRss();
 
   /**
-   * getDescription
-   * Insert description here
+   * Gets the description.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The description.
    */
   public function getDescription();
 
   /**
-   * getBanner
-   * Insert description here
+   * Gets the banner.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The URL to the banner.
    */
   public function getBanner();
 
   /**
-   * getBadge
-   * Insert description here
+   * Gets the badge.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The URL to the badge.
    */
   public function getBadge();
 
   /**
-   * getLogo
-   * Insert description here
+   * Gets the logo.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The URL to the logo.
    */
   public function getLogo();
 
   /**
-   * getPoster
-   * Insert description here
+   * Gets the poster.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The URL to the poster.
    */
   public function getPoster();
 
   /**
-   * getTrophy
-   * Insert description here
+   * Gets the trophy.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The URL to the trophy.
    */
   public function getTrophy();
 
   /**
-   * getNaming
-   * Insert description here
+   * Gets the naming pattern for events.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The naming pattern for events.
    */
   public function getNaming();
 
   /**
-   * getLocked
-   * Insert description here
+   * Whether this team is locked or not.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   Returns 'locked' or 'unlocked'.
    */
   public function getLocked();
 
   /**
-   * getSeasons
-   * Insert description here
+   * Gets the seasons.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\SeasonInterface[]
+   *   The seasons.
    */
   public function getSeasons();
 }

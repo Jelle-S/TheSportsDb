@@ -12,6 +12,7 @@ namespace TheSportsDb\Entity\Repository;
  * @author Jelle Sebreghts
  */
 interface SeasonRepositoryInterface extends RepositoryInterface {
+
   /**
    * Loads all seasons.
    *

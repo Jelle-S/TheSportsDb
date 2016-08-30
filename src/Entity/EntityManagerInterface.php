@@ -17,9 +17,10 @@ interface EntityManagerInterface {
    * Returns the repository object for the given entity type.
    *
    * @param string $entityType
+   *   The entity type to get the repository for.
    *
    * @return TheSportsDb\Entity\Repository\EntityRepositoryInterface
-   *   The repositort for the given entity type.
+   *   The repository for the given entity type.
    */
   public function repository($entityType);
 
@@ -27,6 +28,7 @@ interface EntityManagerInterface {
    * Returns the repository object for the given entity type.
    *
    * @param string $entityType
+   *   The entity type to get the factory for.
    *
    * @return Factory\FactoryInterface
    *   The repositort for the given entity type.
@@ -37,8 +39,12 @@ interface EntityManagerInterface {
    * Register real and proxy classes for an entity type.
    *
    * @param string $entityType
+   *   The entity type to register the classes for.
+   *
    * @param string $realClass
+   *   The real class to register.
    * @param string $proxyClass
+   *   The proxy class to register.
    *
    * @return array
    *   The registered classes for this entity type.
@@ -49,7 +55,9 @@ interface EntityManagerInterface {
    * Get the registered class for an entity type.
    *
    * @param string $entityType
+   *   The entity type to get the class for.
    * @param string $type
+   *   The type of class to get 'real' or 'proxy'.
    *
    * @return string
    *   The registered class of the given type for this entity type.

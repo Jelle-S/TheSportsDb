@@ -12,6 +12,7 @@ namespace TheSportsDb\Entity\Factory;
  * @author Jelle Sebreghts
  */
 class FactoryContainer implements FactoryContainerInterface {
+
   /**
    * Storage for factories.
    *

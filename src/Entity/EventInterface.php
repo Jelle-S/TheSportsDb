@@ -14,604 +14,346 @@ namespace TheSportsDb\Entity;
 interface EventInterface extends EntityInterface {
 
   /**
-   * getId
-   * Insert description here
+   * Gets the primary identifier.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return mixed
+   *   The primary identifier.
    */
   public function getId();
 
   /**
-   * getName
-   * Insert description here
+   * Gets the name.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The name.
    */
   public function getName();
 
   /**
-   * getLeague
-   * Insert description here
+   * Gets the league.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\LeagueInterface
+   *   The league.
    */
   public function getLeague();
 
   /**
-   * getFilename
-   * Insert description here
+   * Gets the filename.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The filename.
    */
   public function getFilename();
 
   /**
-   * getSeason
-   * Insert description here
+   * Gets the season.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\SeasonInterface
+   *   The season.
    */
   public function getSeason();
 
   /**
-   * getDescription
-   * Insert description here
+   * Gets the description.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The description.
    */
   public function getDescription();
 
   /**
-   * getHomeScore
-   * Insert description here
+   * Gets the home score.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return int
+   *   The home score.
    */
   public function getHomeScore();
 
   /**
-   * getRound
-   * Insert description here
+   * Gets the round.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return int
+   *   The round.
    */
   public function getRound();
 
   /**
-   * getAwayScore
-   * Insert description here
+   * Gets the away score.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return int
+   *   The away score.
    */
   public function getAwayScore();
 
   /**
-   * getSpecators
-   * Insert description here
+   * Gets the number of specators.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return int
+   *   The number of spectators.
    */
   public function getSpecators();
 
   /**
-   * getHomeGoalDetails
-   * Insert description here
+   * Gets the home goal details.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The home goal details.
    */
   public function getHomeGoalDetails();
 
   /**
-   * getHomeRedCards
-   * Insert description here
+   * Gets the home red cards.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The home red cards.
    */
   public function getHomeRedCards();
 
   /**
-   * getHomeYellowCards
-   * Insert description here
+   * Gets the home yellow cards.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The home yellow cards.
    */
   public function getHomeYellowCards();
 
   /**
-   * getHomeLineupGoalkeeper
-   * Insert description here
+   * Gets the home lineup - goalkeeper.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The home lineup - goalkeeper.
    */
   public function getHomeLineupGoalkeeper();
 
   /**
-   * getHomeLineupDefense
-   * Insert description here
+   * Gets the home lineup - defense.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The home lineup - defense.
    */
   public function getHomeLineupDefense();
 
   /**
-   * getHomeLineupMidfield
-   * Insert description here
+   * Gets the home lineup - midfield.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The home lineup - midfield.
    */
   public function getHomeLineupMidfield();
 
   /**
-   * getHomeLineupForward
-   * Insert description here
+   * Gets the home lineup - forward.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The home lineup - forward.
    */
   public function getHomeLineupForward();
 
   /**
-   * getHomeLineupSubstitues
-   * Insert description here
+   * Gets the home lineup - substitutes.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The home lineup - substitutes.
    */
   public function getHomeLineupSubstitues();
 
   /**
-   * getHomeFormation
-   * Insert description here
+   * Gets the home formation.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The home formation.
    */
   public function getHomeFormation();
 
   /**
-   * getAwayRedCards
-   * Insert description here
+   * Gets the away red cards.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The away red cards.
    */
   public function getAwayRedCards();
 
   /**
-   * getAwayYellowCards
-   * Insert description here
+   * Gets the away yellow cards.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The away yellow cards.
    */
   public function getAwayYellowCards();
 
   /**
-   * getAwayGoalDetails
-   * Insert description here
+   * Gets the away goal details.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The away goal details.
    */
   public function getAwayGoalDetails();
 
   /**
-   * getAwayLineupGoalkeeper
-   * Insert description here
+   * Gets the away lineup - goalkeeper.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The away lineup - goalkeeper.
    */
   public function getAwayLineupGoalkeeper();
 
   /**
-   * getAwayLineupDefense
-   * Insert description here
+   * Gets the away lineup - defense.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The away lineup - defense.
    */
   public function getAwayLineupDefense();
 
   /**
-   * getAwayLineupMidfield
-   * Insert description here
+   * Gets the away lineup - midfield.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The away lineup - midfield.
    */
   public function getAwayLineupMidfield();
 
   /**
-   * getAwayLineupForward
-   * Insert description here
+   * Gets the away lineup - forward.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The away lineup - forward.
    */
   public function getAwayLineupForward();
 
   /**
-   * getAwayLineupSubstitutes
-   * Insert description here
+   * Gets the away lineup - substitutes.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The away lineup - substitutes.
    */
   public function getAwayLineupSubstitutes();
 
   /**
-   * getAwayFormation
-   * Insert description here
+   * Gets the away formation.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The away formation.
    */
   public function getAwayFormation();
 
   /**
-   * getHomeShots
-   * Insert description here
+   * Gets the home shots.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return int
+   *   The home shots.
    */
   public function getHomeShots();
 
   /**
-   * getAwayShots
-   * Insert description here
+   * Gets the away shots.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return int
+   *   The away shots.
    */
   public function getAwayShots();
 
   /**
-   * getDate
-   * Insert description here
+   * Gets the date.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The date.
    */
   public function getDate();
 
   /**
-   * getTvStation
-   * Insert description here
+   * Gets the TV station.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The TV station.
    */
   public function getTvStation();
 
   /**
-   * getHomeTeam
-   * Insert description here
+   * Gets the home team.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\TealInterface
+   *   The home team.
    */
   public function getHomeTeam();
 
   /**
-   * getAwayTeam
-   * Insert description here
+   * Gets the away team.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\TealInterface
+   *   The away team.
    */
   public function getAwayTeam();
 
   /**
-   * getResult
-   * Insert description here
+   * Gets the result.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The result.
    */
   public function getResult();
 
   /**
-   * getCircuit
-   * Insert description here
+   * Gets the circuit.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The circuit.
    */
   public function getCircuit();
 
   /**
-   * getCountry
-   * Insert description here
+   * Gets the country.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The country.
    */
   public function getCountry();
 
   /**
-   * getCity
-   * Insert description here
+   * Gets the city.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The city.
    */
   public function getCity();
 
   /**
-   * getPoster
-   * Insert description here
+   * Gets the poster URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The poster URL.
    */
   public function getPoster();
 
   /**
-   * getThumb
-   * Insert description here
+   * Gets the thumbnail URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The thumbnail URL.
    */
   public function getThumb();
 
   /**
-   * getBanner
-   * Insert description here
+   * Gets the banner URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The banner URL.
    */
   public function getBanner();
 
   /**
-   * getMap
-   * Insert description here
+   * Gets the map URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The map URL.
    */
   public function getMap();
 
   /**
-   * getLocked
-   * Insert description here
+   * Whether this team is locked or not.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   Returns 'locked' or 'unlocked'.
    */
   public function getLocked();
 }

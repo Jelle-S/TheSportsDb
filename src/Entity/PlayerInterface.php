@@ -15,324 +15,186 @@ namespace TheSportsDb\Entity;
 interface PlayerInterface extends EntityInterface {
 
   /**
-   * getId
-   * Insert description here
+   * Gets the primary identifier.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return int
+   *   The primary identifier.
    */
   public function getId();
 
   /**
-   * getTeam
-   * Insert description here
+   * Gets the team of this player.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\TeamInterface
+   *   The team of this player.
    */
   public function getTeam();
 
   /**
-   * getNationality
-   * Insert description here
+   * Gets the nationality.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The nationality.
    */
   public function getNationality();
 
   /**
-   * getName
-   * Insert description here
+   * Gets the name
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The name.
    */
   public function getName();
 
   /**
-   * getSport
-   * Insert description here
+   * Gets the sport of this player.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return \TheSportsDb\Entity\SportInterface
+   *   The sport of this player.
    */
   public function getSport();
 
   /**
-   * getBirthDay
-   * Insert description here
+   * Gets the birthday
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The birthday.
    */
   public function getBirthDay();
 
   /**
-   * getDateSigned
-   * Insert description here
+   * Gets the date this player signed.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The date this player signed.
    */
   public function getDateSigned();
 
   /**
-   * getSigning
-   * Insert description here
+   * Gets the amount the player signed for.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The amount the player signed for.
    */
   public function getSigning();
 
   /**
-   * getWage
-   * Insert description here
+   * Gets the wage.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The wage.
    */
   public function getWage();
 
   /**
-   * getBirthLocation
-   * Insert description here
+   * Gets the birth location.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The birth location.
    */
   public function getBirthLocation();
 
   /**
-   * getDescription
-   * Insert description here
+   * Gets the description.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The description.
    */
   public function getDescription();
 
   /**
-   * getGender
-   * Insert description here
+   * Gets the gender.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The gender.
    */
   public function getGender();
 
   /**
-   * getPosition
-   * Insert description here
+   * Gets the position.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The position.
    */
   public function getPosition();
 
   /**
-   * getFacebook
-   * Insert description here
+   * Gets the facebook URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The facebook URL.
    */
   public function getFacebook();
 
   /**
-   * getWebsite
-   * Insert description here
+   * Gets the website URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The website URL.
    */
   public function getWebsite();
 
   /**
-   * getTwitter
-   * Insert description here
+   * Gets the twitter profile URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The twitte profile URL.
    */
   public function getTwitter();
 
   /**
-   * getInstagram
-   * Insert description here
+   * Gets the instagram URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The instagram URL.
    */
   public function getInstagram();
 
   /**
-   * getYoutube
-   * Insert description here
+   * Gets the youtube URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The youtube URL.
    */
   public function getYoutube();
 
   /**
-   * getHeight
-   * Insert description here
+   * Gets the height.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return float
+   *   The height.
    */
   public function getHeight();
 
   /**
-   * getWeight
-   * Insert description here
+   * Gets the weight.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return float
+   *   The weight.
    */
   public function getWeight();
 
   /**
-   * getThumb
-   * Insert description here
+   * Gets the thumbnail URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The thumbnail URL.
    */
   public function getThumb();
 
   /**
-   * getCutout
-   * Insert description here
+   * Gets the cutout URL.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   The cutout URL.
    */
   public function getCutout();
 
   /**
-   * getLocked
-   * Insert description here
+   * Whether this player is locked or not.
    *
-   *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @return string
+   *   Returns 'locked' or 'unlocked'.
    */
   public function getLocked();
 

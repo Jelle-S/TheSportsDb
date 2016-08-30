@@ -22,18 +22,13 @@ trait EntityManagerConsumerTrait {
   protected $entityManager;
 
   /**
-   * setEntityManager
-   * Insert description here
+   * Set the entity manager.
    *
-   * @param EntityManagerInterface
-   * @param $entityManager
+   * @param \TheSportsDb\Entity\EntityManagerInterface $entityManager
+   *   The entity manager to set.
    *
-   * @return
-   *
-   * @access
-   * @static
-   * @see
-   * @since
+   * @throws \Exception
+   *   If the entity manager is already set.
    */
   public function setEntityManager(EntityManagerInterface $entityManager) {
     if ($this->entityManager instanceof EntityManagerInterface) {
