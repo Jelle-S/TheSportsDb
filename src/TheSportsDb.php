@@ -265,7 +265,7 @@ class TheSportsDb implements EntityManagerConsumerInterface {
   /**
    * Get events by name.
    *
-   * @param string $eventName
+   * @param string $name
    *   The event name.
    *
    * @return \TheSportsDb\Entity\EventInterface[]
