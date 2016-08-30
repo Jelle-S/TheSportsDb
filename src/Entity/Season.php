@@ -137,8 +137,6 @@ class Season extends Entity implements SeasonInterface {
    *   The source value of the id property.
    * @param \stdClass $context
    *   The source object representing this season.
-   * @param EntityManagerInterface $entityManager
-   *   The entity manager.
    *
    * @return string
    *   The unique identifier.
