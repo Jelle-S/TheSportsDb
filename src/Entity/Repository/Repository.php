@@ -56,8 +56,7 @@ abstract class Repository implements RepositoryInterface {
       $factory = $this->entityManager->factory($this->getEntityTypeName());
       $this->repository[$id] = $factory->create(
         (object) array('id' => $id),
-        $this->getEntityTypeName(),
-        FALSE
+        $this->getEntityTypeName()
       );
     }
     return $this->repository[$id];
