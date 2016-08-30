@@ -22,6 +22,8 @@ interface EntityManagerConsumerInterface {
    *
    * @throws \Exception
    *   If the entity manager is already set.
+   *
+   * @return void
    */
   public function setEntityManager(EntityManagerInterface $entityManager);
 }
