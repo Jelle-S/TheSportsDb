@@ -19,6 +19,9 @@ interface FactoryContainerInterface {
    * @param \TheSportsDb\Entity\Factory\FactoryInterface $factory
    *   The factory to add.
    *
+   * @param string $entityType
+   *   The entity type this factory is for.
+   *
    * @return void
    */
   public function addFactory(FactoryInterface $factory, $entityType);
@@ -26,8 +29,8 @@ interface FactoryContainerInterface {
   /**
    * Get the factory for a class.
    *
-   * @param string $class
-   *   The fully qualified classname this factory is for.
+   * @param string $entityType
+   *   The entity type this factory is for.
    *
    * @throws \Exception
    *   When the factory for this class is not registered.
@@ -35,7 +38,7 @@ interface FactoryContainerInterface {
    * @return \TheSportsDb\Entity\Factory\FactoryInterface
    *   The factory for this class.
    */
-  public function getFactory($class);
+  public function getFactory($entityType);
 
   /**
    * Set the default factory to use.

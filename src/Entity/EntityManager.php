@@ -175,8 +175,11 @@ class EntityManager implements EntityManagerInterface {
   public function mapProperties(\stdClass $values, $entityType) {
     $mapped = new \stdClass();
     foreach ($this->getPropertyMapDefinition($entityType)->getPropertyMaps() as $map) {
+      // The property on the destination must exist or it will not map.
       $mapped->{$map->getDestination()->getName()} = NULL;
       if (!isset($values->{$map->getSource()->getName()})) {
+        // If a source property is not set, we must unset it on the destination
+        // later on, so give it a value we can recognize.
         $values->{$map->getSource()->getName()} = static::EMPTYPROPERTYPLACEHOLDER;
       }
     }
@@ -306,34 +309,7 @@ class EntityManager implements EntityManagerInterface {
    */
   public function sanitizeValues(\stdClass &$values, $entityType) {
     foreach ($this->getPropertyMapDefinition($entityType)->getPropertyMaps() as $map) {
-      $this->sanitizeProperty($values, $map->getDestination());
-    }
-  }
-
-  /**
-   * Helper function for sanitizeValues.
-   *
-   * @param \stdClass $object
-   *   The object of which to sanitize the property.
-   * @param PropertyDefinition $property
-   *   The property definition of the property to sanitize.
-   *
-   * @return void
-   */
-  protected function sanitizeProperty(\stdClass &$object, PropertyDefinition $property) {
-    if (($propType = $property->getEntityType()) && isset($object->{$property->getName()})) {
-      $value = &$object->{$property->getName()};
-      if ($property->isArray()) {
-        foreach ($value as &$val) {
-          if ($val instanceof EntityInterface) {
-            continue;
-          }
-          $val = $this->factory($propType)->create($val, $propType);
-        }
-      }
-      elseif (!($value instanceof EntityInterface)) {
-        $value = $this->factory($propType)->create($value, $propType);
-      }
+      $map->getDestination()->sanitizeProperty($values, $this->factoryContainer);
     }
   }
 }

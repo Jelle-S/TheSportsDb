@@ -8,6 +8,9 @@
 
 namespace TheSportsDb\PropertyMapper;
 
+use TheSportsDb\Entity\EntityInterface;
+use TheSportsDb\Entity\Factory\FactoryContainerInterface;
+
 /**
  * Description of Property
  *
@@ -80,5 +83,32 @@ class PropertyDefinition {
    */
   public function isArray() {
     return $this->isArray;
+  }
+
+  /**
+   * Sanitizes an object property based on this definition.
+   *
+   * @param \stdClass $object
+   *   The object of which to sanitize the property.
+   * @param \TheSportsDb\Entity\Factory\FactoryContainerInterface $factoryContainer
+   *   The factory container.
+   *
+   * @return void
+   */
+  protected function sanitizeProperty(\stdClass &$object, FactoryContainerInterface $factoryContainer) {
+    if (($entityType = $this->getEntityType()) && isset($object->{$this->getName()})) {
+      $value = &$object->{$this->getName()};
+      if ($this->isArray()) {
+        foreach ($value as &$val) {
+          if ($val instanceof EntityInterface) {
+            continue;
+          }
+          $val = $factoryContainer->getFactory($entityType)->create($val, $entityType);
+        }
+      }
+      elseif (!($value instanceof EntityInterface)) {
+        $value = $factoryContainer->getFactory($entityType)->create($value, $entityType);
+      }
+    }
   }
 }
