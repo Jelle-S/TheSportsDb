@@ -95,7 +95,7 @@ class PropertyDefinition {
    *
    * @return void
    */
-  protected function sanitizeProperty(\stdClass &$object, FactoryContainerInterface $factoryContainer) {
+  public function sanitizeProperty(\stdClass &$object, FactoryContainerInterface $factoryContainer) {
     if (($entityType = $this->getEntityType()) && isset($object->{$this->getName()})) {
       $value = &$object->{$this->getName()};
       if ($this->isArray()) {
