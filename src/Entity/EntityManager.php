@@ -10,7 +10,6 @@ use FastNorth\PropertyMapper\Map;
 use FastNorth\PropertyMapper\MapperInterface;
 use TheSportsDb\Entity\Factory\FactoryContainerInterface;
 use TheSportsDb\Entity\Repository\RepositoryContainerInterface;
-use TheSportsDb\PropertyMapper\PropertyDefinition;
 use TheSportsDb\PropertyMapper\Transformer\Callback;
 
 /**
