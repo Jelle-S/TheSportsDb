@@ -70,6 +70,5 @@ build:
         coverage:
           file: 'build/logs/clover.xml'
           format: 'clover'
-  build:
   environment:
     php: 7.0.6
