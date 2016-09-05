@@ -63,10 +63,13 @@ coding_style:
       around_operators:
         concatenation: true
 build:
-    tests:
-        override:
-            -
-                command: 'phpunit --coverage-clover build/logs/clover.xml'
-                coverage:
-                    file: 'build/logs/clover.xml'
-                    format: 'clover'
+  tests:
+    override:
+      -
+        command: 'phpunit --coverage-clover build/logs/clover.xml'
+        coverage:
+          file: 'build/logs/clover.xml'
+          format: 'clover'
+  build:
+  environment:
+    php: 7.0.6
