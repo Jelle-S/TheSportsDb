@@ -102,13 +102,13 @@ abstract class Repository implements RepositoryInterface {
    *
    * @see \TheSportsDb\Entity\Repository\Repository::normilizeEntity()
    *
-   * @param \stdClass[] $data
+   * @param \stdClass[]|null $data
    *   The data of the entity.
    *
    * @return \TheSportsDb\Entity\EntityInterface[]
    *   The matched entities.
    */
-  public function normalizeArray(array $data) {
+  public function normalizeArray($data) {
     $normalized = array();
     if ($data) {
       foreach ($data as $raw) {

@@ -134,10 +134,10 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    * @param string $teamName
    *   The team name.
    *
-   * @return \TheSportsDb\Entity\TeamInterface
+   * @return \TheSportsDb\Entity\TeamInterface[]
    *   The team.
    */
-  public function getTeamByName($teamName) {
+  public function getTeamsByName($teamName) {
     return $this->entityManager->repository('team')->byName($teamName);
   }
 

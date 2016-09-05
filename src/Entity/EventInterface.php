@@ -272,7 +272,7 @@ interface EventInterface extends EntityInterface {
   /**
    * Gets the home team.
    *
-   * @return \TheSportsDb\Entity\TealInterface
+   * @return \TheSportsDb\Entity\TeamInterface
    *   The home team.
    */
   public function getHomeTeam();
@@ -280,7 +280,7 @@ interface EventInterface extends EntityInterface {
   /**
    * Gets the away team.
    *
-   * @return \TheSportsDb\Entity\TealInterface
+   * @return \TheSportsDb\Entity\TeamInterface
    *   The away team.
    */
   public function getAwayTeam();

@@ -45,7 +45,7 @@ class SeasonRepository extends Repository implements SeasonRepositoryInterface {
    * {@inheritdoc}
    */
   public function byLeague($leagueId) {
-    $data = $this->sportsDbClient->doRequest('search_all_seasons.php', array('id' => $leagueId))->seasons;
+    $data = $this->sportsDbClient->doRequest('search_all_seasons.php', array('id' => $leagueId))->seasons ?: array();
     foreach ($data as &$season) {
       $season->idLeague = $leagueId;
     }

@@ -96,7 +96,7 @@ abstract class Entity implements EntityInterface {
    *
    * @return void
    */
-  abstract protected static function initPropertyMapDefinition();
+  protected static function initPropertyMapDefinition() {}
 
   /**
    * Reverse map a property that is an entity.

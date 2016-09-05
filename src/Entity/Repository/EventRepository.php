@@ -64,7 +64,7 @@ class EventRepository extends Repository implements EventRepositoryInterface {
    * {@inheritdoc}
    */
   public function lastFiveByTeam($teamId) {
-    return $this->normalizeArray($this->sportsDbClient->doRequest('eventslast.php', array('id' => $teamId))->events);
+    return $this->normalizeArray($this->sportsDbClient->doRequest('eventslast.php', array('id' => $teamId))->results);
   }
 
   /**
