@@ -51,7 +51,9 @@ checks:
     avoid_fixme_comments: true
     align_assignments: true
 
-filter: {  }
+filter:
+    excluded_paths:
+        - tests/*
 coding_style:
   php:
     indentation:
