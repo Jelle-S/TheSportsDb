@@ -114,9 +114,9 @@ class PropertyDefinitionTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * Test TheSportsDb\PropertyMapper\PropertyDefinition::sanitizeProperty with
-   * an array of entities property.
+   * an array property.
    */
-  private function _testSanitizePropertyEntityArray() {
+  private function _testSanitizePropertySimpleArray() {
     // Factory container.
     $factoryContainer = new FactoryContainer();
 
@@ -154,6 +154,49 @@ class PropertyDefinitionTest extends \PHPUnit_Framework_TestCase {
       ->method('create')
       ->with($this->equalTo($data->testProp[1]), $this->equalTo('mockEntityType'))
       ->willReturn($entity2);
+
+    // Test method.
+    $propdef->sanitizeProperty($data, $factoryContainer);
+    $this->assertEquals($entity1, $data->testProp[0]);
+    $this->assertEquals($entity2, $data->testProp[1]);
+  }
+  /**
+   * Test TheSportsDb\PropertyMapper\PropertyDefinition::sanitizeProperty with
+   * an array of entities property.
+   */
+  private function _testSanitizePropertyEntityArray() {
+    // Factory container.
+    $factoryContainer = new FactoryContainer();
+
+    // Array of entities.
+    $propdef = new PropertyDefinition('testProp', 'mockEntityType', TRUE);
+
+    // Data.
+    $data = new \stdClass();
+    $data->testProp = array();
+
+    // Mock entities.
+    $entity1 = $this->getMockBuilder(EntityInterface::class)
+      ->setMockClassName('MockEntity1')
+      ->getMock();
+    $entity2 = $this->getMockBuilder(EntityInterface::class)
+      ->setMockClassName('MockEntity2')
+      ->getMock();
+
+    // Set entities as properties.
+    $data->testProp[0] = $entity1;
+    $data->testProp[1] = $entity2;
+
+    // Mock factory.
+    $factory = $this->getMockBuilder(FactoryInterface::class)
+      ->disableOriginalConstructor()
+      ->getMock();
+    $factoryContainer->addFactory($factory, 'mockEntityType');
+
+
+    // Mock factory create method (should never be called, items are already
+    // entities).
+    $factory->expects($this->never())->method($this->anything());
 
     // Test method.
     $propdef->sanitizeProperty($data, $factoryContainer);
