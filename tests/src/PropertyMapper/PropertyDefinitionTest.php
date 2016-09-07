@@ -51,6 +51,7 @@ class PropertyDefinitionTest extends \PHPUnit_Framework_TestCase {
   public function testSanitizeProperty() {
     $this->_testSanitizePropertySimple();
     $this->_testSanitizePropertyEntity();
+    $this->_testSanitizePropertySimpleArray();
     $this->_testSanitizePropertyEntityArray();
   }
 
