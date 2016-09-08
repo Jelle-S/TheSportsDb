@@ -17,7 +17,7 @@ class EntityPropertyUtilTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('test', EntityPropertyUtil::getRawValue('test'));
 
     // Complex value.
-    $mock = $this->getMockBuilder('MockValueHolder')->setMethods(array('raw'))->getMock();
+    $mock = $this->getMockBuilder('\\stdClass')->setMethods(array('raw'))->getMock();
     $mock->expects($this->once())->method('raw')->willReturn('rawVal');
     $this->assertEquals('rawVal', EntityPropertyUtil::getRawValue($mock));
 
@@ -26,9 +26,9 @@ class EntityPropertyUtilTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals($value, EntityPropertyUtil::getRawValue($value));
 
     // Complex array.
-    $mock1 = $this->getMockBuilder('MockValueHolder1')->setMethods(array('raw'))->getMock();
+    $mock1 = $this->getMockBuilder('\\stdClass')->setMethods(array('raw'))->getMock();
     $mock1->expects($this->once())->method('raw')->willReturn('rawVal1');
-    $mock2 = $this->getMockBuilder('MockValueHolder2')->setMethods(array('raw'))->getMock();
+    $mock2 = $this->getMockBuilder('\\stdClass')->setMethods(array('raw'))->getMock();
     $mock2->expects($this->once())->method('raw')->willReturn('rawVal2');
     $values = array($mock1, $mock2);
     $expected = array('rawVal1', 'rawVal2');
