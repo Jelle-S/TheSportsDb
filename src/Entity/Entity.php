@@ -52,7 +52,7 @@ abstract class Entity implements EntityInterface {
       $methodName = $method->getName();
       if (strpos($methodName, 'get') === 0) {
         $prop = lcfirst(substr($methodName, 3));
-        if ($reflection->hasProperty($prop)) {
+        if (property_exists($this, $prop)) {
           $val = $this->{$methodName}();
           $this->_raw->{$prop} = EntityPropertyUtil::getRawValue($val);
         }
