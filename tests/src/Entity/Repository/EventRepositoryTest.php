@@ -34,7 +34,8 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\EventRepository::byName
-   * @todo   Implement testByName().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testByName() {
     $events = $this->eventRepository->byName('Arsenal vs');
@@ -53,7 +54,8 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\EventRepository::byFileName
-   * @todo   Implement testByFileName().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testByFileName() {
     $events = $this->eventRepository->byFileName('English Premier League');
@@ -72,7 +74,8 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\EventRepository::byNameAndSeason
-   * @todo   Implement testByNameAndSeason().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testByNameAndSeason() {
     $events = $this->eventRepository->byNameAndSeason('Arsenal vs', '1415');
@@ -100,7 +103,8 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\EventRepository::nextFiveByTeam
-   * @todo   Implement testNextFiveByTeam().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testNextFiveByTeam() {
     $events = $this->eventRepository->nextFiveByTeam(133604);
@@ -121,7 +125,8 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\EventRepository::nextFifteenByLeague
-   * @todo   Implement testNextFifteenByLeague().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testNextFifteenByLeague() {
     $events = $this->eventRepository->nextFifteenByLeague(4328);
@@ -141,7 +146,8 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\EventRepository::nextFifteenByLeagueAndRound
-   * @todo   Implement testNextFifteenByLeagueAndRound().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testNextFifteenByLeagueAndRound() {
     $events = $this->eventRepository->nextFifteenByLeagueAndRound(4328, 38);
@@ -162,7 +168,8 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\EventRepository::lastFiveByTeam
-   * @todo   Implement testLastFiveByTeam().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testLastFiveByTeam() {
     $events = $this->eventRepository->lastFiveByTeam(133604);
@@ -183,7 +190,8 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\EventRepository::lastFifteenByLeague
-   * @todo   Implement testLastFifteenByLeague().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testLastFifteenByLeague() {
     $events = $this->eventRepository->lastFifteenByLeague(4328);
@@ -203,7 +211,8 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\EventRepository::byDay
-   * @todo   Implement testByDay().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testByDay() {
     $day = new DateTime();
@@ -264,7 +273,8 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\EventRepository::byLeagueRoundAndSeason
-   * @todo   Implement testByLeagueRoundAndSeason().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testByLeagueRoundAndSeason() {
     $events = $this->eventRepository->byLeagueRoundAndSeason(4328, 38, '1415');
@@ -309,7 +319,8 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\EventRepository::byLeagueAndSeason
-   * @todo   Implement testByLeagueAndSeason().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testByLeagueAndSeason() {
     $events = $this->eventRepository->byLeagueAndSeason(4328, '1415');

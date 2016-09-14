@@ -62,6 +62,8 @@ class SeasonRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\SeasonRepository::byLeague
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testByLeague() {
     $seasons = $this->seasonRepository->byLeague(4328);

@@ -33,6 +33,8 @@ class TeamRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\TeamRepository::byName
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testByName() {
     $teams = $this->teamRepository->byName('Arsenal');
@@ -51,6 +53,8 @@ class TeamRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\TeamRepository::byLeagueName
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testByLeagueName() {
     $teams = $this->teamRepository->byLeagueName('English Premier League');
@@ -69,7 +73,8 @@ class TeamRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\TeamRepository::bySportAndCountry
-   * @todo   Implement testBySportAndCountry().
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testBySportAndCountry() {
     $teams = $this->teamRepository->bySportAndCountry('Soccer', 'Belgium');
@@ -96,6 +101,8 @@ class TeamRepositoryTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\Repository\TeamRepository::byLeague
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeArray
+   * @covers TheSportsDb\Entity\Repository\Repository::normalizeEntity
    */
   public function testByLeague() {
     $teams = $this->teamRepository->byLeague(4328);
