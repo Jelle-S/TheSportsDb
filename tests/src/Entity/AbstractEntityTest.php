@@ -38,17 +38,17 @@ abstract class AbstractEntityTest extends \PHPUnit_Framework_TestCase {
     foreach ($reflection->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
       if (strpos($method->getName(), 'get') === 0 && $method->getNumberOfParameters() === 0 && !$method->isStatic()) {
         $prop = lcfirst(substr($method->getName(), 3));
-        if ($reflection->hasProperty($prop)) {
-          $this->getters[$prop] = $method->getName();
-        }
+        $this->getters[$prop] = $method->getName();
       }
     }
   }
 
   protected function initTestValues() {
     $this->testValues = new \stdClass();
-    foreach (array_keys($this->getters) as $property) {
-      $this->testValues->{$property} = $this->getTestValue();
+    if ($this->getters) {
+      foreach (array_keys($this->getters) as $property) {
+        $this->testValues->{$property} = $this->getTestValue();
+      }
     }
   }
 
