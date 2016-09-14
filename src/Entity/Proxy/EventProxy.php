@@ -205,7 +205,7 @@ class EventProxy extends Proxy implements EventInterface {
   /**
    * {@inheritdoc}
    */
-  public function getHomeLineupSubstitues() {
+  public function getHomeLineupSubstitutes() {
     return $this->get('homeLineupSubstitutes');
   }
 

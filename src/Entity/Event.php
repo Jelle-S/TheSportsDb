@@ -444,7 +444,7 @@ class Event extends Entity implements EventInterface {
   /**
    * {@inheritdoc}
    */
-  public function getHomeLineupSubstitues() {
+  public function getHomeLineupSubstitutes() {
     return $this->homeLineupSubstitues;
   }
 

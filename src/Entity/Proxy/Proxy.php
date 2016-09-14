@@ -100,7 +100,7 @@ abstract class Proxy implements ProxyInterface {
       return $this->entity->{'get' . ucfirst($name)}();
     }
 
-        // If the property exists on the proxy, use it.
+    // If the property exists on the proxy, use it.
     if (isset($this->properties->{$name})) {
       return $this->properties->{$name};
     }

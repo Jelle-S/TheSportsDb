@@ -155,7 +155,7 @@ interface EventInterface extends EntityInterface {
    * @return string
    *   The home lineup - substitutes.
    */
-  public function getHomeLineupSubstitues();
+  public function getHomeLineupSubstitutes();
 
   /**
    * Gets the home formation.
