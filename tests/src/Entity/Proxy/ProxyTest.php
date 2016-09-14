@@ -72,7 +72,6 @@ class ProxyTest extends \PHPUnit_Framework_TestCase {
    * @covers TheSportsDb\Entity\Entity::getEntityType
    */
   public function testGetEntityType() {
-    $this->assertEquals('proxy', Proxy::getEntityType());
     $this->assertEquals('sport', SportProxy::getEntityType());
     $this->assertEquals('league', LeagueProxy::getEntityType());
   }
