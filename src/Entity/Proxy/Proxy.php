@@ -54,8 +54,13 @@ abstract class Proxy implements ProxyInterface {
    * {@inheritdoc}
    */
   public function update(\stdClass $values) {
+    if ($this->entity instanceof EntityInterface) {
+      $this->entity->update($values);
+      return;
+    }
     foreach ((array) $values as $prop => $val) {
       if (method_exists($this, 'get' . ucfirst($prop))) {
+        print 'setting prop ' . $prop;
         $this->properties->{$prop} = $val;
       }
     }
@@ -158,7 +163,8 @@ abstract class Proxy implements ProxyInterface {
    */
   public static function getPropertyMapDefinition() {
     $selfReflection = new \ReflectionClass(static::class);
-    $reflection = new \ReflectionClass('\\TheSportsDb\\Entity\\' . substr($selfReflection->getShortName(), 0, -5));
+    $namespace = substr($selfReflection->getNamespaceName(), 0, -5);
+    $reflection = new \ReflectionClass($namespace . substr($selfReflection->getShortName(), 0, -5));
     return $reflection->getMethod('getPropertyMapDefinition')->invoke(NULL);
   }
 }
