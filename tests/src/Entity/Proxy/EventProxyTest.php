@@ -29,7 +29,7 @@ class EventProxyTest extends AbstractEntityTest {
    * @covers TheSportsDb\Entity\Proxy\EventProxy::getHomeLineupDefense
    * @covers TheSportsDb\Entity\Proxy\EventProxy::getHomeLineupMidfield
    * @covers TheSportsDb\Entity\Proxy\EventProxy::getHomeLineupForward
-   * @covers TheSportsDb\Entity\Proxy\EventProxy::getHomeLineupSubstitues
+   * @covers TheSportsDb\Entity\Proxy\EventProxy::getHomeLineupSubstitutes
    * @covers TheSportsDb\Entity\Proxy\EventProxy::getHomeFormation
    * @covers TheSportsDb\Entity\Proxy\EventProxy::getAwayRedCards
    * @covers TheSportsDb\Entity\Proxy\EventProxy::getAwayYellowCards

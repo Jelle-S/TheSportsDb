@@ -27,7 +27,7 @@ class EventTest extends AbstractEntityTest {
    * @covers TheSportsDb\Entity\Event::getHomeLineupDefense
    * @covers TheSportsDb\Entity\Event::getHomeLineupMidfield
    * @covers TheSportsDb\Entity\Event::getHomeLineupForward
-   * @covers TheSportsDb\Entity\Event::getHomeLineupSubstitues
+   * @covers TheSportsDb\Entity\Event::getHomeLineupSubstitutes
    * @covers TheSportsDb\Entity\Event::getHomeFormation
    * @covers TheSportsDb\Entity\Event::getAwayRedCards
    * @covers TheSportsDb\Entity\Event::getAwayYellowCards
