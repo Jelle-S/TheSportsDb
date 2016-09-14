@@ -60,7 +60,6 @@ abstract class Proxy implements ProxyInterface {
     }
     foreach ((array) $values as $prop => $val) {
       if (method_exists($this, 'get' . ucfirst($prop))) {
-        print 'setting prop ' . $prop;
         $this->properties->{$prop} = $val;
       }
     }
