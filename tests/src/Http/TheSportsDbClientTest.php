@@ -33,6 +33,7 @@ class TheSportsDbClientTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Http\TheSportsDbClient::doRequest
+   * @covers TheSportsDb\Http\TheSportsDbClient::getBaseUrl
    */
   public function testDoRequest() {
     $result = $this->client->doRequest('all_leagues.php');
