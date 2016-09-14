@@ -145,7 +145,7 @@ class Event extends Entity implements EventInterface {
    *
    * @var string
    */
-  protected $homeLineupSubstitues;
+  protected $homeLineupSubstitutes;
 
   /**
    * The home formation.
@@ -445,7 +445,7 @@ class Event extends Entity implements EventInterface {
    * {@inheritdoc}
    */
   public function getHomeLineupSubstitutes() {
-    return $this->homeLineupSubstitues;
+    return $this->homeLineupSubstitutes;
   }
 
   /**
