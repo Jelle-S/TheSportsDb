@@ -5,7 +5,7 @@ namespace TheSportsDb\Test\Entity;
 use TheSportsDb\Entity\Entity;
 
 /**
- * Test stub class form entity.
+ * Test stub class for entity.
  *
  * @author Jelle Sebreghts
  */

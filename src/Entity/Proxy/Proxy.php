@@ -157,7 +157,8 @@ abstract class Proxy implements ProxyInterface {
    * {@inheritdoc}
    */
   public static function getPropertyMapDefinition() {
-    $reflection = new \ReflectionClass(substr(static::class, 0, -5));
-    return $reflection->getStaticPropertyValue('propertyMapDefinition');
+    $selfReflection = new \ReflectionClass(static::class);
+    $reflection = new \ReflectionClass('\\TheSportsDb\\Entity\\' . substr($selfReflection->getShortName(), 0, -5));
+    return $reflection->getMethod('getPropertyMapDefinition')->invoke(NULL);
   }
 }

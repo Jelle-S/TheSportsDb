@@ -27,7 +27,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase {
    * This method is called before a test is executed.
    */
   protected function setUp() {
-    $this->entity = $this->getMockBuilder('\\TheSportsDb\\Entity\Entity')
+    $this->entity = $this->getMockBuilder('\\TheSportsDb\\Entity\\Entity')
       ->disableOriginalConstructor()
       ->setMethods(array('getId', 'getName'))
       ->getMock();
