@@ -31,7 +31,7 @@ class TeamProxy extends Proxy implements TeamInterface {
    * {@inheritdoc}
    */
   public function getAlternateName() {
-    return $this->get('AlternateName');
+    return $this->get('alternateName');
   }
 
   /**
