@@ -95,20 +95,16 @@ abstract class Proxy implements ProxyInterface {
    *   The property value.
    */
   protected function get($name) {
-    print "Getting $name \n";
     // If the full entity is loaded, use it.
     if ($this->entity instanceof EntityInterface) {
-      print "On entity \n";
       return $this->entity->{'get' . ucfirst($name)}();
     }
 
-    print "On properties \n";
     // If the property exists on the proxy, use it.
     if (isset($this->properties->{$name})) {
       return $this->properties->{$name};
     }
 
-    print "On loading \n";
     // The property does not exist on the proxy, and the entity is not loaded in
     // full yet, so load it first and repeat the operation.
     method_exists($this, 'load' . ucfirst($name)) ? $this->{'load' . ucfirst($name)}() : $this->load();
