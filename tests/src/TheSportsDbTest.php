@@ -169,7 +169,7 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
    */
   public function testGetTeam() {
     $team = $this->db->getTeam(133604);
-    // Should be a sport.
+    // Should be a team.
     $this->assertInstanceOf(TeamInterface::class, $team);
     $this->assertEquals('Arsenal', $team->getName());
 
@@ -179,7 +179,7 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
     $this->assertInstanceOf(TeamInterface::class, $team);
     $this->assertEquals('FakeTeam123', $team->getId());
 
-    // Sport doesn't exist, so exception when we try to load its teams.
+    // Team doesn't exist, so exception when we try to load its name.
     $this->expectException(\Exception::class);
     $this->expectExceptionMessage('Could not fully load team with id FakeTeam123.');
     $team->getName();
@@ -553,7 +553,6 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
    * @covers TheSportsDb\TheSportsDb::getEventsByDay
    */
   public function testGetEventsByDay() {
-    //http://www.thesportsdb.com/api/v1/json/1/eventsday.php?d=2014-10-10
     $day = new \DateTime();
     $day->setDate(2014, 1, 13);
     $events = $this->db->getEventsByDay($day);
@@ -690,7 +689,7 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
     $this->assertNotEmpty($seasons);
 
     foreach ($seasons as $season) {
-      // Should be an event.
+      // Should be a season.
       $this->assertInstanceOf(SeasonInterface::class, $season);
       $this->assertEquals(4328, $season->getLeague()->getId());
     }

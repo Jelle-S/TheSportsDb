@@ -83,7 +83,7 @@ interface EventRepositoryInterface extends RepositoryInterface {
    * @return \TheSportsDb\Entity\EventInterface[]
    *   An array of matched events.
    */
-  public function nextFifteenEventsByLeague($leagueId);
+  public function nextFifteenByLeague($leagueId);
 
   /**
    * Load the next fifteen events by league and round.
@@ -96,7 +96,7 @@ interface EventRepositoryInterface extends RepositoryInterface {
    * @return \TheSportsDb\Entity\EventInterface[]
    *   An array of matched events.
    */
-  public function nextFifteenEventsByLeagueAndRound($leagueId, $round);
+  public function nextFifteenByLeagueAndRound($leagueId, $round);
 
   /**
    * Load the last five events by team.
@@ -118,7 +118,7 @@ interface EventRepositoryInterface extends RepositoryInterface {
    * @return \TheSportsDb\Entity\EventInterface[]
    *   An array of matched events.
    */
-  public function lastFifteenEventsByLeague($leagueId);
+  public function lastFifteenByLeague($leagueId);
 
   /**
    * Load events by league, round and season.

@@ -19,7 +19,7 @@ class SeasonProxy extends Proxy implements SeasonInterface {
    * {@inheritdoc}
    */
   protected function load() {
-    throw new \Exception('Could not fully load season with id ' . $this->getId() . ' and league id ' . $this->getLeague()->getId() . '.');
+    throw new \Exception('Could not fully load season with id ' . $this->getId() . '.');
   }
 
   /**
@@ -37,7 +37,7 @@ class SeasonProxy extends Proxy implements SeasonInterface {
       $this->update($this->entityManager->mapProperties((object) array('events' => $eventData->events), $this->getEntityType()));
       return;
     }
-    throw new \Exception('Could not fully load season with id ' . $this->getId() . ' and league id ' . $this->getLeague()->getId() . '.');
+    throw new \Exception('Could not fully load season with id ' . $this->getId() . '.');
   }
 
   /**

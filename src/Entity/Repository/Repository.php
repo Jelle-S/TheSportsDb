@@ -108,7 +108,7 @@ abstract class Repository implements RepositoryInterface {
    * @return \TheSportsDb\Entity\EntityInterface[]
    *   The matched entities.
    */
-  public function normalizeArray($data) {
+  protected function normalizeArray($data) {
     $normalized = array();
     if ($data) {
       foreach ($data as $raw) {

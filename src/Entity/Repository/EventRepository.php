@@ -49,14 +49,14 @@ class EventRepository extends Repository implements EventRepositoryInterface {
   /**
    * {@inheritdoc}
    */
-  public function nextFifteenEventsByLeague($leagueId) {
+  public function nextFifteenByLeague($leagueId) {
     return $this->normalizeArray($this->sportsDbClient->doRequest('eventsnextleague.php', array('id' => $leagueId))->events);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function nextFifteenEventsByLeagueAndRound($leagueId, $round) {
+  public function nextFifteenByLeagueAndRound($leagueId, $round) {
     return $this->normalizeArray($this->sportsDbClient->doRequest('eventsnextleague.php', array('id' => $leagueId, 'r' => $round))->events);
   }
 
@@ -70,7 +70,7 @@ class EventRepository extends Repository implements EventRepositoryInterface {
   /**
    * {@inheritdoc}
    */
-  public function lastFifteenEventsByLeague($leagueId) {
+  public function lastFifteenByLeague($leagueId) {
     return $this->normalizeArray($this->sportsDbClient->doRequest('eventspastleague.php', array('id' => $leagueId))->events);
   }
 
