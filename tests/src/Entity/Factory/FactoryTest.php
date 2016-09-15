@@ -27,7 +27,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
    */
   protected function setUp() {
     $this->manager = $this->getMockBuilder(EntityManager::class)
-      ->setMethods(array('isFullObject', 'getClass'))
+      ->setMethods(array('isFullObject', 'getClass', 'sanitizeValues'))
       ->disableOriginalConstructor()
       ->getMock();
     $this->client = $this->getMockBuilder(TheSportsDbClient::class)->disableOriginalConstructor()->getMock();
@@ -48,15 +48,23 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
    * @covers TheSportsDb\Entity\Factory\Factory::create
    * @covers TheSportsDb\Entity\Factory\Factory::finalizeEntity
    */
-  public function testCreate() {
+  public function testCreateProxy() {
     $proxy = $this->getMockClass(Proxy::class, array(), array(), 'testEntityTypeProxy');
-    $this->manager->expects($this->at(0))->method('isFullObject')->willReturn(FALSE);
-    $this->manager->expects($this->at(0))->method('getClass')->with('testEntityType', 'proxy')->willReturn($proxy);
+    $this->manager->expects($this->any())->method('sanitizeValues')->willReturn(NULL);
+    $this->manager->expects($this->any())->method('isFullObject')->willReturn(FALSE);
+    $this->manager->expects($this->any())->method('getClass')->with('testEntityType', 'proxy')->willReturn($proxy);
     $this->assertInstanceOf($proxy, $this->factory->create((object) array('id' => '123'), 'testEntityType'));
+  }
 
+  /**
+   * @covers TheSportsDb\Entity\Factory\Factory::create
+   * @covers TheSportsDb\Entity\Factory\Factory::finalizeEntity
+   */
+  public function testCreateEntity() {
     $entity = $this->getMockClass(\TheSportsDb\Entity\Entity::class, array(), array(), 'testEntityType');
-    $this->manager->expects($this->at(1))->method('isFullObject')->willReturn(TRUE);
-    $this->manager->expects($this->at(1))->method('getClass')->with('testEntityType')->willReturn($entity);
+    $this->manager->expects($this->any())->method('sanitizeValues')->willReturn(NULL);
+    $this->manager->expects($this->any())->method('isFullObject')->willReturn(TRUE);
+    $this->manager->expects($this->any())->method('getClass')->with('testEntityType')->willReturn($entity);
     $this->assertInstanceOf($entity, $this->factory->create((object) array('id' => '123'), 'testEntityType'));
   }
 

@@ -38,7 +38,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase {
    * @covers TheSportsDb\PropertyMapper\Transformer\Callback::transform
    */
   public function testTransform() {
-    $this->object->expects($this->once())->with('testValue', 'testContext')->method('transform');
+    $this->object->expects($this->once())->method('transform')->with('testValue', 'testContext');
     $this->callback->transform('testValue', 'testContext');
   }
 
@@ -46,7 +46,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase {
    * @covers TheSportsDb\PropertyMapper\Transformer\Callback::reverse
    */
   public function testReverse() {
-    $this->object->expects($this->once())->with('testValue', 'testContext')->method('reverse');
+    $this->object->expects($this->once())->method('reverse')->with('testValue', 'testContext');
     $this->callback->reverse('testValue', 'testContext');
   }
 
