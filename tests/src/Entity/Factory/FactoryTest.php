@@ -27,7 +27,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
    */
   protected function setUp() {
     $this->manager = $this->getMockBuilder(EntityManager::class)
-      ->setMethods()
+      ->setMethods(array('isFullObject', 'getClass'))
       ->disableOriginalConstructor()
       ->getMock();
     $this->client = $this->getMockBuilder(TheSportsDbClient::class)->disableOriginalConstructor()->getMock();
