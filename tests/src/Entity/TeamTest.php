@@ -68,7 +68,7 @@ class TeamTest extends AbstractEntityTest {
   }
 
   /**
-   * @covers TheSportsDb\Entity\Event::initPropertyMapDefinition()
+   * @covers TheSportsDb\Entity\Team::initPropertyMapDefinition()
    */
   public function testInitPropertyMapDefinition() {
     parent::testInitPropertyMapDefinition();

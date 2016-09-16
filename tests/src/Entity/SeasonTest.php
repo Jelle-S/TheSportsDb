@@ -64,7 +64,7 @@ class SeasonTest extends AbstractEntityTest {
   }
 
   /**
-   * @covers TheSportsDb\Entity\Event::initPropertyMapDefinition()
+   * @covers TheSportsDb\Entity\Season::initPropertyMapDefinition()
    */
   public function testInitPropertyMapDefinition() {
     parent::testInitPropertyMapDefinition();
