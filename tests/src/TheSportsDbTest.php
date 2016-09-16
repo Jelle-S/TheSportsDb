@@ -52,12 +52,16 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\TheSportsDb::getSport
+   * @covers TheSportsDb\Entity\Proxy\SportProxy::loadLeagues
+   * @covers TheSportsDb\Entity\Proxy\SportProxy::load
    */
   public function testGetSport() {
     $sport = $this->db->getSport('Soccer');
     // Should be a sport.
     $this->assertInstanceOf(SportInterface::class, $sport);
     $this->assertEquals('Soccer', $sport->getName());
+    $sport->load();
+    $this->assertNotEmpty($sport->getLeagues());
 
     // Try a fake sport.
     $sport = $this->db->getSport('FakeSport123');
@@ -659,15 +663,22 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\TheSportsDb::getSeasonsByLeague
+   * @covers TheSportsDb\Entity\Proxy\SeasonProxy::loadEvents
+   * @covers TheSportsDb\Entity\Proxy\SeasonProxy::load
    */
   public function testGetSeasonsByLeague() {
     $seasons = $this->db->getSeasonsByLeague(4328);
     $this->assertNotEmpty($seasons);
-
+    $first = TRUE;
     foreach ($seasons as $season) {
       // Should be a season.
       $this->assertInstanceOf(SeasonInterface::class, $season);
       $this->assertEquals(4328, $season->getLeague()->getId());
+      if ($first) {
+        // Load the events.
+        $season->load();
+        $this->assertNotEmpty($season->getEvents());
+      }
     }
 
     // Try a fake league.
