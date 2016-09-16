@@ -38,6 +38,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase {
    */
   protected function tearDown() {
     $this->proxy = NULL;
+    TestEntity::resetStatics(array('get'));
   }
 
   /**
