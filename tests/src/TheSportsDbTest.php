@@ -345,6 +345,11 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\TheSportsDb::getEvent
+   * @covers TheSportsDb\Entity\Event::transformLeague
+   * @covers TheSportsDb\Entity\Event::transformLeague
+   * @covers TheSportsDb\Entity\Event::transformSeason
+   * @covers TheSportsDb\Entity\Event::transformHomeTeam
+   * @covers TheSportsDb\Entity\Event::transformAwayTeam
    */
   public function testGetEvent() {
     $event = $this->db->getEvent(441613);
