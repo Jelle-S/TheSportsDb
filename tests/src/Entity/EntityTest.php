@@ -82,6 +82,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase {
   public function testGetPropertyMapDefinition() {
     // If something goes wrong an exception will be thrown
     $this->assertInstanceOf(PropertyMapDefinition::class, TestEntity::getPropertyMapDefinition());
+    TestEntity::resetStatics(array('get'));
     $this->assertInstanceOf(PropertyMapDefinition::class, TestEntity::getPropertyMapDefinition());
   }
 

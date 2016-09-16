@@ -190,26 +190,4 @@ class EntityManagerTest extends \PHPUnit_Framework_TestCase {
     $this->assertFalse($this->entityManager->isFullObject((object) array('id' => '123'), 'testEntity'));
   }
 
-  /**
-   * @covers TheSportsDb\Entity\EntityManager::isEmptyValue
-   * @todo   Implement testIsEmptyValue().
-   */
-  public function testIsEmptyValue() {
-    // Remove the following lines when you implement this test.
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
-  }
-
-  /**
-   * @covers TheSportsDb\Entity\EntityManager::sanitizeValues
-   * @todo   Implement testSanitizeValues().
-   */
-  public function testSanitizeValues() {
-    // Remove the following lines when you implement this test.
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
-  }
-
 }

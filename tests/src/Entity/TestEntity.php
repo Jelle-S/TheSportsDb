@@ -47,14 +47,18 @@ class TestEntity extends Entity {
 
   public static function getPropertyMapDefinition() {
     if (static::$getCounter > 0) {
-      throw new \Exception('Entity::initPropertyMapDefinition should only be called once.');
+      throw new \Exception('Entity::getPropertyMapDefinition should only be called once.');
     }
     static::$getCounter++;
     return parent::getPropertyMapDefinition();
   }
 
-  public static function resetStatics() {
-    static::$initCounter = 0;
-    static::$getCounter = 0;
+  public static function resetStatics($statics = array()) {
+    if (empty($statics) || in_array('init', $statics)) {
+      static::$initCounter = 0;
+    }
+    if (empty($statics) || in_array('get', $statics)) {
+      static::$getCounter = 0;
+    }
   }
 }
