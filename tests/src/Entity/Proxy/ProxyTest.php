@@ -40,7 +40,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @covers TheSportsDb\Entity\Entity::raw
+   * @covers TheSportsDb\Entity\Proxy\Proxy::raw
    */
   public function testRaw() {
     $raw = $this->proxy->raw();
@@ -51,11 +51,9 @@ class ProxyTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @covers TheSportsDb\Entity\Entity::update
+   * @covers TheSportsDb\Entity\Proxy\Proxy::update
    */
   public function testUpdate() {
-    /*
-     * @todo
     $update_vals = array('id' => 'newId', 'name' => 'newName');
     $this->proxy->update((object) $update_vals);
     $reflection = new \ReflectionClass($this->proxy);
@@ -63,13 +61,12 @@ class ProxyTest extends \PHPUnit_Framework_TestCase {
     $property->setAccessible(TRUE);
     $raw = $property->getValue($this->proxy);
     foreach ($update_vals as $prop => $val) {
-      $this->assertEquals($val, $this->proxy->{'get' . ucfirst($prop)}());
+      $this->assertEquals($val, $raw->{$prop});
     }
-     */
   }
 
   /**
-   * @covers TheSportsDb\Entity\Entity::getEntityType
+   * @covers TheSportsDb\Entity\Proxy\Proxy::getEntityType
    */
   public function testGetEntityType() {
     $this->assertEquals('sport', SportProxy::getEntityType());
@@ -77,7 +74,7 @@ class ProxyTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @covers TheSportsDb\Entity\Entity::getPropertyMapDefinition
+   * @covers TheSportsDb\Entity\Proxy\Proxy::getPropertyMapDefinition
    */
   public function testGetPropertyMapDefinition() {
     // If something goes wrong an exception will be thrown
