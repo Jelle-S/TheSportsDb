@@ -26,4 +26,14 @@ interface ProxyInterface extends EntityInterface, EntityManagerConsumerInterface
    * @return void
    */
   public function setSportsDbClient(TheSportsDbClientInterface $sportsDbClient);
+
+  /**
+   * Lazy loads an entity.
+   *
+   * @throws \Exception
+   *   When the entity is not found.
+   *
+   * @return void
+   */
+  public function load();
 }

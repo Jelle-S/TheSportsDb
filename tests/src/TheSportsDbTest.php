@@ -61,14 +61,8 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
 
     // Try a fake sport.
     $sport = $this->db->getSport('FakeSport123');
-    // Should be a sport.
-    $this->assertInstanceOf(SportInterface::class, $sport);
-    $this->assertEquals('FakeSport123', $sport->getName());
-
-    // Sport doesn't exist, so exception when we try to load its leagues.
-    $this->expectException(\Exception::class);
-    $this->expectExceptionMessage('Could not fully load sport with id FakeSport123.');
-    $sport->getLeagues();
+    // Should be false.
+    $this->assertFalse($sport);
   }
 
   /**
@@ -94,14 +88,8 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
 
     // Try a fake league.
     $league = $this->db->getLeague('FakeLeague123');
-    // Should be a league.
-    $this->assertInstanceOf(LeagueInterface::class, $league);
-    $this->assertEquals('FakeLeague123', $league->getId());
-
-    // League doesn't exist, so exception when we try to load its name.
-    $this->expectException(\Exception::class);
-    $this->expectExceptionMessage('Could not fully load league with id FakeLeague123.');
-    $league->getName();
+    // Should be false.
+    $this->assertFalse($league);
   }
 
   /**
@@ -175,14 +163,8 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
 
     // Try a fake team.
     $team = $this->db->getTeam('FakeTeam123');
-    // Should be a team.
-    $this->assertInstanceOf(TeamInterface::class, $team);
-    $this->assertEquals('FakeTeam123', $team->getId());
-
-    // Team doesn't exist, so exception when we try to load its name.
-    $this->expectException(\Exception::class);
-    $this->expectExceptionMessage('Could not fully load team with id FakeTeam123.');
-    $team->getName();
+    // Should be false.
+    $this->assertFalse($team);
   }
 
   /**
@@ -276,14 +258,8 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
 
     // Try a fake player.
     $player = $this->db->getPlayer('FakePlayer123');
-    // Should be a player.
-    $this->assertInstanceOf(PlayerInterface::class, $player);
-    $this->assertEquals('FakePlayer123', $player->getId());
-
-    // Player doesn't exist, so exception when we try to load its sport.
-    $this->expectException(\Exception::class);
-    $this->expectExceptionMessage('Could not fully load player with id FakePlayer123.');
-    $player->getSport();
+    // Should be false.
+    $this->assertFalse($player);
   }
 
   /**
@@ -378,14 +354,8 @@ class TheSportsDbTest extends \PHPUnit_Framework_TestCase {
 
     // Try a fake event.
     $event = $this->db->getEvent('FakeEvent123');
-    // Should be an event.
-    $this->assertInstanceOf(EventInterface::class, $event);
-    $this->assertEquals('FakeEvent123', $event->getId());
-
-    // Event doesn't exist, so exception when we try to load its sport.
-    $this->expectException(\Exception::class);
-    $this->expectExceptionMessage('Could not fully load event with id FakeEvent123.');
-    $event->getLeague();
+    // Should be false.
+    $this->assertFalse($event);
   }
 
   /**

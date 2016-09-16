@@ -19,8 +19,8 @@ class SportProxy extends Proxy implements SportInterface {
   /**
    * {@inheritdoc}
    */
-  protected function load() {
-    throw new \Exception('Could not fully load sport with id ' . $this->properties->id . '.');
+  public function load() {
+    $this->loadLeagues();
   }
 
   /**

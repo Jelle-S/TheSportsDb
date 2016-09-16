@@ -18,7 +18,7 @@ class EventProxy extends Proxy implements EventInterface {
   /**
    * {@inheritdoc}
    */
-  protected function load() {
+  public function load() {
     $eventData = $this->sportsDbClient->doRequest('lookupevent.php', array('id' => $this->properties->id));
     if (isset($eventData->events)) {
       $this->update($this->entityManager->mapProperties(reset($eventData->events), $this->getEntityType()));

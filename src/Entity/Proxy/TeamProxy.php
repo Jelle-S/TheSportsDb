@@ -18,7 +18,7 @@ class TeamProxy extends Proxy implements TeamInterface {
   /**
    * {@inheritdoc}
    */
-  protected function load() {
+  public function load() {
     $teamData = $this->sportsDbClient->doRequest('lookupteam.php', array('id' => $this->properties->id));
     if (isset($teamData->teams)) {
       $this->update($this->entityManager->mapProperties(reset($teamData->teams), $this->getEntityType()));

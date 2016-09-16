@@ -113,14 +113,9 @@ abstract class Proxy implements ProxyInterface {
   }
 
   /**
-   * Lazy loads an entity.
-   *
-   * @throws \Exception
-   *   When the entity is not found.
-   *
-   * @return void
+   * {@inheritdoc}
    */
-  abstract protected function load();
+  abstract public function load();
 
   /**
    * {@inheritdoc}

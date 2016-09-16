@@ -9,6 +9,7 @@ namespace TheSportsDb;
 use TheSportsDb\Entity\EntityManagerConsumerInterface;
 use TheSportsDb\Entity\EntityManagerConsumerTrait;
 use TheSportsDb\Entity\EntityManagerInterface;
+use TheSportsDb\Entity\Proxy\ProxyInterface;
 
 /**
  * Main API class for TheSportsDb.
@@ -48,7 +49,16 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    *   The sport.
    */
   public function getSport($name) {
-    return $this->entityManager->repository('sport')->byId($name);
+    $entity = $this->entityManager->repository('sport')->byId($name);
+    if ($entity instanceof ProxyInterface) {
+      try {
+        $entity->load();
+      }
+      catch (\Exception $e) {
+        return FALSE;
+      }
+    }
+    return $entity;
   }
 
   /**
@@ -71,7 +81,16 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    *   The league.
    */
   public function getLeague($leagueId) {
-    return $this->entityManager->repository('league')->byId($leagueId);
+    $entity = $this->entityManager->repository('league')->byId($leagueId);
+    if ($entity instanceof ProxyInterface) {
+      try {
+        $entity->load();
+      }
+      catch (\Exception $e) {
+        return FALSE;
+      }
+    }
+    return $entity;
   }
 
   /**
@@ -125,7 +144,16 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    *   The team.
    */
   public function getTeam($teamId) {
-    return $this->entityManager->repository('team')->byId($teamId);
+    $entity = $this->entityManager->repository('team')->byId($teamId);
+    if ($entity instanceof ProxyInterface) {
+      try {
+        $entity->load();
+      }
+      catch (\Exception $e) {
+        return FALSE;
+      }
+    }
+    return $entity;
   }
 
   /**
@@ -192,7 +220,16 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    *   The player.
    */
   public function getPlayer($playerId) {
-    return $this->entityManager->repository('player')->byId($playerId);
+    $entity = $this->entityManager->repository('player')->byId($playerId);
+    if ($entity instanceof ProxyInterface) {
+      try {
+        $entity->load();
+      }
+      catch (\Exception $e) {
+        return FALSE;
+      }
+    }
+    return $entity;
   }
 
   /**
@@ -259,7 +296,16 @@ class TheSportsDb implements EntityManagerConsumerInterface {
    *   The event.
    */
   public function getEvent($eventId) {
-    return $this->entityManager->repository('event')->byId($eventId);
+    $entity = $this->entityManager->repository('event')->byId($eventId);
+    if ($entity instanceof ProxyInterface) {
+      try {
+        $entity->load();
+      }
+      catch (\Exception $e) {
+        return FALSE;
+      }
+    }
+    return $entity;
   }
 
   /**

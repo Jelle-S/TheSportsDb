@@ -11,7 +11,7 @@ use TheSportsDb\Entity\Proxy\Proxy;
  */
 class TestEntityProxy extends Proxy {
 
-  protected function load() {
+  public function load() {
 
   }
 
