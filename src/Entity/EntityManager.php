@@ -131,11 +131,11 @@ class EntityManager implements EntityManagerInterface {
     if (is_null($realClass)) {
       $realClass = (new \ReflectionClass(static::class))->getNamespaceName() . '\\' . ucfirst($entityType);
     }
+    if (!class_exists($realClass)) {
+      throw new \Exception('Class ' . $realClass . ' not found.');
+    }
     if (is_null($proxyClass)) {
       $proxyClass = (new \ReflectionClass($realClass))->getNamespaceName() . '\\Proxy\\' . ucfirst($entityType) . 'Proxy';
-    }
-    if (!class_exists($realClass)) {
-      throw new \Exception('Class ' . $realClass . 'not found.');
     }
     if (!class_exists($proxyClass)) {
       throw new \Exception('Class ' . $proxyClass . 'not found.');

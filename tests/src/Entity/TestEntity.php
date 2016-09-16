@@ -3,6 +3,7 @@
 namespace TheSportsDb\Test\Entity;
 
 use TheSportsDb\Entity\Entity;
+use TheSportsDb\PropertyMapper\PropertyDefinition;
 
 /**
  * Test stub class for entity.
@@ -10,13 +11,50 @@ use TheSportsDb\Entity\Entity;
  * @author Jelle Sebreghts
  */
 class TestEntity extends Entity {
+
+  protected static $initCounter = 0;
+
+  protected static $getCounter = 0;
+
+  protected $id;
+
+  protected $name;
+
+  public function getId() {
+    return $this->id;
+  }
+
+  public function getName() {
+    return $this->name;
+  }
+
   protected static function initPropertyMapDefinition() {
     static $once = FALSE;
-    if ($once) {
+    if (static::$initCounter > 0) {
       throw new \Exception('Entity::initPropertyMapDefinition should only be called once.');
     }
-    if (!$once) {
-      $once = TRUE;
+    static::$initCounter++;
+    static::$propertyMapDefinition
+      ->addPropertyMap(
+        new PropertyDefinition('testId'),
+        new PropertyDefinition('id')
+      )
+      ->addPropertyMap(
+        new PropertyDefinition('testName'),
+        new PropertyDefinition('name')
+      );
+  }
+
+  public static function getPropertyMapDefinition() {
+    if (static::$getCounter > 0) {
+      throw new \Exception('Entity::initPropertyMapDefinition should only be called once.');
     }
+    static::$getCounter++;
+    return parent::getPropertyMapDefinition();
+  }
+
+  public static function resetStatics() {
+    static::$initCounter = 0;
+    static::$getCounter = 0;
   }
 }

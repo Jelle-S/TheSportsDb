@@ -15,4 +15,12 @@ class TestEntityProxy extends Proxy {
 
   }
 
+  public function getId() {
+    return $this>get('id');
+  }
+
+  public function getName() {
+    return $this->get('name');
+  }
+
 }

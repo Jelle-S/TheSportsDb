@@ -47,6 +47,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
   /**
    * @covers TheSportsDb\Entity\Factory\Factory::create
    * @covers TheSportsDb\Entity\Factory\Factory::finalizeEntity
+   * @covers TheSportsDb\Entity\EntityManager::sanitizeValues
    */
   public function testCreateProxy() {
     $proxy = $this->getMockClass(Proxy::class, array(), array(), 'testEntityTypeProxy');
@@ -59,6 +60,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
   /**
    * @covers TheSportsDb\Entity\Factory\Factory::create
    * @covers TheSportsDb\Entity\Factory\Factory::finalizeEntity
+   * @covers TheSportsDb\Entity\EntityManager::sanitizeValues
    */
   public function testCreateEntity() {
     $entity = $this->getMockClass(\TheSportsDb\Entity\Entity::class, array(), array(), 'testEntityType');

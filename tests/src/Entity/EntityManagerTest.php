@@ -2,8 +2,9 @@
 
 namespace TheSportsDb\Test\Entity;
 
-use TheSportsDb\Entity\EntityManager;
+use FastNorth\PropertyMapper\Mapper;
 use FastNorth\PropertyMapper\MapperInterface;
+use TheSportsDb\Entity\EntityManager;
 use TheSportsDb\Entity\Factory\FactoryContainerInterface;
 use TheSportsDb\Entity\Repository\RepositoryContainerInterface;
 
@@ -27,7 +28,7 @@ class EntityManagerTest extends \PHPUnit_Framework_TestCase {
    * This method is called before a test is executed.
    */
   protected function setUp() {
-    $this->mapper = $this->getMockBuilder(MapperInterface::class)->getMock();
+    $this->mapper = new Mapper();
     $this->entityManager = new EntityManager($this->mapper);
   }
 
@@ -38,6 +39,7 @@ class EntityManagerTest extends \PHPUnit_Framework_TestCase {
   protected function tearDown() {
     $this->mapper = NULL;
     $this->entityManager = NULL;
+    TestEntity::resetStatics();
   }
 
   /**
@@ -104,68 +106,88 @@ class EntityManagerTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @covers TheSportsDb\Entity\EntityManager::registerClass
-   * @todo   Implement testRegisterClass().
    */
   public function testRegisterClass() {
-    // Remove the following lines when you implement this test.
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
+    $this->assertEquals(
+      array(
+        'real' => 'TheSportsDb\\Entity\\Team',
+        'proxy' => 'TheSportsDb\\Entity\\Proxy\\TeamProxy',
+      ),
+      $this->entityManager->registerClass('team')
     );
+
+    $this->assertEquals(
+      array(
+        'real' => 'TheSportsDb\\Entity\\Team',
+        'proxy' => 'TheSportsDb\\Entity\\Proxy\\TeamProxy',
+      ),
+      $this->entityManager->registerClass('team', 'TheSportsDb\\Entity\\Team', 'TheSportsDb\\Entity\\Proxy\\TeamProxy')
+    );
+
+    $this->expectException(\Exception::class);
+    $this->expectExceptionMessage('Class SomeFakeClass not found.');
+    $this->entityManager->registerClass('team', 'SomeFakeClass');
+
+    $this->expectException(\Exception::class);
+    $this->expectExceptionMessage('Class SomeFakeClass not found.');
+    $this->entityManager->registerClass('team', NULL, 'SomeFakeClass');
+
   }
 
   /**
    * @covers TheSportsDb\Entity\EntityManager::getPropertyMapDefinition
-   * @todo   Implement testGetPropertyMapDefinition().
    */
   public function testGetPropertyMapDefinition() {
-    // Remove the following lines when you implement this test.
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    $this->entityManager->registerClass('testEntity', 'TheSportsDb\\Test\\Entity\\TestEntity');
+    // If something goes wrong an exception will be thrown.
+    $this->entityManager->getPropertyMapDefinition('testEntity');
+    $this->entityManager->getPropertyMapDefinition('testEntity');
   }
 
   /**
    * @covers TheSportsDb\Entity\EntityManager::getClass
-   * @todo   Implement testGetClass().
    */
   public function testGetClass() {
-    // Remove the following lines when you implement this test.
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    $this->entityManager->registerClass('testEntity', 'TheSportsDb\\Test\\Entity\\TestEntity');
+    $this->assertEquals('TheSportsDb\\Test\\Entity\\TestEntity', $this->entityManager->getClass('testEntity'));
+    $this->assertEquals('TheSportsDb\\Test\\Entity\\Proxy\\TestEntityProxy', $this->entityManager->getClass('testEntity', 'proxy'));
   }
 
   /**
    * @covers TheSportsDb\Entity\EntityManager::mapProperties
-   * @todo   Implement testMapProperties().
+   * @covers TheSportsDb\Entity\EntityManager::sanitizeObject
+   * @covers TheSportsDb\Entity\EntityManager::isEmptyValue
    */
   public function testMapProperties() {
-    // Remove the following lines when you implement this test.
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    $this->entityManager->registerClass('testEntity', 'TheSportsDb\\Test\\Entity\\TestEntity');
+    $values = (object) array('testId' => '123', 'testName' => 'name123');
+    $this->assertEquals((object) array('id' => '123', 'name' => 'name123'), $this->entityManager->mapProperties($values, 'testEntity'));
+    $values = (object) array('testId' => '123');
+    $mapped = $this->entityManager->mapProperties($values, 'testEntity');
+    $this->assertFalse(isset($mapped->name));
+    $this->assertEquals((object) array('id' => '123'), $mapped);
   }
 
   /**
    * @covers TheSportsDb\Entity\EntityManager::reverseMapProperties
-   * @todo   Implement testReverseMapProperties().
    */
   public function testReverseMapProperties() {
-    // Remove the following lines when you implement this test.
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    $this->entityManager->registerClass('testEntity', 'TheSportsDb\\Test\\Entity\\TestEntity');
+    $values = (object) array('id' => '123', 'name' => 'name123');
+    $this->assertEquals((object) array('testId' => '123', 'testName' => 'name123'), $this->entityManager->reverseMapProperties($values, 'testEntity'));
+    $values = (object) array('id' => '123');
+    $mapped = $this->entityManager->reverseMapProperties($values, 'testEntity');
+    $this->assertFalse(isset($mapped->testName));
+    $this->assertEquals((object) array('testId' => '123'), $mapped);
   }
 
   /**
    * @covers TheSportsDb\Entity\EntityManager::isFullObject
-   * @todo   Implement testIsFullObject().
    */
   public function testIsFullObject() {
-    // Remove the following lines when you implement this test.
-    $this->markTestIncomplete(
-      'This test has not been implemented yet.'
-    );
+    $this->entityManager->registerClass('testEntity', 'TheSportsDb\\Test\\Entity\\TestEntity');
+    $this->assertTrue($this->entityManager->isFullObject((object) array('id' => '123', 'name' => 'name123'), 'testEntity'));
+    $this->assertFalse($this->entityManager->isFullObject((object) array('id' => '123'), 'testEntity'));
   }
 
   /**
