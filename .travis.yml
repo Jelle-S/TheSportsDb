@@ -6,6 +6,7 @@ php:
   - nightly
 before_script:
   - composer install
+script: vendor/bin/phpunit
 after_script:
   - export CODACY_PROJECT_TOKEN=b20b085ff2034bef823cb57fc5fc5330
   - php vendor/bin/codacycoverage clover build/logs/clover.xml
