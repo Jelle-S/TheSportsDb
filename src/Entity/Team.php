@@ -589,21 +589,6 @@ class Team extends Entity implements TeamInterface {
       );
       // idSoccerXML
       // intLoved
-      // strLeague
-      // strDescriptionDE
-      // strDescriptionFR
-      // strDescriptionCN
-      // strDescriptionIT
-      // strDescriptionJP
-      // strDescriptionRU
-      // strDescriptionES
-      // strDescriptionPT
-      // strDescriptionSE
-      // strDescriptionNL
-      // strDescriptionHU
-      // strDescriptionNO
-      // strDescriptionIL
-      // strDescriptionPL
       // strTeamFanart1
       // strTeamFanart2
       // strTeamFanart3

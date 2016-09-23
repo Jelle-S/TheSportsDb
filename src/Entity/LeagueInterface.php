@@ -57,7 +57,7 @@ interface LeagueInterface extends EntityInterface {
   /**
    * Gets the date of the first event.
    *
-   * @return string
+   * @return \DateTime
    *   The date of the first event.
    */
   public function getDateFirstEvent();

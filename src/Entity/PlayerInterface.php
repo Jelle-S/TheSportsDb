@@ -57,7 +57,7 @@ interface PlayerInterface extends EntityInterface {
   /**
    * Gets the birthday
    *
-   * @return string
+   * @return \DateTime
    *   The birthday.
    */
   public function getBirthDay();
@@ -65,7 +65,7 @@ interface PlayerInterface extends EntityInterface {
   /**
    * Gets the date this player signed.
    *
-   * @return string
+   * @return \DateTime
    *   The date this player signed.
    */
   public function getDateSigned();

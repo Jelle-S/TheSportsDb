@@ -223,7 +223,7 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
     foreach ($events as $event) {
       // Should be an event.
       $this->assertInstanceOf(EventInterface::class, $event);
-      $this->assertEquals($day->format('Y-m-d'), $event->getDate());
+      $this->assertEquals($day->format('Y-m-d'), $event->getDate()->format('Y-m-d'));
     }
 
     $events = $this->eventRepository->byDay($day, 'Soccer');
@@ -232,7 +232,7 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
     foreach ($events as $event) {
       // Should be an event.
       $this->assertInstanceOf(EventInterface::class, $event);
-      $this->assertEquals($day->format('Y-m-d'), $event->getDate());
+      $this->assertEquals($day->format('Y-m-d'), $event->getDate()->format('Y-m-d'));
       $this->assertEquals('Soccer', $event->getLeague()->getSport()->getName());
     }
 
@@ -242,7 +242,7 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
     foreach ($events as $event) {
       // Should be an event.
       $this->assertInstanceOf(EventInterface::class, $event);
-      $this->assertEquals($day->format('Y-m-d'), $event->getDate());
+      $this->assertEquals($day->format('Y-m-d'), $event->getDate()->format('Y-m-d'));
       $this->assertEquals('English Premier League', $event->getLeague()->getName());
     }
 
@@ -252,7 +252,7 @@ class EventRepositoryTest extends \PHPUnit_Framework_TestCase {
     foreach ($events as $event) {
       // Should be an event.
       $this->assertInstanceOf(EventInterface::class, $event);
-      $this->assertEquals($day->format('Y-m-d'), $event->getDate());
+      $this->assertEquals($day->format('Y-m-d'), $event->getDate()->format('Y-m-d'));
       $this->assertEquals('English Premier League', $event->getLeague()->getName());
       $this->assertEquals('Soccer', $event->getLeague()->getSport()->getName());
     }

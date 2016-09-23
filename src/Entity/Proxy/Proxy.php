@@ -101,7 +101,7 @@ abstract class Proxy implements ProxyInterface {
     }
 
     // If the property exists on the proxy, use it.
-    if (isset($this->properties->{$name})) {
+    if (property_exists($this->properties, $name)) {
       return $this->properties->{$name};
     }
 

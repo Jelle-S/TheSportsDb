@@ -256,7 +256,7 @@ interface EventInterface extends EntityInterface {
   /**
    * Gets the date.
    *
-   * @return string
+   * @return \DateTime
    *   The date.
    */
   public function getDate();

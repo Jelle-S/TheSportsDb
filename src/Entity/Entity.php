@@ -195,4 +195,58 @@ abstract class Entity implements EntityInterface {
     }
     return $data;
   }
+
+  /**
+   * Transform a textual representation of a date to a \DateTimeObject
+   * @param string $value
+   *   The date.
+   * @param string $format
+   *   The format of the date
+   * @param string $time
+   *
+   * @return \DateTime
+   */
+  public static function transformDateTime($value, $format, $time = NULL) {
+    $date = new \DateTime($value);
+    $date->createFromFormat($format, $value);
+    if ($time && $time !== EntityManager::EMPTYPROPERTYPLACEHOLDER) {
+      $time_parts = explode(':', $time);
+      $time_parts[] = 0;
+      $date->setTime($time_parts[0], $time_parts[1], $time_parts[2]);
+    }
+    return $date;
+  }
+
+  public static function reverseDate(\DateTime $value, $format) {
+    return $value->format($format);
+  }
+
+
+  public static function reverseTime($value) {
+    return $value->format('H:i:s');
+  }
+
+  /**
+   * Transforms the date.
+   *
+   * @param string $value
+   *   The textual representation of the date.
+   *
+   * @return \DateTime
+   */
+  public static function transformDateDefault($value) {
+    return static::transformDateTime($value, 'Y-m-d');
+  }
+
+  /**
+   * Reverses the date.
+   *
+   * @param \DateTime $value
+   *   The date.
+   *
+   * @return string
+   */
+  public static function reverseDateDefault(\DateTime $value) {
+    return static::reverseDate($value, 'Y-m-d');
+  }
 }

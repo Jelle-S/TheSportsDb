@@ -397,7 +397,10 @@ class League extends Entity implements LeagueInterface {
       )
       ->addPropertyMap(
         new PropertyDefinition('dateFirstEvent'),
-        new  PropertyDefinition('dateFirstEvent')) //"2013-03-02",
+        new  PropertyDefinition('dateFirstEvent'),
+        [self::class, 'transformDateDefault'],
+        [self::class, 'reverseDateDefault']
+      )
       ->addPropertyMap(
         new PropertyDefinition('strGender'),
         new  PropertyDefinition('gender')
@@ -465,19 +468,6 @@ class League extends Entity implements LeagueInterface {
         [Season::class, 'reverseArray']
       );
     // idSoccerXML
-    // strDescriptionDE
-    // strDescriptionFR
-    // strDescriptionIT
-    // strDescriptionCN
-    // strDescriptionJP
-    // strDescriptionRU
-    // strDescriptionES
-    // strDescriptionPT
-    // strDescriptionSE
-    // strDescriptionNL
-    // strDescriptionHU
-    // strDescriptionNO
-    // strDescriptionPL
     // strFanart1
     // strFanart2
     // strFanart3

@@ -825,9 +825,17 @@ class Event extends Entity implements EventInterface {
         new PropertyDefinition('awayShots')
       )
       ->addPropertyMap(
+        new PropertyDefinition('strTime'),
+        new PropertyDefinition('time'),
+        [self::class, 'transformEventTime'],
+        [self::class, 'reverseEventTime']
+      )
+      ->addPropertyMap(
         new PropertyDefinition('dateEvent'),
-        new PropertyDefinition('date')
-      )/* todo: map dateEvent and strTime to date*/
+        new PropertyDefinition('date'),
+        [self::class, 'transformDateEvent'],
+        [self::class, 'reverseDateDefault']
+      )
       ->addPropertyMap(
         new PropertyDefinition('strTVStation'),
         new PropertyDefinition('tvStation')
@@ -886,6 +894,18 @@ class Event extends Entity implements EventInterface {
       // strAwayTeam
       // strFanart
       // strTime
+  }
+
+  public static function transformDateEvent($value, $context) {
+    $pos = strpos($context->strTime, '+');
+    return static::transformDateTime($value, 'Y-m-d', $pos === FALSE ? $context->strTime : substr($context->strTime, 0, $pos));
+  }
+
+  public static function transformEventTime($value) {
+  }
+
+  public static function reverseEventTime($value, Event $context) {
+    return $context->getDate()->format('H:i:s');
   }
 
 }

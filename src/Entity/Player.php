@@ -408,11 +408,15 @@ class Player extends Entity implements PlayerInterface {
       )
       ->addPropertyMap(
         new PropertyDefinition('dateBorn'),
-        new PropertyDefinition('birthDay') // transform to date
+        new PropertyDefinition('birthDay'),
+        [self::class, 'transformDateDefault'],
+        [self::class, 'reverseDateDefault']
       )
       ->addPropertyMap(
         new PropertyDefinition('dateSigned'),
-        new PropertyDefinition('dateSigned') // transform to date
+        new PropertyDefinition('dateSigned'),
+        [self::class, 'transformDateDefault'],
+        [self::class, 'reverseDateDefault']
       )
       ->addPropertyMap(
         new PropertyDefinition('strSigning'),
@@ -478,24 +482,9 @@ class Player extends Entity implements PlayerInterface {
         new PropertyDefinition('strLocked'),
         new PropertyDefinition('locked')
       );
-      // strTeam
       // idSoccerXML
       // idPlayerManager
       // intSoccerXMLTeamID
-      // strDescriptionDE
-      // strDescriptionFR
-      // strDescriptionCN
-      // strDescriptionIT
-      // strDescriptionJP
-      // strDescriptionRU
-      // strDescriptionES
-      // strDescriptionPT
-      // strDescriptionSE
-      // strDescriptionNL
-      // strDescriptionHU
-      // strDescriptionNO
-      // strDescriptionIL
-      // strDescriptionPL
       // strCollege
       // intLoved
       // strFanart1
