@@ -48,7 +48,7 @@ class TheSportsDbClient implements TheSportsDbClientInterface {
    * @return string
    */
   protected function getBaseUrl() {
-    return 'http://thesportsdb.com/api/v1/json/' . $this->apiKey . '/';
+    return 'https://thesportsdb.com/api/v1/json/' . $this->apiKey . '/';
   }
 
   /**
